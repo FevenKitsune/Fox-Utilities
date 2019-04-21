@@ -88,7 +88,7 @@ class CoreUtilities(commands.Cog):
         em_pull.set_footer(text="Invoked by: The Developer")
         em_pull.add_field(
             name="Fox Utilities GitHub",
-            value=f"```git\n{str(repo.git.pull())}\n```"
+            value=f"```shell\n{str(repo.git.pull())}\n```"
         )
 
         await ctx.send(embed=em_pull)
