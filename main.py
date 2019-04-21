@@ -12,7 +12,7 @@ import time
 import os
 from requests import get
 import ext.foxexc as fex
-from ext.extensions import *
+from ext.globals import *
 
 # Constants
 BOT_KEY = os.environ['FU_KEY']

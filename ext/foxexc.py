@@ -6,8 +6,7 @@ Do not redistribute!
 
 from discord.ext import commands
 import discord
-
-COL_ERROR = 0xFF0000
+from ext.globals import *
 
 
 async def on_command_error(ctx, error):

@@ -7,9 +7,7 @@ Do not redistribute!
 # Imports
 from discord.ext import commands
 import discord
-
-# Colors
-COL_MESSAGE = 0xFFB600
+from ext.globals import *
 
 
 # BotCommands extension class

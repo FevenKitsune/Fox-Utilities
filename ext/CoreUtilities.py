@@ -12,10 +12,7 @@ import psutil
 import sys
 import os
 import git
-from ext.extensions import *
-
-# Colors
-COL_MESSAGE = 0xFFB600
+from ext.globals import *
 
 
 class CoreUtilities(commands.Cog):

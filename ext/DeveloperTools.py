@@ -8,9 +8,7 @@ Do not redistribute!
 from discord.ext import commands
 import discord
 import datetime
-
-# Colors
-COL_MESSAGE = 0xFFB600
+from ext.globals import *
 
 
 # DeveloperTools extension class
