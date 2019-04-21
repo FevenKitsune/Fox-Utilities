@@ -1,6 +1,7 @@
 """
 Fox Utilities
 Author: Feven Kitsune <fevenkitsune@gmail.com>
+Do not redistribute!
 """
 
 # Imports
