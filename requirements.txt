@@ -3,7 +3,7 @@ async-timeout==3.0.1
 attrs==19.1.0
 certifi==2019.3.9
 chardet==3.0.4
-discord.py==git+https://github.com/Rapptz/discord.py@rewrite#egg=discord.py
+discord.py==1.0.0
 gitdb2==2.0.5
 GitPython==2.1.11
 idna==2.8
