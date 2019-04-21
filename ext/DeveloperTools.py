@@ -82,7 +82,7 @@ class DeveloperTools(commands.Cog):
             return
 
         await ctx.message.delete()
-        await ctx.send(args)\
+        await ctx.send(args)
 
 
 # Extension setup
