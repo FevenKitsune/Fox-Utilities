@@ -30,6 +30,7 @@ COL_MESSAGE = 0xFFB600
 
 # Extensions
 extensions = [
+    "ext.CoreUtilities",
     "ext.DeveloperTools",
     "ext.MemberManagement",
     "ext.BotCommands",
@@ -56,10 +57,6 @@ if __name__ == "__main__":
     # Exception handler
     logger.info("Registering error handler.")
     client.add_listener(fex.on_command_error)
-
-    # Local cogs
-    logger.info("Registering Core commands.")
-    client.add_cog(CoreUtilities(client))
 
     # External cogs
     for extension in extensions:
