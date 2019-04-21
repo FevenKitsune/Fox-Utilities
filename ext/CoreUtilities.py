@@ -11,7 +11,6 @@ import logging
 import psutil
 import sys
 import os
-from extensions import *
 
 # Colors
 COL_MESSAGE = 0xFFB600
