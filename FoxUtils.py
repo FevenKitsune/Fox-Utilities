@@ -10,9 +10,6 @@ from discord.ext import commands
 import logging
 import time
 from requests import get
-import psutil
-import sys
-import os
 import ext.foxexc as fex
 
 # Constants

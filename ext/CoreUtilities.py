@@ -7,6 +7,10 @@ Do not redistribute!
 # Imports
 from discord.ext import commands
 import discord
+import logging
+import psutil
+import sys
+import os
 
 # Colors
 COL_MESSAGE = 0xFFB600
