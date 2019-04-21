@@ -8,6 +8,9 @@ Do not redistribute!
 from discord.ext import commands
 import discord
 
+# Colors
+COL_MESSAGE = 0xFFB600
+
 
 class CoreUtilities(commands.Cog):
 
