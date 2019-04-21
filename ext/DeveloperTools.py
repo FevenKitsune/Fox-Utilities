@@ -14,7 +14,7 @@ COL_MESSAGE = 0xFFB600
 
 
 # DeveloperTools extension class
-class DeveloperTools:
+class DeveloperTools(commands.Cog):
 
     # Constructor
     def __init__(self, client):

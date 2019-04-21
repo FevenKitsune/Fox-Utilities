@@ -13,7 +13,7 @@ COL_MESSAGE = 0xFFB600
 
 
 # BotCommands extension class
-class BotCommands:
+class BotCommands(commands.Cog):
     """
     BotCommands class
 

@@ -13,7 +13,7 @@ COL_MESSAGE = 0xFFB600
 
 
 # MemberManagement extension class
-class MemberManagement:
+class MemberManagement(commands.Cog):
 
     # Constructor
     def __init__(self, client):

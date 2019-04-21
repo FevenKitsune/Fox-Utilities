@@ -14,7 +14,7 @@ COL_MESSAGE = 0xFFB600
 
 
 # InviteTools extension class
-class InviteTools:
+class InviteTools(commands.Cog):
 
     # Constructor
     def __init__(self, client):
