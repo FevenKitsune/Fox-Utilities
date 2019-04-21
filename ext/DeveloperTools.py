@@ -37,7 +37,7 @@ class DeveloperTools(commands.Cog):
         brief="Throw a text exception.",
         usage="")
     async def test_exception(self, ctx):
-        raise UserWarning("Testing an exception!")
+        raise UserWarning("Testing exception!")
 
     # Change bot status
     @commands.command(
