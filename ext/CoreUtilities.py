@@ -87,7 +87,7 @@ class CoreUtilities(commands.Cog):
         em_pull = discord.Embed(color=COL_MESSAGE)
         em_pull.set_footer(text="Invoked by: The Developer")
         em_pull.add_field(
-            name="FoxUtils GitHub"
+            name="FoxUtils GitHub",
             value=f"```git\n{str(repo.git.pull())}\n```"
         )
 
