@@ -1,4 +1,8 @@
-# Extension InviteTools.py
+"""
+Fox Utilities > InviteTools.py
+Author: Feven Kitsune <fevenkitsune@gmail.com>
+Do not redistribute!
+"""
 
 # Imports
 from discord.ext import commands
@@ -8,6 +12,7 @@ import datetime
 # Colors
 COL_MESSAGE = 0xFFB600
 
+
 # InviteTools extension class
 class InviteTools:
 
@@ -16,7 +21,11 @@ class InviteTools:
         self.client = client
 
     # My invite counts
-    @commands.command(name="invites", aliases=["myinvites"], brief="Display your own or a mentioned user's server invites.", usage="@user")
+    @commands.command(
+        name="invites",
+        aliases=["myinvites"],
+        brief="Display your own or a mentioned user's server invites.",
+        usage="@user")
     async def invites(self, ctx, *args):
         # Command setup
         if ctx.message.mentions:

@@ -1,4 +1,8 @@
-# Bot Commands
+"""
+Fox Utilities > BotCommands.py
+Author: Feven Kitsune <fevenkitsune@gmail.com>
+Do not redistribute!
+"""
 
 # Imports
 from discord.ext import commands
@@ -6,6 +10,7 @@ import discord
 
 # Colors
 COL_MESSAGE = 0xFFB600
+
 
 # BotCommands extension class
 class BotCommands:
@@ -20,7 +25,11 @@ class BotCommands:
         self.client = client
 
     # Server Count
-    @commands.command(name="servercount", aliases=["scount", "servers"], brief="Displays the number of servers the bot is currently connected to.", usage="")
+    @commands.command(
+        name="servercount",
+        aliases=["scount", "servers"],
+        brief="Displays the number of servers the bot is currently connected to.",
+        usage="")
     async def server_count(self, ctx):
         # Embed setup
         em_servercount = discord.Embed(color=COL_MESSAGE)
@@ -31,8 +40,12 @@ class BotCommands:
         await ctx.send(embed=em_servercount)
 
     # User Count
-    @commands.command(name="usercount", aliases=["ucount", "memcount", "membercount", "users"], brief="Displays the number of users the bot sees.", usage="")
-    async def usercount(self, ctx):
+    @commands.command(
+        name="usercount",
+        aliases=["ucount", "memcount", "membercount", "users"],
+        brief="Displays the number of users the bot sees.",
+        usage="")
+    async def user_count(self, ctx):
         # Embed setup
         em_usercount = discord.Embed(color=COL_MESSAGE)
         em_usercount.set_footer(text=f"Invoked by: {ctx.message.author.name}")
@@ -41,7 +54,11 @@ class BotCommands:
         await ctx.send(embed=em_usercount)
 
     # Ping command
-    @commands.command(name="ping", aliases=["pong"], brief="A simple command to see if the bot is running.", usage="")
+    @commands.command(
+        name="ping",
+        aliases=["pong"],
+        brief="A simple command to see if the bot is running.",
+        usage="")
     async def ping_bot(self, ctx):
         # Embed setup
         em_ping = discord.Embed(color=COL_MESSAGE)
@@ -51,7 +68,10 @@ class BotCommands:
         await ctx.send(embed=em_ping)
 
     # Invite command
-    @commands.command(name="invite", brief="Invite this bot to your server.", usage="")
+    @commands.command(
+        name="invite",
+        brief="Invite this bot to your server.",
+        usage="")
     async def invite_bot(self, ctx):
         # Embed setup
         em_invite = discord.Embed(color=COL_MESSAGE)
@@ -61,7 +81,10 @@ class BotCommands:
         await ctx.send(embed=em_invite)
 
     # Privacy Information command
-    @commands.command(name="privacy", brief="Information about our bot's privacy.", usage="")
+    @commands.command(
+        name="privacy",
+        brief="Information about our bot's privacy.",
+        usage="")
     async def privacy_information(self, ctx):
         # Embed setup
         em_privacy = discord.Embed(color=COL_MESSAGE)
@@ -69,6 +92,7 @@ class BotCommands:
         em_privacy.add_field(name="Privacy Information", value="Privacy is important to everyone, so we put a quick not-legally-rigorous overview of the data we have stored.\n\n**1)** If a command returns an error, the contents of the command will be logged for debug purposes. The name of the sender and the server it was sent on is **not** logged.\n\n**2)** We do not store data persistently! All logs are cleared on system reboot to ensure privacy.\n\n**3)** We do not, nor will we ever use the bot to access information not specified by this privacy notice.\n\n- The FoxUtils Team")
         # Send message
         await ctx.author.send(embed=em_privacy)
+
 
 # Extension setup
 def setup(client):

@@ -1,8 +1,14 @@
+"""
+Fox Utilities > foxexc.py
+Author: Feven Kitsune <fevenkitsune@gmail.com>
+Do not redistribute!
+"""
+
 from discord.ext import commands
-#from discord.ext import error
 import discord
 
 COL_ERROR = 0xFF0000
+
 
 async def on_command_error(ctx, error):
     try:
