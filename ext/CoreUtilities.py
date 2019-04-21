@@ -73,7 +73,7 @@ class CoreUtilities(commands.Cog):
 
     # Git Pull command
     @commands.command(
-        name="pull"
+        name="pull",
         brief="Git pull from GitHub repo.",
         hidden=True,
         usage=""
