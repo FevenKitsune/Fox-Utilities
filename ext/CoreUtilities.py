@@ -11,6 +11,7 @@ import logging
 import psutil
 import sys
 import os
+import git
 from ext.extensions import *
 
 # Colors
@@ -70,12 +71,27 @@ class CoreUtilities(commands.Cog):
 
         await ctx.send(embed=em_reload)
 
+    # Git Pull command
+    @commands.command(
+        name="pull"
+        brief="Git pull from GitHub repo.",
+        hidden=True,
+        usage=""
+    )
+    async def git_pull(self, ctx):
+        if not (ctx.author.id == 276531286443556865):
+            raise UserWarning("You must be developer to run this command!")
+
+        repo = git.Repo(os.getcwd(), search_parent_directories=True)
+        await ctx.send(str(repo.git.status()))
+
     # Reboot command
     @commands.command(
         name="reboot",
         brief="Reboot core bot. Developer command.",
         hidden=True,
-        usage="")
+        usage=""
+    )
     async def reboot(self, ctx):
         if not (ctx.author.id == 276531286443556865):
             raise UserWarning("You must be developer to run this command!")
