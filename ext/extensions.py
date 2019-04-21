@@ -1,4 +1,3 @@
-
 # Globally accessible list of extensions.
 extensions = [
     "ext.CoreUtilities",
