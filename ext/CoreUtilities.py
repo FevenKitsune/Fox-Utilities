@@ -26,7 +26,7 @@ class CoreUtilities(commands.Cog):
         hidden=True,
         usage="")
     async def reload(self, ctx, *args):
-        if not (ctx.author.id == 276531286443556865):
+        if not (ctx.author.id == DEV_ID):
             raise UserWarning("You must be the developer to run this command!")
 
         em_reload = discord.Embed(color=COL_MESSAGE)
@@ -74,7 +74,7 @@ class CoreUtilities(commands.Cog):
         usage=""
     )
     async def git_pull(self, ctx):
-        if not (ctx.author.id == 276531286443556865):
+        if not (ctx.author.id == DEV_ID):
             raise UserWarning("You must be developer to run this command!")
 
         repo = git.Repo(os.getcwd(), search_parent_directories=True)
@@ -96,7 +96,7 @@ class CoreUtilities(commands.Cog):
         usage=""
     )
     async def reboot(self, ctx):
-        if not (ctx.author.id == 276531286443556865):
+        if not (ctx.author.id == DEV_ID):
             raise UserWarning("You must be developer to run this command!")
 
         em_reboot = discord.Embed(color=COL_MESSAGE)
@@ -125,7 +125,7 @@ class CoreUtilities(commands.Cog):
         em_help.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         for cmd in sorted(self.client.commands, key=lambda command: command.cog_name):
-            if (cmd.hidden) and not (ctx.author.id == 276531286443556865):
+            if (cmd.hidden) and not (ctx.author.id == DEV_ID):
                 pass
             else:
                 em_help.add_field(

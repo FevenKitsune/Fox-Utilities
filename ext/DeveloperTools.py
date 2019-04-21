@@ -44,7 +44,7 @@ class DeveloperTools(commands.Cog):
         usage="string",
         hidden=True)
     async def change_status(self, ctx, args):
-        if not (ctx.author.id == 276531286443556865):
+        if not (ctx.author.id == DEV_ID):
             raise UserWarning("You must be the Developer to run this command!")
 
         await ctx.bot.change_presence(activity=discord.Game(args))
@@ -58,7 +58,7 @@ class DeveloperTools(commands.Cog):
         usage="",
         hidden=True)
     async def sys_uptime(self, ctx):
-        if not (ctx.author.id == 276531286443556865):
+        if not (ctx.author.id == DEV_ID):
             raise UserWarning("You must be the Developer to run this command!")
 
         em_sys_uptime = discord.Embed(color=COL_MESSAGE)
@@ -76,7 +76,7 @@ class DeveloperTools(commands.Cog):
         usage="<string>",
         hidden=True)
     async def botsay(self, ctx, args):
-        if not (ctx.author.id == 276531286443556865):
+        if not (ctx.author.id == DEV_ID):
             return
 
         await ctx.message.delete()
