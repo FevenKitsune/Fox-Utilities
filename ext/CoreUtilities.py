@@ -36,13 +36,13 @@ class CoreUtilities(commands.Cog):
         em_reload.set_footer(text="Invoked by: The Developer")
 
         # Check if there are any extensions first.
-        if len(self.extensions) == 0:
+        if len(extensions) == 0:
             logger.info("No extensions found")
             em_reload.add_field(name="Oh well.", value="Doesn't look like there are any extensions defined.")
             await ctx.send(embed=em_reload)
             return
 
-        for extension in self.extensions:
+        for extension in extensions:
             try:
                 client.unload_extension(extension)
             except Exception as e:
@@ -55,7 +55,7 @@ class CoreUtilities(commands.Cog):
                     name=f"{extension}", 
                     value=f"Successfully unloaded extension {extension}")
 
-        for extension in self.extensions:
+        for extension in extensions:
             try:
                 client.load_extension(extension)
             except Exception as e:
