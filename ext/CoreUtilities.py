@@ -44,7 +44,7 @@ class CoreUtilities(commands.Cog):
 
         for extension in extensions:
             try:
-                client.unload_extension(extension)
+                self.client.unload_extension(extension)
             except Exception as e:
                 expt = f"{type(e).__name__}: {e}"
                 em_reload.add_field(
@@ -57,7 +57,7 @@ class CoreUtilities(commands.Cog):
 
         for extension in extensions:
             try:
-                client.load_extension(extension)
+                self.client.load_extension(extension)
             except Exception as e:
                 expt = f"{type(e).__name__}: {e}"
                 em_reload.add_field(
@@ -105,7 +105,7 @@ class CoreUtilities(commands.Cog):
         em_help = discord.Embed(color=COL_MESSAGE)
         em_help.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
-        for cmd in sorted(client.commands, key=lambda command: command.cog_name):
+        for cmd in sorted(self.client.commands, key=lambda command: command.cog_name):
             if (cmd.hidden) and not (ctx.author.id == 276531286443556865):
                 pass
             else:
@@ -115,6 +115,7 @@ class CoreUtilities(commands.Cog):
                     inline=False)
 
         await ctx.author.send(embed=em_help)
+
 
 # Extension setup
 def setup(client):
