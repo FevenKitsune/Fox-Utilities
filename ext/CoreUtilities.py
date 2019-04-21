@@ -11,6 +11,7 @@ import logging
 import psutil
 import sys
 import os
+from extensions import *
 
 # Colors
 COL_MESSAGE = 0xFFB600
@@ -20,7 +21,6 @@ class CoreUtilities(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        
 
     # Extension reload command
     @commands.command(
