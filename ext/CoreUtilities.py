@@ -20,6 +20,7 @@ class CoreUtilities(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+        
 
     # Extension reload command
     @commands.command(

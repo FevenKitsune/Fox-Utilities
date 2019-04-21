@@ -12,6 +12,7 @@ import time
 import os
 from requests import get
 import ext.foxexc as fex
+from ext.extensions import *
 
 # Constants
 BOT_KEY = os.environ['FU_KEY']
@@ -25,15 +26,6 @@ logger.info("Test")
 
 # Colors
 COL_MESSAGE = 0xFFB600
-
-# Extensions
-extensions = [
-    "ext.CoreUtilities",
-    "ext.DeveloperTools",
-    "ext.MemberManagement",
-    "ext.BotCommands",
-    "ext.InviteTools"
-    ]
 
 # Bot Status
 default_status = "with code."
