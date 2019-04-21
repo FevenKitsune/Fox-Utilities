@@ -107,3 +107,7 @@ class CoreUtilities(commands.Cog):
                     inline=False)
 
         await ctx.author.send(embed=em_help)
+
+# Extension setup
+def setup(client):
+    client.add_cog(CoreUtilities(client))
