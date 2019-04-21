@@ -1,5 +1,5 @@
 """
-Fox Utilities > FoxUtils.py
+Fox Utilities > main.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
 Do not redistribute!
 """
