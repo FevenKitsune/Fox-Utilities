@@ -83,7 +83,15 @@ class CoreUtilities(commands.Cog):
             raise UserWarning("You must be developer to run this command!")
 
         repo = git.Repo(os.getcwd(), search_parent_directories=True)
-        await ctx.send(f"```git\nFoxUtils GitHub\n\n{str(repo.git.pull())}\n```")
+
+        em_pull = discord.Embed(color=COL_MESSAGE)
+        em_pull.set_footer(text="Invoked by: The Developer")
+        em_pull.add_field(
+            name="FoxUtils GitHub"
+            value=f"```git\n{str(repo.git.pull())}\n```"
+        )
+
+        await ctx.send(embed=em_pull)
 
     # Reboot command
     @commands.command(
