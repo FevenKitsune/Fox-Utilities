@@ -8,9 +8,7 @@ Do not redistribute!
 import discord
 from discord.ext import commands
 import logging
-import time
 import os
-from requests import get
 import ext.foxexc as fex
 from ext.globals import *
 

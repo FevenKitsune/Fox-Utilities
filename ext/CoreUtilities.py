@@ -7,7 +7,6 @@ Do not redistribute!
 # Imports
 from discord.ext import commands
 import discord
-import logging
 import psutil
 import sys
 import os
@@ -35,7 +34,6 @@ class CoreUtilities(commands.Cog):
 
         # Check if there are any extensions first.
         if len(extensions) == 0:
-            logger.info("No extensions found")
             em_reload.add_field(name="Oh well.", value="Doesn't look like there are any extensions defined.")
             await ctx.send(embed=em_reload)
             return
