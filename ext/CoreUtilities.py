@@ -83,7 +83,7 @@ class CoreUtilities(commands.Cog):
             raise UserWarning("You must be developer to run this command!")
 
         repo = git.Repo(os.getcwd(), search_parent_directories=True)
-        await ctx.send(str(repo.git.status()))
+        await ctx.send(f"```git\n{str(repo.git.pull())}\n```")
 
     # Reboot command
     @commands.command(
