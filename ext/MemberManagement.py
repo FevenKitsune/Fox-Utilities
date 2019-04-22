@@ -13,6 +13,11 @@ COL_MESSAGE = 0xFFB600
 
 # MemberManagement extension class
 class MemberManagement(commands.Cog):
+    """
+    MemberManagement class
+
+    filler
+    """
 
     # Constructor
     def __init__(self, client):

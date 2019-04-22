@@ -12,6 +12,11 @@ from ext.globals import *
 
 # InviteTools extension class
 class InviteTools(commands.Cog):
+    """
+    InviteTools class
+
+    filler
+    """
 
     # Constructor
     def __init__(self, client):

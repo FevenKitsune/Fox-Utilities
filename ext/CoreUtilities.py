@@ -14,6 +14,11 @@ from ext.globals import *
 
 
 class CoreUtilities(commands.Cog):
+    """
+    CoreUtilities class
+
+    filler
+    """
 
     def __init__(self, client):
         self.client = client
