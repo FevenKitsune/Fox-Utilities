@@ -108,7 +108,7 @@ class BotCommands(commands.Cog):
             "**2)** We do not store data persistently! All logs are cleared "
             "on system reboot to ensure privacy.\n\n**3)** We do not, nor "
             "will we ever use the bot to access information not specified "
-            "by this privacy notice.\n\n- The FoxUtils Team")
+            "by this privacy notice.\n\n- The Fox Utilities Team")
         # Send message
         await ctx.author.send(embed=em)
 
