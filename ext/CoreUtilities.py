@@ -1,6 +1,7 @@
 """
-Fox Utilities > CoreUtilities.py
+Fox Utilities > coreutilities.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
+
 """
 
 # Imports

@@ -1,6 +1,7 @@
 """
 Fox Utilities > globals.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
+
 """
 
 

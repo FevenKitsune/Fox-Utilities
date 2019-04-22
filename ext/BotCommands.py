@@ -1,6 +1,7 @@
 """
-Fox Utilities > BotCommands.py
+Fox Utilities > botcommands.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
+
 """
 
 # Imports

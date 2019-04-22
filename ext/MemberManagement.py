@@ -1,6 +1,7 @@
 """
-Fox Utilities > MemberManagement.py
+Fox Utilities > membermanagement.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
+
 """
 
 # Imports

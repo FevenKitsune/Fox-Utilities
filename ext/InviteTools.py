@@ -1,6 +1,7 @@
 """
-Fox Utilities > InviteTools.py
+Fox Utilities > invitetools.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
+
 """
 
 # Imports

@@ -1,6 +1,7 @@
 """
-Fox Utilities > DeveloperTools.py
+Fox Utilities > developertools.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
+
 """
 
 # Imports
