@@ -23,3 +23,4 @@ BOT_KEY = os.environ['FU_KEY']
 
 # Config Variables
 BOT_PREFIX = "f."
+BOT_DEFAULT_STATUS = "with code."

@@ -17,14 +17,11 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("discord")
 client = commands.Bot(description="Fox Utilities", command_prefix=BOT_PREFIX)
 
-# Bot Status
-default_status = "with code."
-
 # Startup
 @client.event
 async def on_ready():
     logger.info("Setting client presence.")
-    await client.change_presence(activity=discord.Game(default_status))
+    await client.change_presence(activity=discord.Game(BOT_DEFAULT_STATUS))
     logger.info("Fox Utilities is now ready!")
 
 # Extension Loading
