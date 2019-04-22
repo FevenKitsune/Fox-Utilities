@@ -7,11 +7,12 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 # Imports
 import discord
 from discord.ext import commands
+from ext.globals import *
+
 import psutil
 import sys
 import os
 import git
-from ext.globals import *
 
 
 class CoreUtilities(commands.Cog):

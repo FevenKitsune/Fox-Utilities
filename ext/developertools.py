@@ -7,8 +7,9 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 # Imports
 import discord
 from discord.ext import commands
-import datetime
 from ext.globals import *
+
+import datetime
 
 
 class DeveloperTools(commands.Cog):

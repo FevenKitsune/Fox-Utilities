@@ -7,9 +7,10 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 # Imports
 import discord
 from discord.ext import commands
-import logging
-import ext.foxexc as fex
 from ext.globals import *
+import ext.foxexc as fex
+
+import logging
 
 
 # Object Setup
