@@ -118,7 +118,7 @@ class CoreUtilities(commands.Cog):
             value="Please wait while the bot reboots..."
         )
 
-        await ctx.send(embed=em_reboot)
+        await ctx.send(embed=em)
 
         p = psutil.Process(os.getpid())  # Get bot process
         for handler in p.open_files() + p.connections():
