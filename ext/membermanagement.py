@@ -53,7 +53,7 @@ class MemberManagement(commands.Cog):
 
         # Command logic
         for mem in chunked_members[page_count-1]:
-            em_member.add_field(name=mem.top_role, value=f"`User`: {mem.mention}\n`Tag`:{mem.name}")
+            em_member.add_field(name=mem.top_role, value=f"`User`: {mem.mention}\n`Tag`: {mem.name}#{mem.discriminator}")
 
         # Send message
         await ctx.send(embed=em_member)
