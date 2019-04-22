@@ -4,8 +4,9 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 
 """
 
-from discord.ext import commands
+# Imports
 import discord
+from discord.ext import commands
 from ext.globals import *
 
 

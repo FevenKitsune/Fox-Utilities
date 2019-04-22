@@ -5,8 +5,8 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 """
 
 # Imports
-from discord.ext import commands
 import discord
+from discord.ext import commands
 import psutil
 import sys
 import os

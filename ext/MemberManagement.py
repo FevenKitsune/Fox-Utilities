@@ -5,11 +5,9 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 """
 
 # Imports
-from discord.ext import commands
 import discord
-
-# Colors
-COL_MESSAGE = 0xFFB600
+from discord.ext import commands
+from ext.globals import *
 
 
 # MemberManagement extension class
