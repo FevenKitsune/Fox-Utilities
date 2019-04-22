@@ -16,7 +16,7 @@ class InviteTools(commands.Cog):
     """
     InviteTools class
 
-    filler
+    Commands for tracking personal server invites.
     """
 
     # Constructor

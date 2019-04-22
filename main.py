@@ -28,24 +28,24 @@ async def on_ready():
 # Extension Loading
 if __name__ == "__main__":
 
-    # Remove default Help command.
+    # Remove default help command, this is replaced in coreutilities.
     logger.info("Removing default help command.")
     client.remove_command("help")
 
-    # Exception handler
+    # Register foxexc as the exception handler.
     logger.info("Registering error handler.")
     client.add_listener(fex.on_command_error)
 
     # External cogs
     for extension in extensions:
         try:
-            client.load_extension(extension)
-        except Exception as e:
+            client.load_extension(extension)  # Load all extensions
+        except Exception as e:  # If load failed, post to log.
             exc = f"{type(e).__name__}: {e}"
             logger.warning(f"Failed to load extension {extension}\n{exc}")
-        else:
+        else:  # If load succeeded, post to log.
             logger.info(f"Loaded extension {extension}")
 
     # Start Bot
     logger.info("Starting client.")
-    client.run(BOT_KEY)
+    client.run(BOT_KEY)  # Start server.

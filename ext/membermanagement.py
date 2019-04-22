@@ -14,7 +14,7 @@ class MemberManagement(commands.Cog):
     """
     MemberManagement class
 
-    filler
+    Server administration commands and useful utilities.
     """
 
     # Constructor

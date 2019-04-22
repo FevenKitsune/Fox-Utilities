@@ -16,7 +16,7 @@ class DeveloperTools(commands.Cog):
     """
     DeveloperTools class
 
-    filler
+    Various commands and tools for development and testing.
     """
 
     # Constructor

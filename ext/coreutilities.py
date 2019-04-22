@@ -19,7 +19,7 @@ class CoreUtilities(commands.Cog):
     """
     CoreUtilities class
 
-    filler
+    Core system operation commands.
     """
 
     def __init__(self, client):
@@ -38,34 +38,35 @@ class CoreUtilities(commands.Cog):
         em_reload = discord.Embed(color=COL_MESSAGE)
         em_reload.set_footer(text="Invoked by: The Developer")
 
-        # Check if there are any extensions first.
-        if len(extensions) == 0:
-            em_reload.add_field(name="Oh well.", value="Doesn't look like there are any extensions defined.")
+        if len(extensions) == 0:  # Check for extensions first.
+            em_reload.add_field(
+                name="Oh well.",
+                value="Doesn't look like there are any extensions defined.")
             await ctx.send(embed=em_reload)
             return
 
         for extension in extensions:
             try:
-                self.client.unload_extension(extension)
-            except Exception as e:
+                self.client.unload_extension(extension)  # Unload extension
+            except Exception as e:  # Post error to embed if unload failed.
                 expt = f"{type(e).__name__}: {e}"
                 em_reload.add_field(
                     name=f"{extension}",
                     value=f"Failed to unload extension {extension}\nException: {expt}")
-            else:
+            else:  # Post to embed if unload succeeded.
                 em_reload.add_field(
-                    name=f"{extension}", 
+                    name=f"{extension}",
                     value=f"Successfully unloaded extension {extension}")
 
         for extension in extensions:
             try:
-                self.client.load_extension(extension)
-            except Exception as e:
+                self.client.load_extension(extension)  # Load extension
+            except Exception as e:  # Post error to embed if load failed.
                 expt = f"{type(e).__name__}: {e}"
                 em_reload.add_field(
                     name=f"{extension}",
                     value=f"Failed to load extension {extension}\nException: {expt}")
-            else:
+            else:  # Post to embed if load succeeded.
                 em_reload.add_field(
                     name=f"{extension}",
                     value=f"Successfully loaded extension {extension}")
@@ -83,14 +84,14 @@ class CoreUtilities(commands.Cog):
         if not (ctx.author.id == DEV_ID):
             raise UserWarning("You must be developer to run this command!")
 
-        repo = git.Repo(os.getcwd(), search_parent_directories=True)
+        repo = git.Repo(os.getcwd(), search_parent_directories=True)  # Find git
 
         em_pull = discord.Embed(color=COL_MESSAGE)
         em_pull.set_footer(text="Invoked by: The Developer")
         em_pull.add_field(
             name="Fox Utilities GitHub",
             value=f"```smalltalk\n{str(repo.git.pull())}\n```"
-        )
+        )  # Run git pull and post results into embed.
 
         await ctx.send(embed=em_pull)
 
@@ -114,12 +115,12 @@ class CoreUtilities(commands.Cog):
 
         await ctx.send(embed=em_reboot)
 
-        p = psutil.Process(os.getpid())
+        p = psutil.Process(os.getpid())  # Get bot process
         for handler in p.open_files() + p.connections():
-            os.close(handler.fd)
+            os.close(handler.fd)  # Close all active connections and processes
 
-        python = sys.executable
-        os.execl(python, python, *sys.argv)
+        python = sys.executable  # Get python exec
+        os.execl(python, python, *sys.argv)  # Start python process
 
     # Help command
     @commands.command(
@@ -132,12 +133,12 @@ class CoreUtilities(commands.Cog):
 
         for cmd in sorted(self.client.commands, key=lambda command: command.cog_name):
             if (cmd.hidden) and not (ctx.author.id == DEV_ID):
-                pass
+                pass  # If not developer, do not show hidden commands.
             else:
                 em_help.add_field(
                     name=f"{'#' if cmd.hidden else ''}`{cmd.cog_name}`> {cmd.name} {cmd.usage}",
                     value=cmd.brief,
-                    inline=False)
+                    inline=False)  # Help field formatter.
 
         await ctx.author.send(embed=em_help)
 

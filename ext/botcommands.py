@@ -14,7 +14,7 @@ class BotCommands(commands.Cog):
     """
     BotCommands class
 
-    For seeing the status of the bot, and other functions.
+    Bot status and operation commands.
     """
 
     # Constructor
