@@ -1,7 +1,6 @@
 """
 Fox Utilities > DeveloperTools.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
-Do not redistribute!
 """
 
 # Imports

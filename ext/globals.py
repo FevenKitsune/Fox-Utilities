@@ -1,3 +1,9 @@
+"""
+Fox Utilities > globals.py
+Author: Feven Kitsune <fevenkitsune@gmail.com>
+"""
+
+
 # Globally accessible list of extensions.
 extensions = [
     "ext.CoreUtilities",

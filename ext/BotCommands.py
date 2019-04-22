@@ -1,7 +1,6 @@
 """
 Fox Utilities > BotCommands.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
-Do not redistribute!
 """
 
 # Imports

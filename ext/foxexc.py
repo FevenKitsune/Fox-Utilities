@@ -1,7 +1,6 @@
 """
 Fox Utilities > foxexc.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
-Do not redistribute!
 """
 
 from discord.ext import commands
