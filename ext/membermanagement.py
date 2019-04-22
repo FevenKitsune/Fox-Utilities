@@ -39,24 +39,27 @@ class MemberManagement(commands.Cog):
             found_role = ctx.message.role_mentions[0]
 
         # Page argument
-        page_count = 1 # Default to 1st page
+        page_count = 1  # Default to 1st page
         if (len(args) == 2):
             page_count = int(args[1])
 
         # Generates a list containing n sized chunks of found_role.members
-        n = 25 # Page size
-        chunked_members = [found_role.members[i * n:(i + 1) * n] for i in range((len(found_role.members) + n - 1) // n)] # https://www.geeksforgeeks.org/break-list-chunks-size-n-python/
+        n = 25  # Page size
+        chunked_members = [found_role.members[i * n:(i + 1) * n] for i in range((len(found_role.members) + n - 1) // n)]  # https://www.geeksforgeeks.org/break-list-chunks-size-n-python/
 
         # Embed setup
-        em_member = discord.Embed(color=COL_MESSAGE)
-        em_member.set_footer(text=f"Page {page_count}/{str(len(chunked_members))} | Invoked by: {ctx.author.name}")
+        em = discord.Embed(color=COL_MESSAGE)
+        em.set_footer(text=f"Page {page_count}/{str(len(chunked_members))} | Invoked by: {ctx.author.name}")
 
         # Command logic
         for mem in chunked_members[page_count-1]:
-            em_member.add_field(name=mem.top_role, value=f"`User`: {mem.mention}\n`Tag`: {mem.name}#{mem.discriminator}")
+            em.add_field(
+                name=mem.top_role,
+                value=f"`User`: {mem.mention}\n`Tag`: {mem.name}#{mem.discriminator}"
+            )
 
         # Send message
-        await ctx.send(embed=em_member)
+        await ctx.send(embed=em)
 
     # Message Role command
     @commands.command(
@@ -82,24 +85,33 @@ class MemberManagement(commands.Cog):
             raise UserWarning("That role has no members!")
 
         # Embed setup
-        em_msgrole = discord.Embed(color=COL_MESSAGE)
-        em_msgrole.set_footer(text="Invoked by: {}".format(ctx.message.author.name))
-        em_msgrole.add_field(name="Sending messages...", value="Sending requested messages!")
+        em = discord.Embed(color=COL_MESSAGE)
+        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.add_field(
+            name="Sending messages...",
+            value="Sending requested messages!"
+        )
 
         # Command logic
         for mem in found_role.members:
             try:
-                em_sentmsg = discord.Embed(color=COL_MESSAGE)
-                em_sentmsg.set_footer(text="Sent from: {}".format(ctx.guild.name))
-                em_sentmsg.set_author(name=ctx.guild.name, icon_url=ctx.guild.icon_url)
-                em_sentmsg.add_field(name="Role message from {}".format(ctx.message.author.name), value="{}".format(ctx.message.clean_content))
-                await mem.send(embed=em_sentmsg)
+                em_sent = discord.Embed(color=COL_MESSAGE)
+                em_sent.set_footer(text=f"Sent from: {ctx.guild.name}")
+                em_sent.set_author(name=ctx.guild.name, icon_url=ctx.guild.icon_url)
+                em_sent.add_field(
+                    name=f"Role message from {ctx.message.author.name}",
+                    value=f"{ctx.message.clean_content}"
+                )
+                await mem.send(embed=em_sent)
             except Exception as e:
-                em_msgrole.add_field(name="Failed to send message to {}".format(mem.name), value="{}: {}".format(type(e).__name__, e))
+                em.add_field(
+                    name=f"Failed to send message to {mem.name}",
+                    value=f"{type(e).__name__}: {e}"
+                )
                 pass
 
         # Send message
-        await ctx.send(embed=em_msgrole)
+        await ctx.send(embed=em)
 
 
 # Extension setup

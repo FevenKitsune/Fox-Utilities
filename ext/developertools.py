@@ -29,10 +29,13 @@ class DeveloperTools(commands.Cog):
         brief="A simple Hello World! command.",
         usage="")
     async def hello_world(self, ctx):
-        em_hello = discord.Embed(color=COL_MESSAGE)
-        em_hello.set_footer(text=f"Invoked by: {ctx.author.name}")
-        em_hello.add_field(name="Response", value="Hello world! [This is a test](https://www.google.com)")
-        await ctx.send(embed=em_hello)
+        em = discord.Embed(color=COL_MESSAGE)
+        em.set_footer(text=f"Invoked by: {ctx.author.name}")
+        em.add_field(
+            name="Response",
+            value="Hello world! [This is a test](https://www.google.com)"
+        )
+        await ctx.send(embed=em)
 
     # Exception testing
     @commands.command(
@@ -66,13 +69,16 @@ class DeveloperTools(commands.Cog):
         if not (ctx.author.id == DEV_ID):
             raise UserWarning("You must be the Developer to run this command!")
 
-        em_sys_uptime = discord.Embed(color=COL_MESSAGE)
-        em_sys_uptime.set_footer(text=f"Invoked by: {ctx.author.name}")
-        with open("/proc/uptime", "r") as proc_ut:
-            proc_ut_seconds = float(proc_ut.readline().split()[0])
+        em = discord.Embed(color=COL_MESSAGE)
+        em.set_footer(text=f"Invoked by: {ctx.author.name}")
+        with open("/proc/uptime", "r") as proc_ut:  # Read system uptime.
+            ut = float(proc_ut.readline().split()[0])
 
-        em_sys_uptime.add_field(name="System Uptime", value=f"/proc/uptime: {str(datetime.timedelta(seconds=int(proc_ut_seconds)))}")
-        await ctx.send(embed=em_sys_uptime)
+        em.add_field(
+            name="System Uptime",
+            value=f"/proc/uptime: {str(datetime.timedelta(seconds=int(ut)))}"
+        )
+        await ctx.send(embed=em)
 
     # Botsay
     @commands.command(

@@ -36,16 +36,20 @@ class InviteTools(commands.Cog):
         else:
             user = ctx.message.author
         # Embed setup
-        em_invites = discord.Embed(title="**{}\'s Invites**".format(user.name), color=COL_MESSAGE)
-        em_invites.set_footer(text="Invoked by: {}".format(ctx.author.name))
+        em = discord.Embed(title="**{}\'s Invites**".format(user.name), color=COL_MESSAGE)
+        em.set_footer(text="Invoked by: {}".format(ctx.author.name))
         # Command logic
         if not ctx.message.guild:
             raise UserWarning("This is a DM channel!")
         for inv in await ctx.message.guild.invites():
             if inv.inviter == user:
-                em_invites.add_field(name="Invite code: \#\#\#\#{}".format(str(inv.code)[4:]), value="Uses: {}\nCreated at: {}".format(inv.uses, inv.created_at.strftime("%b %-d, %Y at %-l:%M%p")))
+                em.add_field(
+                    name="Invite code: ####{}".format(str(inv.code)[4:]),
+                    value=f"Uses: {inv.uses}\nCreated at: {inv.created_at.strftime("%b %-d, %Y at %-l:%M%p")}"
+                )
         # Send message
-        await ctx.send(embed=em_invites)
+        await ctx.send(embed=em)
+
 
 # Extension setup
 def setup(client):

@@ -35,14 +35,14 @@ class CoreUtilities(commands.Cog):
         if not (ctx.author.id == DEV_ID):
             raise UserWarning("You must be the developer to run this command!")
 
-        em_reload = discord.Embed(color=COL_MESSAGE)
-        em_reload.set_footer(text="Invoked by: The Developer")
+        em = discord.Embed(color=COL_MESSAGE)
+        em.set_footer(text="Invoked by: The Developer")
 
         if len(extensions) == 0:  # Check for extensions first.
-            em_reload.add_field(
+            em.add_field(
                 name="Oh well.",
                 value="Doesn't look like there are any extensions defined.")
-            await ctx.send(embed=em_reload)
+            await ctx.send(embed=em)
             return
 
         for extension in extensions:
@@ -50,28 +50,32 @@ class CoreUtilities(commands.Cog):
                 self.client.unload_extension(extension)  # Unload extension
             except Exception as e:  # Post error to embed if unload failed.
                 expt = f"{type(e).__name__}: {e}"
-                em_reload.add_field(
+                em.add_field(
                     name=f"{extension}",
-                    value=f"Failed to unload extension {extension}\nException: {expt}")
+                    value=f"Failed to unload extension {extension}\nException: {expt}"
+                )
             else:  # Post to embed if unload succeeded.
-                em_reload.add_field(
+                em.add_field(
                     name=f"{extension}",
-                    value=f"Successfully unloaded extension {extension}")
+                    value=f"Successfully unloaded extension {extension}"
+                )
 
         for extension in extensions:
             try:
                 self.client.load_extension(extension)  # Load extension
             except Exception as e:  # Post error to embed if load failed.
                 expt = f"{type(e).__name__}: {e}"
-                em_reload.add_field(
+                em.add_field(
                     name=f"{extension}",
-                    value=f"Failed to load extension {extension}\nException: {expt}")
+                    value=f"Failed to load extension {extension}\nException: {expt}"
+                )
             else:  # Post to embed if load succeeded.
-                em_reload.add_field(
+                em.add_field(
                     name=f"{extension}",
-                    value=f"Successfully loaded extension {extension}")
+                    value=f"Successfully loaded extension {extension}"
+                )
 
-        await ctx.send(embed=em_reload)
+        await ctx.send(embed=em)
 
     # Git Pull command
     @commands.command(
@@ -86,14 +90,14 @@ class CoreUtilities(commands.Cog):
 
         repo = git.Repo(os.getcwd(), search_parent_directories=True)  # Find git
 
-        em_pull = discord.Embed(color=COL_MESSAGE)
-        em_pull.set_footer(text="Invoked by: The Developer")
-        em_pull.add_field(
+        em = discord.Embed(color=COL_MESSAGE)
+        em.set_footer(text="Invoked by: The Developer")
+        em.add_field(
             name="Fox Utilities GitHub",
             value=f"```smalltalk\n{str(repo.git.pull())}\n```"
         )  # Run git pull and post results into embed.
 
-        await ctx.send(embed=em_pull)
+        await ctx.send(embed=em)
 
     # Reboot command
     @commands.command(
@@ -106,12 +110,13 @@ class CoreUtilities(commands.Cog):
         if not (ctx.author.id == DEV_ID):
             raise UserWarning("You must be developer to run this command!")
 
-        em_reboot = discord.Embed(color=COL_MESSAGE)
-        em_reboot.set_footer(text="Invoked by: The Developer")
+        em = discord.Embed(color=COL_MESSAGE)
+        em.set_footer(text="Invoked by: The Developer")
 
-        em_reboot.add_field(
+        em.add_field(
             name="Rebooting bot!",
-            value="Please wait while the bot reboots...")
+            value="Please wait while the bot reboots..."
+        )
 
         await ctx.send(embed=em_reboot)
 
@@ -128,19 +133,20 @@ class CoreUtilities(commands.Cog):
         brief="Display this message.",
         usage="")
     async def help(self, ctx, *args):
-        em_help = discord.Embed(color=COL_MESSAGE)
-        em_help.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em = discord.Embed(color=COL_MESSAGE)
+        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         for cmd in sorted(self.client.commands, key=lambda command: command.cog_name):
             if (cmd.hidden) and not (ctx.author.id == DEV_ID):
                 pass  # If not developer, do not show hidden commands.
             else:
-                em_help.add_field(
+                em.add_field(
                     name=f"{'#' if cmd.hidden else ''}`{cmd.cog_name}`> {cmd.name} {cmd.usage}",
                     value=cmd.brief,
-                    inline=False)  # Help field formatter.
+                    inline=False
+                )  # Help field formatter.
 
-        await ctx.author.send(embed=em_help)
+        await ctx.author.send(embed=em)
 
 
 # Extension setup
