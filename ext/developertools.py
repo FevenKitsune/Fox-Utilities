@@ -11,7 +11,6 @@ import datetime
 from ext.globals import *
 
 
-# DeveloperTools extension class
 class DeveloperTools(commands.Cog):
     """
     DeveloperTools class

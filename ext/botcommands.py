@@ -10,7 +10,6 @@ from discord.ext import commands
 from ext.globals import *
 
 
-# BotCommands extension class
 class BotCommands(commands.Cog):
     """
     BotCommands class
