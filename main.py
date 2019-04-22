@@ -8,22 +8,14 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 import discord
 from discord.ext import commands
 import logging
-import os
 import ext.foxexc as fex
 from ext.globals import *
 
-# Constants
-BOT_KEY = os.environ['FU_KEY']
 
 # Object Setup
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("discord")
-client = commands.Bot(description="Fox Utilities", command_prefix="f.")
-
-logger.info("Test")
-
-# Colors
-COL_MESSAGE = 0xFFB600
+client = commands.Bot(description="Fox Utilities", command_prefix=BOT_PREFIX)
 
 # Bot Status
 default_status = "with code."
