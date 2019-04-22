@@ -49,11 +49,11 @@ class MemberManagement(commands.Cog):
 
         # Embed setup
         em_member = discord.Embed(color=COL_MESSAGE)
-        em_member.set_footer(text="Page {}/{} | Invoked by: {}".format(page_count, str(len(chunked_members)), ctx.author.name))
+        em_member.set_footer(text=f"Page {page_count}/{str(len(chunked_members))} | Invoked by: {ctx.author.name}")
 
         # Command logic
         for mem in chunked_members[page_count-1]:
-            em_member.add_field(name=mem.top_role, value=mem.mention)
+            em_member.add_field(name=mem.top_role, value=f"`User`: {mem.mention}\n`Tag`:{mem.name}")
 
         # Send message
         await ctx.send(embed=em_member)
