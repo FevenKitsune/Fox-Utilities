@@ -84,7 +84,7 @@ class BotCommands(commands.Cog):
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
         em.add_field(
             name="Invite me!",
-            value=f"[Invite link!]({BOT_INVITE}})\n[Development server!]({BOT_DEVSERVER})"
+            value=f"[Invite link!]({BOT_INVITE})\n[Development server!]({BOT_DEVSERVER})"
         )
         # Send message
         await ctx.send(embed=em)
