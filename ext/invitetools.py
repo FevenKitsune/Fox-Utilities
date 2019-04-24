@@ -8,6 +8,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 import discord
 from discord.ext import commands
 from ext.globals import *
+from ext.checks import *
 
 import datetime
 
@@ -28,7 +29,8 @@ class InviteTools(commands.Cog):
         name="invites",
         aliases=["myinvites"],
         brief="Display your own or a mentioned user's server invites.",
-        usage="@user")
+        usage="@user"
+    )
     async def invites(self, ctx, *args):
         # Command setup
         if ctx.message.mentions:

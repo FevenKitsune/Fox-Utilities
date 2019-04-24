@@ -8,6 +8,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 import discord
 from discord.ext import commands
 from ext.globals import *
+from ext.checks import *
 
 import psutil
 import sys
@@ -30,11 +31,10 @@ class CoreUtilities(commands.Cog):
         name="reload",
         brief="Reload bot extensions. Developer command.",
         hidden=True,
-        usage="")
+        usage=""
+    )
+    @is_developer()
     async def reload(self, ctx, *args):
-        if not (ctx.author.id == DEV_ID):
-            raise UserWarning("You must be the developer to run this command!")
-
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text="Invoked by: The Developer")
 
@@ -84,10 +84,8 @@ class CoreUtilities(commands.Cog):
         hidden=True,
         usage=""
     )
+    @is_developer()
     async def git_pull(self, ctx):
-        if not (ctx.author.id == DEV_ID):
-            raise UserWarning("You must be developer to run this command!")
-
         repo = git.Repo(os.getcwd(), search_parent_directories=True)  # Find git
 
         em = discord.Embed(color=COL_MESSAGE)
@@ -106,10 +104,8 @@ class CoreUtilities(commands.Cog):
         hidden=True,
         usage=""
     )
+    @is_developer()
     async def reboot(self, ctx):
-        if not (ctx.author.id == DEV_ID):
-            raise UserWarning("You must be developer to run this command!")
-
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text="Invoked by: The Developer")
 
@@ -131,7 +127,8 @@ class CoreUtilities(commands.Cog):
     @commands.command(
         name="help",
         brief="Display this message.",
-        usage="")
+        usage=""
+    )
     async def help(self, ctx, *args):
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")

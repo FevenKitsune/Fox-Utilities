@@ -8,6 +8,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 import discord
 from discord.ext import commands
 from ext.globals import *
+from ext.checks import *
 
 
 class BotCommands(commands.Cog):
@@ -26,7 +27,8 @@ class BotCommands(commands.Cog):
         name="servercount",
         aliases=["scount", "servers"],
         brief="Displays the number of servers the bot is currently connected to.",
-        usage="")
+        usage=""
+    )
     async def server_count(self, ctx):
         # Embed setup
         em = discord.Embed(color=COL_MESSAGE)
@@ -44,7 +46,8 @@ class BotCommands(commands.Cog):
         name="usercount",
         aliases=["ucount", "memcount", "membercount", "users"],
         brief="Displays the number of users the bot sees.",
-        usage="")
+        usage=""
+    )
     async def user_count(self, ctx):
         # Embed setup
         em = discord.Embed(color=COL_MESSAGE)
@@ -61,7 +64,8 @@ class BotCommands(commands.Cog):
         name="ping",
         aliases=["pong"],
         brief="A simple command to see if the bot is running.",
-        usage="")
+        usage=""
+    )
     async def ping_bot(self, ctx):
         # Embed setup
         em = discord.Embed(color=COL_MESSAGE)
@@ -77,7 +81,8 @@ class BotCommands(commands.Cog):
     @commands.command(
         name="invite",
         brief="Invite this bot to your server.",
-        usage="")
+        usage=""
+    )
     async def invite_bot(self, ctx):
         # Embed setup
         em = discord.Embed(color=COL_MESSAGE)
@@ -93,7 +98,8 @@ class BotCommands(commands.Cog):
     @commands.command(
         name="privacy",
         brief="Information about our bot's privacy.",
-        usage="")
+        usage=""
+    )
     async def privacy_information(self, ctx):
         # Embed setup
         em = discord.Embed(color=COL_MESSAGE)

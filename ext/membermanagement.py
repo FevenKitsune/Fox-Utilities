@@ -10,6 +10,7 @@ from discord.ext import commands
 from ext.globals import *
 from ext.checks import *
 
+
 class MemberManagement(commands.Cog):
     """
     MemberManagement class
@@ -26,7 +27,8 @@ class MemberManagement(commands.Cog):
         name="members",
         aliases=["member", "memlist"],
         brief="Lists all members in a mentioned role.",
-        usage="@role/\"role_name\" <page #>")
+        usage="@role/\"role_name\" <page #>"
+    )
     async def member_list(self, ctx, *args):
         # Error checking
         if len(args) < 1:
@@ -80,7 +82,8 @@ class MemberManagement(commands.Cog):
         name="msgrole",
         aliases=["mr", "msgr"],
         brief="Messages all members of a tagged role.",
-        usage="@role")
+        usage="@role"
+    )
     @is_admin()
     async def message_role(self, ctx, *args):
         # Error checking

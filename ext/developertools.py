@@ -8,6 +8,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 import discord
 from discord.ext import commands
 from ext.globals import *
+from ext.checks import *
 
 import datetime
 
@@ -27,7 +28,8 @@ class DeveloperTools(commands.Cog):
     @commands.command(
         name="hello",
         brief="A simple Hello World! command.",
-        usage="")
+        usage=""
+    )
     async def hello_world(self, ctx):
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text=f"Invoked by: {ctx.author.name}")
@@ -41,7 +43,8 @@ class DeveloperTools(commands.Cog):
     @commands.command(
         name="except",
         brief="Throw a text exception.",
-        usage="")
+        usage=""
+    )
     async def test_exception(self, ctx):
         raise UserWarning("Testing exception!")
 
@@ -50,11 +53,10 @@ class DeveloperTools(commands.Cog):
         name="cbs",
         brief="Change bot status. Developer command.",
         usage="string",
-        hidden=True)
+        hidden=True
+    )
+    @is_developer()
     async def change_status(self, ctx, args):
-        if not (ctx.author.id == DEV_ID):
-            raise UserWarning("You must be the Developer to run this command!")
-
         await ctx.bot.change_presence(activity=discord.Game(args))
         await ctx.send(args)
 
@@ -64,11 +66,10 @@ class DeveloperTools(commands.Cog):
         aliases=["suptime"],
         brief="Checks the system /proc/uptime.",
         usage="",
-        hidden=True)
+        hidden=True
+    )
+    @is_developer()
     async def sys_uptime(self, ctx):
-        if not (ctx.author.id == DEV_ID):
-            raise UserWarning("You must be the Developer to run this command!")
-
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text=f"Invoked by: {ctx.author.name}")
         with open("/proc/uptime", "r") as proc_ut:  # Read system uptime.
@@ -85,11 +86,10 @@ class DeveloperTools(commands.Cog):
         name="botsay",
         aliases=["bs"],
         usage="<string>",
-        hidden=True)
+        hidden=True
+    )
+    @is_developer()
     async def botsay(self, ctx, args):
-        if not (ctx.author.id == DEV_ID):
-            return
-
         await ctx.message.delete()
         await ctx.send(args)
 
