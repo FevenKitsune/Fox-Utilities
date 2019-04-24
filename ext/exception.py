@@ -13,12 +13,12 @@ from ext.globals import *
 async def on_command_error(ctx, error):
     try:
         exc = f"{type(error).__name__}: {error}"
-        em = discord.Embed(color=COL_ERROR)
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
-        em.add_field(
-            name="That's not right...",
-            value=f"`{exc}`"
+        em = discord.Embed(
+            title="Something isn't right...",
+            description=f"`{exc}`",
+            color=COL_ERROR
         )
+        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
         await ctx.send(embed=em)
     except Exception as error:
         pass
