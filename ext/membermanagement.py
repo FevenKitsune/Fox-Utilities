@@ -95,28 +95,28 @@ class MemberManagement(commands.Cog):
             raise UserWarning("That role has no members!")
 
         # Embed setup
-        em = discord.Embed(color=COL_MESSAGE)
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
-        em.add_field(
-            name="Sending messages...",
-            value="Sending requested messages!"
+        em = discord.Embed(
+            title="Sending messages...",
+            description="Sending requested messages!",
+            color=COL_MESSAGE
         )
+        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command
         for mem in found_role.members:
             try:
-                em_sent = discord.Embed(color=COL_MESSAGE)
+                em_sent = discord.Embed(
+                    title=f"Role message from {ctx.message.author.name}",
+                    description=f"{ctx.message.clean_content}",
+                    color=COL_MESSAGE
+                )
                 em_sent.set_footer(text=f"Sent from: {ctx.guild.name}")
                 em_sent.set_author(name=ctx.guild.name, icon_url=ctx.guild.icon_url)
-                em_sent.add_field(
-                    name=f"Role message from {ctx.message.author.name}",
-                    value=f"{ctx.message.clean_content}"
-                )
                 await mem.send(embed=em_sent)
             except Exception as e:
                 em.add_field(
                     name=f"Failed to send message to {mem.name}",
-                    value=f"{type(e).__name__}: {e}"
+                    value=f"`{type(e).__name__}: {e}`"
                 )
                 pass
         await ctx.send(embed=em)
