@@ -8,7 +8,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 import discord
 from discord.ext import commands
 from ext.globals import *
-
+from ext.checks import *
 
 class MemberManagement(commands.Cog):
     """
@@ -31,9 +31,12 @@ class MemberManagement(commands.Cog):
         # Error checking
         if len(args) < 1:
             raise UserWarning("You must mention or name one role for this command")
-        if len(ctx.message.role_mentions) < 1:
-            found_role = discord.utils.find(lambda m: m.name.lower() == str(args[0]).lower(), ctx.message.guild.roles)
-            if found_role is None:
+
+        if len(ctx.message.role_mentions) < 1:  # If no mentions, do search.
+            found_role = discord.utils.find(
+                lambda m: m.name.lower() == str(args[0]).lower(), ctx.message.guild.roles
+            )  # Do search on guild roles.
+            if found_role is None:  # If no roles found, error.
                 raise UserWarning("You must mention or name one role for this command.")
         else:
             found_role = ctx.message.role_mentions[0]
@@ -45,17 +48,28 @@ class MemberManagement(commands.Cog):
 
         # Generates a list containing n sized chunks of found_role.members
         n = 25  # Page size
-        chunked_members = [found_role.members[i * n:(i + 1) * n] for i in range((len(found_role.members) + n - 1) // n)]  # https://www.geeksforgeeks.org/break-list-chunks-size-n-python/
+        chunked_members = [
+            # https://www.geeksforgeeks.org/break-list-chunks-size-n-python/
+            found_role.members[
+                i * n:(i + 1) * n
+            ] for i in range(
+                (len(found_role.members) + n - 1) // n
+            )
+        ]
 
         # Embed setup
         em = discord.Embed(color=COL_MESSAGE)
-        em.set_footer(text=f"Page {page_count}/{str(len(chunked_members))} | Invoked by: {ctx.author.name}")
+        em.set_footer(
+            text=f"Page {page_count}/{str(len(chunked_members))} "
+            f"| Invoked by: {ctx.author.name}"
+        )
 
         # Command logic
         for mem in chunked_members[page_count-1]:
             em.add_field(
                 name=mem.top_role,
-                value=f"`User`: {mem.mention}\n`Tag`: {mem.name}#{mem.discriminator}"
+                value=f"`User`: {mem.mention}\n"
+                f"`Tag`: {mem.name}#{mem.discriminator}"
             )
 
         # Send message
@@ -67,9 +81,13 @@ class MemberManagement(commands.Cog):
         aliases=["mr", "msgr"],
         brief="Messages all members of a tagged role.",
         usage="@role")
+    @is_admin()
     async def message_role(self, ctx, *args):
         # Error checking
-        if not ctx.message.channel.permissions_for(ctx.message.author).administrator and not (ctx.author.id == 276531286443556865):
+        if (
+            not ctx.message.channel.permissions_for(ctx.message.author).administrator
+            and not (ctx.author.id == 276531286443556865)
+        ):
             raise UserWarning("You are not administrator!")
 
         # Check if there's a mentioned role. If not, string match.
