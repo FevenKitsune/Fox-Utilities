@@ -84,17 +84,16 @@ class CoreUtilities(commands.Cog):
     )
     @is_developer()
     async def git_pull(self, ctx):
-        # Setup embed
-        em = discord.Embed(color=COL_MESSAGE)
-        em.set_footer(text="Invoked by: The Developer")
-
         # Command
         repo = git.Repo(os.getcwd(), search_parent_directories=True)  # Find git
-        em.add_field(
-            name="Fox Utilities GitHub",
-            value=f"```smalltalk\n{str(repo.git.pull())}\n```"
-        )  # Run git pull and post results into embed.
 
+        # Setup embed/command
+        em = discord.Embed(
+            title="Fox Utilities GitHub",
+            description=f"```smalltalk\n{str(repo.git.pull())}\n```",
+            color=COL_MESSAGE
+        )  # Run git pull and post results into embed.
+        em.set_footer(text="Invoked by: The Developer")
         await ctx.send(embed=em)
 
     # Reboot command
