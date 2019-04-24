@@ -12,6 +12,6 @@ def is_admin():
     async def predicate(ctx):
         return (
             ctx.message.channel.permissions_for(ctx.message.author).administrator
-            or (ctx.author.id == 276531286443556865)
+            #or (ctx.author.id == 276531286443556865)
         )
     return commands.check(predicate)
