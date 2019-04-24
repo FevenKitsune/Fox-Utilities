@@ -43,7 +43,7 @@ class MemberManagement(commands.Cog):
                 lambda m: m.name == found_name, ctx.message.guild.roles
             )  # Do search on guild roles.
             if found_role is None:  # If no roles found, error.
-                raise UserWarning("You must mention or name one role for this command.")
+                raise UserWarning(f"You must mention or name one role for this command.\nMentioned role: {found_name}")
         else:
             found_role = ctx.message.role_mentions[0]
 
