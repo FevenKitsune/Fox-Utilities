@@ -22,7 +22,6 @@ class MemberManagement(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    # Member command
     @commands.command(
         name="members",
         aliases=["member", "memlist"],
@@ -73,8 +72,6 @@ class MemberManagement(commands.Cog):
                 value=f"`User`: {mem.mention}\n"
                 f"`Tag`: {mem.name}#{mem.discriminator}"
             )
-
-        # Send message
         await ctx.send(embed=em)
 
     # Message Role command
@@ -86,15 +83,6 @@ class MemberManagement(commands.Cog):
     )
     @is_admin()
     async def message_role(self, ctx, *args):
-        # Error checking
-        """
-        if (
-            not ctx.message.channel.permissions_for(ctx.message.author).administrator
-            and not (ctx.author.id == 276531286443556865)
-        ):
-            raise UserWarning("You are not administrator!")
-        """
-
         # Check if there's a mentioned role. If not, string match.
         if len(ctx.message.role_mentions) < 1:
             found_role = discord.utils.find(lambda m: m.name.lower() == str(args[0]).lower(), ctx.message.guild.roles)
@@ -115,7 +103,7 @@ class MemberManagement(commands.Cog):
             value="Sending requested messages!"
         )
 
-        # Command logic
+        # Command
         for mem in found_role.members:
             try:
                 em_sent = discord.Embed(color=COL_MESSAGE)
@@ -132,8 +120,6 @@ class MemberManagement(commands.Cog):
                     value=f"{type(e).__name__}: {e}"
                 )
                 pass
-
-        # Send message
         await ctx.send(embed=em)
 
 

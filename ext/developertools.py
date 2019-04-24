@@ -20,35 +20,35 @@ class DeveloperTools(commands.Cog):
     Various commands and tools for development and testing.
     """
 
-    # Constructor
     def __init__(self, client):
         self.client = client
 
-    # Hello world command
     @commands.command(
         name="hello",
         brief="A simple Hello World! command.",
         usage=""
     )
     async def hello_world(self, ctx):
+        # Setup embed
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text=f"Invoked by: {ctx.author.name}")
+        
+        # Command
         em.add_field(
             name="Response",
             value="Hello world! [This is a test](https://www.google.com)"
         )
         await ctx.send(embed=em)
 
-    # Exception testing
     @commands.command(
         name="except",
         brief="Throw a text exception.",
         usage=""
     )
     async def test_exception(self, ctx):
+        # Command
         raise UserWarning("Testing exception!")
 
-    # Change bot status
     @commands.command(
         name="cbs",
         brief="Change bot status. Developer command.",
@@ -57,10 +57,10 @@ class DeveloperTools(commands.Cog):
     )
     @is_developer()
     async def change_status(self, ctx, args):
+        # Command
         await ctx.bot.change_presence(activity=discord.Game(args))
         await ctx.send(args)
 
-    # Get system uptime
     @commands.command(
         name="system_uptime",
         aliases=["suptime"],
@@ -70,8 +70,11 @@ class DeveloperTools(commands.Cog):
     )
     @is_developer()
     async def sys_uptime(self, ctx):
+        # Setup embed
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text=f"Invoked by: {ctx.author.name}")
+        
+        # Command
         with open("/proc/uptime", "r") as proc_ut:  # Read system uptime.
             ut = float(proc_ut.readline().split()[0])
 
@@ -90,6 +93,7 @@ class DeveloperTools(commands.Cog):
     )
     @is_developer()
     async def botsay(self, ctx, args):
+        # Command
         await ctx.message.delete()
         await ctx.send(args)
 
