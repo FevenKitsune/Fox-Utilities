@@ -10,6 +10,8 @@ from discord.ext import commands
 from ext.globals import *
 from ext.checks import *
 
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
 
 class MemberManagement(commands.Cog):
     """
@@ -34,8 +36,11 @@ class MemberManagement(commands.Cog):
             raise UserWarning("You must mention or name one role for this command")
 
         if len(ctx.message.role_mentions) < 1:  # If no mentions, do search.
+            found_name = process.extractOne(
+                args[0], [role.name for role in ctx.message.guild.roles]
+            )
             found_role = discord.utils.find(
-                lambda m: m.name.lower() == str(args[0]).lower(), ctx.message.guild.roles
+                lambda m: m.name == found_name, ctx.message.guild.roles
             )  # Do search on guild roles.
             if found_role is None:  # If no roles found, error.
                 raise UserWarning("You must mention or name one role for this command.")
