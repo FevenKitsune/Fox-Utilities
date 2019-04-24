@@ -105,18 +105,15 @@ class CoreUtilities(commands.Cog):
     )
     @is_developer()
     async def reboot(self, ctx):
-        # Setup embed
-        em = discord.Embed(color=COL_MESSAGE)
-        em.set_footer(text="Invoked by: The Developer")
-
-        # Command
-        em.add_field(
-            name="Rebooting bot!",
-            value="Please wait while the bot reboots..."
+        em = discord.Embed(
+            title="Rebooting the bot!",
+            description="Please wait while the bot reboots...",
+            color=COL_MESSAGE
         )
-
+        em.set_footer(text="Invoked by: The Developer")
         await ctx.send(embed=em)
 
+        # Command
         p = psutil.Process(os.getpid())  # Get bot process
         for handler in p.open_files() + p.connections():
             os.close(handler.fd)  # Close all active connections and processes
