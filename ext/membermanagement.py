@@ -40,10 +40,10 @@ class MemberManagement(commands.Cog):
                 args[0], [role.name for role in ctx.message.guild.roles]
             )
             found_role = discord.utils.find(
-                lambda m: m.name == found_name, ctx.message.guild.roles
+                lambda m: m.name == found_name[0], ctx.message.guild.roles
             )  # Do search on guild roles.
             if found_role is None:  # If no roles found, error.
-                raise UserWarning(f"You must mention or name one role for this command.\nMentioned role: {found_name}")
+                raise UserWarning(f"You must mention or name one role for this command.")
         else:
             found_role = ctx.message.role_mentions[0]
 
