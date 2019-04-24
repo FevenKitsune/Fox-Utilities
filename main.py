@@ -8,7 +8,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 import discord
 from discord.ext import commands
 from ext.globals import *
-import ext.foxexc as fex
+import ext.exception
 
 import logging
 
@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     # Register foxexc as the exception handler.
     logger.info("Registering error handler.")
-    client.add_listener(fex.on_command_error)
+    client.add_listener(exception.on_command_error)
 
     # External cogs
     for extension in extensions:
