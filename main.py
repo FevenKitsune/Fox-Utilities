@@ -32,7 +32,7 @@ if __name__ == "__main__":
     logger.info("Removing default help command.")
     client.remove_command("help")
 
-    # Register foxexc as the exception handler.
+    # Register exception.py as the exception handler.
     logger.info("Registering error handler.")
     client.add_listener(exception.on_command_error)
 
