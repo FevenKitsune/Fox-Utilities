@@ -26,7 +26,6 @@ class CoreUtilities(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    # Extension reload command
     @commands.command(
         name="reload",
         brief="Reload bot extensions. Developer command.",
@@ -35,16 +34,17 @@ class CoreUtilities(commands.Cog):
     )
     @is_developer()
     async def reload(self, ctx, *args):
+        # Setup embed
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text="Invoked by: The Developer")
 
+        # Command
         if len(extensions) == 0:  # Check for extensions first.
             em.add_field(
                 name="Oh well.",
                 value="Doesn't look like there are any extensions defined.")
             await ctx.send(embed=em)
             return
-
         for extension in extensions:
             try:
                 self.client.unload_extension(extension)  # Unload extension
@@ -59,7 +59,6 @@ class CoreUtilities(commands.Cog):
                     name=f"{extension}",
                     value=f"Successfully unloaded extension {extension}"
                 )
-
         for extension in extensions:
             try:
                 self.client.load_extension(extension)  # Load extension
@@ -74,7 +73,6 @@ class CoreUtilities(commands.Cog):
                     name=f"{extension}",
                     value=f"Successfully loaded extension {extension}"
                 )
-
         await ctx.send(embed=em)
 
     # Git Pull command
@@ -86,10 +84,12 @@ class CoreUtilities(commands.Cog):
     )
     @is_developer()
     async def git_pull(self, ctx):
-        repo = git.Repo(os.getcwd(), search_parent_directories=True)  # Find git
-
+        # Setup embed
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text="Invoked by: The Developer")
+
+        # Command
+        repo = git.Repo(os.getcwd(), search_parent_directories=True)  # Find git
         em.add_field(
             name="Fox Utilities GitHub",
             value=f"```smalltalk\n{str(repo.git.pull())}\n```"
@@ -106,9 +106,11 @@ class CoreUtilities(commands.Cog):
     )
     @is_developer()
     async def reboot(self, ctx):
+        # Setup embed
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text="Invoked by: The Developer")
 
+        # Command
         em.add_field(
             name="Rebooting bot!",
             value="Please wait while the bot reboots..."
@@ -130,9 +132,11 @@ class CoreUtilities(commands.Cog):
         usage=""
     )
     async def help(self, ctx, *args):
+        # Setup embed
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
+        # Command
         for cmd in sorted(self.client.commands, key=lambda command: command.cog_name):
             if (cmd.hidden) and not (ctx.author.id == DEV_ID):
                 pass  # If not developer, do not show hidden commands.
