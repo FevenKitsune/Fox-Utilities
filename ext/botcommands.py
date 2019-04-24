@@ -18,7 +18,6 @@ class BotCommands(commands.Cog):
     Bot status and operation commands.
     """
 
-    # Constructor
     def __init__(self, client):
         self.client = client
 
