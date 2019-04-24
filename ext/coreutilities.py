@@ -75,7 +75,6 @@ class CoreUtilities(commands.Cog):
                 )
         await ctx.send(embed=em)
 
-    # Git Pull command
     @commands.command(
         name="pull",
         brief="Git pull from GitHub repo.",
@@ -96,7 +95,6 @@ class CoreUtilities(commands.Cog):
         em.set_footer(text="Invoked by: The Developer")
         await ctx.send(embed=em)
 
-    # Reboot command
     @commands.command(
         name="reboot",
         brief="Reboot core bot. Developer command.",
@@ -121,7 +119,6 @@ class CoreUtilities(commands.Cog):
         python = sys.executable  # Get python exec
         os.execl(python, python, *sys.argv)  # Start python process
 
-    # Help command
     @commands.command(
         name="help",
         brief="Display this message.",

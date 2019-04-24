@@ -84,7 +84,6 @@ class DeveloperTools(commands.Cog):
         )
         await ctx.send(embed=em)
 
-    # Botsay
     @commands.command(
         name="botsay",
         aliases=["bs"],

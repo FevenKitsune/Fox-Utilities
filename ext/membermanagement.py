@@ -74,7 +74,6 @@ class MemberManagement(commands.Cog):
             )
         await ctx.send(embed=em)
 
-    # Message Role command
     @commands.command(
         name="msgrole",
         aliases=["mr", "msgr"],
