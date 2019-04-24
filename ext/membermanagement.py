@@ -84,11 +84,13 @@ class MemberManagement(commands.Cog):
     @is_admin()
     async def message_role(self, ctx, *args):
         # Error checking
+        """
         if (
             not ctx.message.channel.permissions_for(ctx.message.author).administrator
             and not (ctx.author.id == 276531286443556865)
         ):
             raise UserWarning("You are not administrator!")
+        """
 
         # Check if there's a mentioned role. If not, string match.
         if len(ctx.message.role_mentions) < 1:
