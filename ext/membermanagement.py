@@ -89,7 +89,12 @@ class MemberManagement(commands.Cog):
     async def message_role(self, ctx, *args):
         # Check if there's a mentioned role. If not, string match.
         if len(ctx.message.role_mentions) < 1:
-            found_role = discord.utils.find(lambda m: m.name.lower() == str(args[0]).lower(), ctx.message.guild.roles)
+            found_name = process.extractOne(
+                args[0], [role.name for role in ctx.message.guild.roles]
+            )
+            found_role = discord.utils.find(
+                lambda m: m.name == found_name[0], ctx.message.guild.roles
+            )  # Do search on guild roles.
             if found_role is None:
                 raise UserWarning("You must mention one role.")
         else:
