@@ -11,7 +11,7 @@ from ext.globals import *
 import ext.exception as exception
 
 import logging
-from google.cloud imoprt logging as cloudlog
+from google.cloud import logging as cloudlog
 
 # Object Setup
 cloudlog_client = cloudlog.Client()
