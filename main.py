@@ -11,11 +11,12 @@ from ext.globals import *
 import ext.exception as exception
 
 import logging
-
+from google.cloud imoprt logging as cloudlog
 
 # Object Setup
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("discord")
+cloudlogger = cloudlog.Client()
 client = commands.Bot(description="Fox Utilities", command_prefix=BOT_PREFIX)
 
 # Startup
