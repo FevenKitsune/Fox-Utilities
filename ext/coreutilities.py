@@ -142,6 +142,22 @@ class CoreUtilities(commands.Cog):
 
         await ctx.author.send(embed=em)
 
+    @commands.command(
+        name="tags",
+        brief="Lists all bot-permission tags.",
+        usage=""
+    )
+    async def tags(self, ctx, *args):
+        # Setup embed
+        em = discord.Embed(
+            title="Fox Utilities Permission Tags",
+            description="Create a role with the name of a tag to give someone permission to run the tag's respective command.",
+            color=COL_MESSAGE)
+        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+
+        # Command
+
+        await ctx.author.send(embed=em)
 
 # Extension setup
 def setup(client):
