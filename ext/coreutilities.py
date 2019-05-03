@@ -151,7 +151,7 @@ class CoreUtilities(commands.Cog):
         # Setup embed
         em = discord.Embed(
             title="Fox Utilities Permission Tags",
-            description="Create a role with the name of a tag to give someone permission to run the tag's respective command.",
+            description="Create a role with the name of a tag to give someone permission to run the tags respective command.",
             color=COL_MESSAGE)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
