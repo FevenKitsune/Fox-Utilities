@@ -13,7 +13,8 @@ extensions = [
     "ext.developertools",
     "ext.membermanagement",
     "ext.botcommands",
-    "ext.invitetools"
+    "ext.invitetools",
+    "ext.systemtools"
     ]
 
 # Global variables
