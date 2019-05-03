@@ -157,7 +157,7 @@ class CoreUtilities(commands.Cog):
 
         # Command
 
-        await ctx.author.send(embed=em)
+        await ctx.send(embed=em)
 
 # Extension setup
 def setup(client):
