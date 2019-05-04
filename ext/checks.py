@@ -11,7 +11,7 @@ from ext.globals import *
 def has_tag():
     async def predicate(ctx):
         return (
-            True if discord.utils.get(ctx.author.roles, name=str(role_tag[ctx.command.name])) is not False
+            discord.utils.get(ctx.author.roles, name=str(role_tag[ctx.command.name]))
         )
     return commands.check(predicate)
 
