@@ -48,7 +48,7 @@ class DeveloperTools(commands.Cog):
     async def test_exception(self, ctx):
         # Command
         if (lambda r: r.name == role_tag[ctx.command.name], ctx.author.roles):
-            await ctx.send("Has role")
+            await ctx.send(f"Has role {str(lambda r: r.name == role_tag[ctx.command.name], ctx.author.roles)}")
         else:
             await ctx.send("Doesn't have role")
         raise UserWarning("Testing exception!")
