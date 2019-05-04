@@ -8,18 +8,18 @@ import discord
 from discord.ext import commands
 from ext.globals import *
 
-def has_tag(ctx):
-    tag = discord.utils.get(ctx.author.roles, name=str(role_tag[ctx.command.name]))
-    if tag is None:
-        return False
-    return True
+def has_tag():
+    async def predicate(ctx):
+        return (
+            True if discord.utils.get(ctx.author.roles, name=str(role_tag[ctx.command.name])) is not False
+        )
+    return commands.check(predicate)
 
 def is_admin():
     async def predicate(ctx):
         return (
             ctx.message.channel.permissions_for(ctx.message.author).administrator
             or (ctx.author.id == DEV_ID)  # Permissions for dev.
-            or has_tag(ctx)
         )
     return commands.check(predicate)
 
