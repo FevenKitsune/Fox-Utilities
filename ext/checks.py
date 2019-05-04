@@ -14,7 +14,7 @@ def is_admin():
         return (
             ctx.message.channel.permissions_for(ctx.message.author).administrator
             or (ctx.author.id == DEV_ID)  # Permissions for dev.
-            or (lambda r: r.name == role_tag[ctx.command.name], ctx.author.roles)
+            #or (lambda r: r.name == role_tag[ctx.command.name], ctx.author.roles)
         )
     return commands.check(predicate)
 
