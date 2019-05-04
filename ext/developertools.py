@@ -45,13 +45,7 @@ class DeveloperTools(commands.Cog):
         brief="Throw a text exception.",
         usage=""
     )
-    @has_tag()
     async def test_exception(self, ctx):
-        # Command
-        if discord.utils.find(lambda r: r.name == role_tag[ctx.command.name], ctx.author.roles):
-            await ctx.send(f"Has role```{role_tag[ctx.command.name]}``` ```{str(discord.utils.find(lambda r: r.name == role_tag[ctx.command.name], ctx.author.roles))}```")
-        else:
-            await ctx.send("Doesn't have role")
         raise UserWarning("Testing exception!")
 
     @commands.command(

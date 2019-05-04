@@ -8,12 +8,6 @@ import discord
 from discord.ext import commands
 from ext.globals import *
 
-def has_tag():
-    async def predicate(ctx):
-        return (
-            discord.utils.get(ctx.author.roles, name=str(role_tag[ctx.command.name]))
-        )
-    return commands.check(predicate)
 
 def is_admin():
     async def predicate(ctx):
