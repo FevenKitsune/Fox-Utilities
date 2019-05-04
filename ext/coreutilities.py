@@ -63,6 +63,11 @@ class CoreUtilities(commands.Cog):
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command
+        for x in role_tag:
+            em.add_field(
+                name=x,
+                value=role_tag[x]
+            )
 
         await ctx.send(embed=em)
 

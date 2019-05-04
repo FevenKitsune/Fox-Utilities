@@ -28,3 +28,8 @@ BOT_DEVSERVER = "https://discord.gg/ZVJasmz"
 # Config Variables
 BOT_PREFIX = "f."
 BOT_DEFAULT_STATUS = "with code."
+
+# Role Tags
+role_tag = {
+    "msgrole": "FOX_MSGROLE"
+}
