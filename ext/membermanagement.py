@@ -86,6 +86,7 @@ class MemberManagement(commands.Cog):
         usage="@role"
     )
     @is_admin()
+    @discord.ext.commands.has_role("FOX_MSGROLE")
     async def message_role(self, ctx, *args):
         # Check if there's a mentioned role. If not, string match.
         if len(ctx.message.role_mentions) < 1:
