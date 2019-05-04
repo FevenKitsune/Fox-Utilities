@@ -11,11 +11,10 @@ from ext.globals import *
 
 def is_admin():
     async def predicate(ctx):
-        print(f"{role_tag[ctx.command.name]}\n{ctx.command.name}")
         return (
             ctx.message.channel.permissions_for(ctx.message.author).administrator
             or (ctx.author.id == DEV_ID)  # Permissions for dev.
-            or discord.utils.find(lambda r: r.name == role_tag[ctx.command.name], ctx.author.roles)
+            or discord.utils.get(ctx.author.roles, name=str(role_tag[ctx.command.name]))
         )
     return commands.check(predicate)
 
