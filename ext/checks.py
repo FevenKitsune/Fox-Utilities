@@ -8,8 +8,6 @@ import discord
 from discord.ext import commands
 from ext.globals import *
 
-def printcommand(comname):
-    print("Test")
 
 def is_admin():
     async def predicate(ctx):
@@ -17,7 +15,6 @@ def is_admin():
             ctx.message.channel.permissions_for(ctx.message.author).administrator
             or (ctx.author.id == DEV_ID)  # Permissions for dev.
             or discord.utils.get(ctx.author.roles, name=str(role_tag[ctx.command.name]))
-            or printcommand(ctx.command.name)
         )
     return commands.check(predicate)
 
