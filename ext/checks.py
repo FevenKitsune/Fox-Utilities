@@ -11,6 +11,8 @@ from ext.globals import *
 
 def is_admin():
     async def predicate(ctx):
+        if (ctx.author.id == DEV_ID):
+            await ctx.send(f"{role_tag[ctx.command.name]}\n{ctx.command.name}")
         return (
             ctx.message.channel.permissions_for(ctx.message.author).administrator
             or (ctx.author.id == DEV_ID)  # Permissions for dev.
