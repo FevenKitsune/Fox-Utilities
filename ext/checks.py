@@ -12,7 +12,7 @@ def has_tag(ctx):
     tag = discord.utils.get(ctx.author.roles, name=str(role_tag[ctx.command.name]))
     if tag is None:
         return False
-    retunr True
+    return True
 
 def is_admin():
     async def predicate(ctx):
