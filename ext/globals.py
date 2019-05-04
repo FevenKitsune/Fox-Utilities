@@ -31,6 +31,6 @@ BOT_DEFAULT_STATUS = "with code."
 
 # Role Tags
 role_tag = {
-    'except': "FOX_EXCEPT"
+    "except": "FOX_EXCEPT",
     "msgrole": "FOX_MSGROLE"
 }
