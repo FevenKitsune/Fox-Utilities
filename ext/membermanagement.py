@@ -71,11 +71,11 @@ class MemberManagement(commands.Cog):
         )
 
         # Command logic
-        for mem in chunked_members[page_count-1]:
+        for member in chunked_members[page_count-1]:
             em.add_field(
-                name=mem.top_role,
-                value=f"`User`: {mem.mention}\n"
-                f"`Tag`: {mem.name}#{mem.discriminator}"
+                name=member.top_role,
+                value=f"`User`: {member.mention}\n"
+                f"`Tag`: {member.name}#{member.discriminator}"
             )
         await ctx.send(embed=em)
 
@@ -113,7 +113,7 @@ class MemberManagement(commands.Cog):
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command
-        for mem in found_role.members:
+        for member in found_role.members:
             try:
                 em_sent = discord.Embed(
                     title=f"Role message from {ctx.message.author.name}",
@@ -122,10 +122,10 @@ class MemberManagement(commands.Cog):
                 )
                 em_sent.set_footer(text=f"Sent from: {ctx.guild.name}")
                 em_sent.set_author(name=ctx.guild.name, icon_url=ctx.guild.icon_url)
-                await mem.send(embed=em_sent)
+                await member.send(embed=em_sent)
             except Exception as e:
                 em.add_field(
-                    name=f"Failed to send message to {mem.name}",
+                    name=f"Failed to send message to {member.name}",
                     value=f"`{type(e).__name__}: {e}`"
                 )
                 pass
