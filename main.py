@@ -19,7 +19,7 @@ handler = cloudlog_client.get_default_handler()
 logger = logging.getLogger("discord")
 logger.setLevel(logging.INFO)
 logger.addHandler(handler)
-client = commands.Bot(description="Fox Utilities", command_prefix=BOT_PREFIX)
+client = commands.Bot(description=BOT_DESCRIPTION, command_prefix=BOT_PREFIX)
 
 # Startup
 @client.event
