@@ -14,12 +14,12 @@ import logging
 from google.cloud import logging as cloudlog
 
 # Object Setup
-cloudlog_client = cloudlog.Client()
-handler = cloudlog_client.get_default_handler()
-logger = logging.getLogger("discord")
-logger.setLevel(logging.INFO)
+cloudlog_client = cloudlog.Client()  # Google Cloud Logging client
+handler = cloudlog_client.get_default_handler()  # Get default Python debug handler
+logger = logging.getLogger("discord")  # Set up logger called "discord"
+logger.setLevel(logging.INFO)  # Log all
 logger.addHandler(handler)
-client = commands.Bot(description=BOT_DESCRIPTION, command_prefix=BOT_PREFIX)
+client = commands.Bot(description=BOT_DESCRIPTION, command_prefix=BOT_PREFIX)  # Setup bot client information
 
 # Startup
 @client.event
