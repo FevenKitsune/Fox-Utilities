@@ -71,11 +71,17 @@ class MemberManagement(commands.Cog):
         )
 
         # Command logic
-        for member in chunked_members[page_count-1]:
+        try:
+            for member in chunked_members[page_count-1]:
+                em.add_field(
+                    name=member.top_role,
+                    value=f"`User`: {member.mention}\n"
+                    f"`Tag`: {member.name}#{member.discriminator}"
+                )
+        except IndexError:
             em.add_field(
-                name=member.top_role,
-                value=f"`User`: {member.mention}\n"
-                f"`Tag`: {member.name}#{member.discriminator}"
+                name="Uh-oh!",
+                value="This role has no members!"
             )
         await ctx.send(embed=em)
 
