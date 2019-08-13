@@ -116,6 +116,15 @@ class SystemTools(commands.Cog):
                 )
         await ctx.send(embed=em)
 
+    @commands.command(
+        name="stop",
+        hidden=True,
+        usage=""
+    )
+    @is_developer()
+    async def stop_bot(self, ctx):
+        exit()
+
 
 # Extension setup
 def setup(client):
