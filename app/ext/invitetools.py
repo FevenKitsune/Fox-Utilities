@@ -5,12 +5,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 # Imports
-import discord
-from discord.ext import commands
-from ext.globals import *
-from ext.checks import *
-
-import datetime
+from app.ext.checks import *
 
 
 class InviteTools(commands.Cog):

@@ -5,12 +5,8 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 # Imports
-import discord
-from discord.ext import commands
-from ext.globals import *
-from ext.checks import *
+from app.ext.checks import *
 
-from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
 
