@@ -6,7 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 import discord
 from discord.ext import commands
-from app.ext.globals import *
+from ext.globals import *
 
 
 def is_admin():

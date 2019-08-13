@@ -10,8 +10,8 @@ from discord.ext import commands
 import logging
 
 # Program Imports
-from app.ext.globals import *
-import app.ext.exception as exception
+from ext.globals import *
+import ext.exception as exception
 
 # Logging
 logger = logging.getLogger("discord")  # Set up logger called "discord"

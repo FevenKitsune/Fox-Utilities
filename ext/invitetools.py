@@ -5,7 +5,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 # Imports
-from app.ext.checks import *
+from ext.checks import *
 
 
 class InviteTools(commands.Cog):
