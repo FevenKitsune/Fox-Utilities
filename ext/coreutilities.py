@@ -71,6 +71,7 @@ class CoreUtilities(commands.Cog):
 
         await ctx.send(embed=em)
 
+
 # Extension setup
 def setup(client):
     client.add_cog(CoreUtilities(client))

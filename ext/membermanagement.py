@@ -13,6 +13,7 @@ from ext.checks import *
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
+
 class MemberManagement(commands.Cog):
     """
     MemberManagement class
@@ -57,7 +58,7 @@ class MemberManagement(commands.Cog):
         chunked_members = [
             # https://www.geeksforgeeks.org/break-list-chunks-size-n-python/
             found_role.members[
-                i * n:(i + 1) * n
+            i * n:(i + 1) * n
             ] for i in range(
                 (len(found_role.members) + n - 1) // n
             )
@@ -67,16 +68,16 @@ class MemberManagement(commands.Cog):
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(
             text=f"Page {page_count}/{str(len(chunked_members))} "
-            f"| Invoked by: {ctx.author.name}"
+                 f"| Invoked by: {ctx.author.name}"
         )
 
         # Command logic
         try:
-            for member in chunked_members[page_count-1]:
+            for member in chunked_members[page_count - 1]:
                 em.add_field(
                     name=member.top_role,
                     value=f"`User`: {member.mention}\n"
-                    f"`Tag`: {member.name}#{member.discriminator}"
+                          f"`Tag`: {member.name}#{member.discriminator}"
                 )
         except IndexError:
             em.add_field(

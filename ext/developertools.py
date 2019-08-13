@@ -32,7 +32,7 @@ class DeveloperTools(commands.Cog):
         # Setup embed
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text=f"Invoked by: {ctx.author.name}")
-        
+
         # Command
         em.add_field(
             name="Response",
@@ -72,7 +72,7 @@ class DeveloperTools(commands.Cog):
         # Setup embed
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text=f"Invoked by: {ctx.author.name}")
-        
+
         # Command
         with open("/proc/uptime", "r") as proc_ut:  # Read system uptime.
             ut = float(proc_ut.readline().split()[0])

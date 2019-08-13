@@ -106,14 +106,14 @@ class BotCommands(commands.Cog):
         em.add_field(
             name="Privacy Information",
             value="Privacy is important to everyone, so we put a quick "
-            "not-legally-rigorous overview of the data we have stored.\n\n"
-            "**1)** If a command returns an error, the contents of the "
-            "command will be logged for debug purposes. The name of the "
-            "sender and the server it was sent on is **not** logged.\n\n"
-            "**2)** We do not store data persistently! All logs are cleared "
-            "on system reboot to ensure privacy.\n\n**3)** We do not, nor "
-            "will we ever use the bot to access information not specified "
-            "by this privacy notice.\n\n- The Fox Utilities Team"
+                  "not-legally-rigorous overview of the data we have stored.\n\n"
+                  "**1)** If a command returns an error, the contents of the "
+                  "command will be logged for debug purposes. The name of the "
+                  "sender and the server it was sent on is **not** logged.\n\n"
+                  "**2)** We do not store data persistently! All logs are cleared "
+                  "on system reboot to ensure privacy.\n\n**3)** We do not, nor "
+                  "will we ever use the bot to access information not specified "
+                  "by this privacy notice.\n\n- The Fox Utilities Team"
         )
         await ctx.author.send(embed=em)
 

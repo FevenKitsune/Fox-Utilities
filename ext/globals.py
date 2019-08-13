@@ -15,7 +15,7 @@ extensions = [
     "ext.botcommands",
     "ext.invitetools",
     "ext.systemtools"
-    ]
+]
 
 # Global variables
 COL_MESSAGE = 0xFFB600
