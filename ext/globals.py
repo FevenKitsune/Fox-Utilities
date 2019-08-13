@@ -24,6 +24,7 @@ DEV_ID = 276531286443556865
 BOT_KEY = os.environ['FU_KEY']
 BOT_INVITE = "https://discordapp.com/oauth2/authorize?client_id=476166340328161280&scope=bot&permissions=1543761142"
 BOT_DEVSERVER = "https://discord.gg/ZVJasmz"
+BOT_SOURCE = "https://github.com/FevenKitsune/Fox-Utilities"
 BOT_DESCRIPTION = "Fox Utilities"
 
 # Config Variables

@@ -74,6 +74,7 @@ class BotCommands(commands.Cog):
 
     @commands.command(
         name="invite",
+        aliases=["source", "code"],
         brief="Invite this bot to your server.",
         usage=""
     )
@@ -85,7 +86,7 @@ class BotCommands(commands.Cog):
         # Command
         em.add_field(
             name="Invite me!",
-            value=f"[Invite link!]({BOT_INVITE})\n[Development server!]({BOT_DEVSERVER})"
+            value=f"[Invite link!]({BOT_INVITE})\n[Development server!]({BOT_DEVSERVER})\n[GitHub!]({BOT_SOURCE})"
         )
         await ctx.send(embed=em)
 
