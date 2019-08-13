@@ -44,10 +44,10 @@ class InviteTools(commands.Cog):
             raise UserWarning("This is a DM channel!")
         for inv in await ctx.message.guild.invites():
             if inv.inviter == user:
-                STRFTIME_FORMATTER = "%b %-d, %Y at %-l:%M%p"
+                time_formatter = "%b %-d, %Y at %-l:%M%p"
                 em.add_field(
                     name="Invite code: ####{}".format(str(inv.code)[4:]),
-                    value=f"Uses: {inv.uses}\nCreated at: {inv.created_at.strftime(STRFTIME_FORMATTER)}"
+                    value=f"Uses: {inv.uses}\nCreated at: {inv.created_at.strftime(time_formatter)}"
                 )
         # Send message
         await ctx.send(embed=em)
