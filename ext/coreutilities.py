@@ -38,7 +38,7 @@ class CoreUtilities(commands.Cog):
 
         # Command
         for cmd in sorted(self.client.commands, key=lambda command: command.cog_name):
-            if (cmd.hidden) and not (ctx.author.id == DEV_ID):
+            if cmd.hidden and not (ctx.author.id == DEV_ID):
                 pass  # If not developer, do not show hidden commands.
             else:
                 em.add_field(
