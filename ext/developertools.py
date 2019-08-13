@@ -59,7 +59,7 @@ class DeveloperTools(commands.Cog):
     @commands.command(
         name="system_uptime",
         aliases=["suptime"],
-        brief="Checks the system /proc/uptime.",
+        brief="Checks the container /proc/uptime.",
         usage="",
         hidden=True
     )
@@ -74,7 +74,7 @@ class DeveloperTools(commands.Cog):
             ut = float(proc_ut.readline().split()[0])
 
         em.add_field(
-            name="System Uptime",
+            name="Container Uptime",
             value=f"/proc/uptime: {str(datetime.timedelta(seconds=int(ut)))}"
         )
         await ctx.send(embed=em)
