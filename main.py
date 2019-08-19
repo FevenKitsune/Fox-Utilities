@@ -12,7 +12,6 @@ import logging
 # Program Imports
 from ext.globals import *
 from ext.checks import get_prefix
-from ext.listeners import is_mentioned
 import ext.exception as exception
 
 # Logging
@@ -41,9 +40,6 @@ if __name__ == "__main__":
     # Register exception.py as the exception handler.
     logger.info("Registering error handler.")
     client.add_listener(exception.on_command_error)
-
-    # Register external listeners
-    client.add_listener(is_mentioned, 'on_message')
 
     # External cogs
     for extension in extensions:
