@@ -27,3 +27,10 @@ def is_developer():
         )
 
     return commands.check(predicate)
+
+async def get_prefix(bot, message):
+        my_roles = [role.name for role in message.guild.me.roles]
+        for role_name in my_roles:
+                if role_name[:11] == "fox_prefix:":
+                        return role_name[11:]
+        return BOT_PREFIX

@@ -11,6 +11,7 @@ import logging
 
 # Program Imports
 from ext.globals import *
+from ext.checks import get_prefix
 import ext.exception as exception
 
 # Logging
@@ -18,7 +19,7 @@ logger = logging.getLogger("discord")  # Set up logger called "discord"
 logger.setLevel(logging.INFO)  # Log all
 
 # Client
-client = commands.Bot(description=BOT_DESCRIPTION, command_prefix=BOT_PREFIX)
+client = commands.Bot(description=BOT_DESCRIPTION, command_prefix=get_prefix)
 
 
 # Startup
