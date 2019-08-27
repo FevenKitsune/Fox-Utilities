@@ -20,15 +20,17 @@ class SnipeTools(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        for member in message.mentions:
-            snipe_db.update( {
-                f"{member.id}" : {
-                    f"{message.channel}" : {
-                        "content" : message.content,
-                        "author_id" : str(message.author.id)
+        if message.author.id == DEV_ID:
+            for member in message.mentions:
+                snipe_db.update( {
+                    f"{member.id}" : {
+                        f"{message.channel}" : {
+                            "content" : message.content,
+                            "author_id" : str(message.author.id)
+                        }
                     }
-                }
-            } )
+                } )
+            await message.channel.send(str(snipe_db))
 
     @commands.command(
         name="snipe",
