@@ -51,7 +51,7 @@ class SnipeTools(commands.Cog):
         else:
             em.add_field(
                 name=f"You Were Last Mentioned By: <@{grabbed_message['author_id']}>",
-                value=f"{grabbed_message["content"]}"
+                value=f"{grabbed_message['content']}"
             )
 
         await ctx.send(embed=em)
