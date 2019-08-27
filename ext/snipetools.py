@@ -20,6 +20,9 @@ class SnipeTools(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        if message.author.id == DEV_ID:
+            message.channel.send("Pong!")
+
         for member in message.mentions:
             snipe_db.update( {
                 f"{member.id}" : {
