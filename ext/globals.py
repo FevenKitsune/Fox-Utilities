@@ -33,5 +33,5 @@ BOT_DEFAULT_STATUS = "with code."
 
 # Role Tags
 role_tag = {
-    "msgrole": "FOX_MSGROLE"
+    "msgrole": "fox:msgrole"
 }

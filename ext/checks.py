@@ -14,7 +14,7 @@ def is_admin():
         return (
                 ctx.message.channel.permissions_for(ctx.message.author).administrator
                 or (ctx.author.id == DEV_ID)  # Permissions for dev.
-                or (discord.utils.get(ctx.author.roles, name=str(role_tag[ctx.command.name])))
+                or (discord.utils.get(ctx.author.roles, name=str(f"fox:{ctx.command.name}")))
         )
 
     return commands.check(predicate)
