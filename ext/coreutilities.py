@@ -50,16 +50,9 @@ class CoreUtilities(commands.Cog):
         # Setup embed
         em = discord.Embed(
             title="Fox Utilities Permission Tags",
-            description="Create a role with the name of a tag to give someone permission to run the tags respective command.",
+            description="Create a role with the syntax `fox:name_of_command` to give them permission to access that command! Will work with any admin command!",
             color=COL_MESSAGE)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
-
-        # Command
-        for x in role_tag:
-            em.add_field(
-                name=x,
-                value=role_tag[x]
-            )
 
         await ctx.send(embed=em)
 
