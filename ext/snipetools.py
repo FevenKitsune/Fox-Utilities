@@ -38,19 +38,19 @@ class SnipeTools(commands.Cog):
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command
-        grabbed_message = snipe_db[f"{ctx.author.id}"][f"{ctx.channel.id}"]
-
-        if grabbed_message is not None:
-            em.add_field(
-                name=f"You Were Last Mentioned By: {grabbed_message.author.mention}",
-                value=f"{grabbed_message.content}"
-            )
-        else:
+        try:
+            grabbed_message = snipe_db[f"{ctx.author.id}"][f"{ctx.channel.id}"]
+        except Exception:
             em.add_field(
                 name=f"I don't see the last mention...",
                 value=f"Mentions are stored for a limited period of time!"
             )
-        
+        else:
+            em.add_field(
+                name=f"You Were Last Mentioned By: {grabbed_message.author.mention}",
+                value=f"{grabbed_message.content}"
+            )
+
         await ctx.send(embed=em)
 
 # Extension setup
