@@ -8,6 +8,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 from ext.checks import *
 from ext.globals import snipe_db
 
+
 class SnipeTools(commands.Cog):
     """
     SnipeTools class
@@ -20,17 +21,15 @@ class SnipeTools(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author.id == DEV_ID:
-            for member in message.mentions:
-                snipe_db.update( {
-                    f"{member.id}" : {
-                        f"{message.channel}" : {
-                            "content" : message.content,
-                            "author_id" : str(message.author.id)
-                        }
+        for member in message.mentions:
+            snipe_db.update({
+                f"{member.id}": {
+                    f"{message.channel.id}": {
+                        "content": message.content,
+                        "author_id": str(message.author.id)
                     }
-                } )
-            await message.channel.send(str(snipe_db))
+                }
+            })
 
     @commands.command(
         name="snipe",
@@ -41,8 +40,6 @@ class SnipeTools(commands.Cog):
         # Embed setup
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
-
-        await ctx.send(f"Searching for... {ctx.author.id}/{ctx.channel.id}")
 
         # Command
         try:
@@ -61,5 +58,7 @@ class SnipeTools(commands.Cog):
         await ctx.send(embed=em)
 
 # Extension setup
+
+
 def setup(client):
     client.add_cog(SnipeTools(client))
