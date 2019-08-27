@@ -14,7 +14,8 @@ extensions = [
     "ext.membermanagement",
     "ext.botcommands",
     "ext.invitetools",
-    "ext.systemtools"
+    "ext.systemtools",
+    "ext.snipetools"
 ]
 
 # Global variables
@@ -30,3 +31,6 @@ BOT_DESCRIPTION = "Fox Utilities"
 # Config Variables
 BOT_PREFIX = "f."
 BOT_DEFAULT_STATUS = "with code."
+
+# Snipe Dict
+snipe_db = {}
