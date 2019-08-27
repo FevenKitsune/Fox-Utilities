@@ -24,7 +24,10 @@ class SnipeTools(commands.Cog):
         for member in message.mentions:
             snipe_db.update({
                 f"{member.id}": {
-                    f"{message.channel.id}": message
+                    f"{message.channel.id}": {
+                        "author_id" : str(message.author.id),
+                        "content" : str(message.content)
+                    }
                 }
             })
 
@@ -49,7 +52,7 @@ class SnipeTools(commands.Cog):
         else:
             em.add_field(
                 name=f"I found something:",
-                value=f"Mentioned by: {grabbed_message.author.mention}\n\n{grabbed_message.content}"
+                value=f"Mentioned by: <@{grabbed_message['author_id']}>\n\n{grabbed_message['content']}"
             )
 
         await ctx.send(embed=em)
