@@ -42,6 +42,8 @@ class SnipeTools(commands.Cog):
         em = discord.Embed(color=COL_MESSAGE)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
+        await ctx.send(f"Searching for... {ctx.author.id}/{ctx.channel.id}")
+
         # Command
         try:
             grabbed_message = snipe_db[f"{ctx.author.id}"][f"{ctx.channel.id}"]
