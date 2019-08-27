@@ -20,13 +20,13 @@ class SnipeTools(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author.id == DEV_ID:
-            await message.channel.send("Pong!")
-
         for member in message.mentions:
             snipe_db.update( {
                 f"{member.id}" : {
-                    f"{message.channel}" : message
+                    f"{message.channel}" : {
+                        "content" : message.content,
+                        "author_id" : str(message.author.id)
+                    }
                 }
             } )
 
@@ -50,8 +50,8 @@ class SnipeTools(commands.Cog):
             )
         else:
             em.add_field(
-                name=f"You Were Last Mentioned By: {grabbed_message.author.mention}",
-                value=f"{grabbed_message.content}"
+                name=f"You Were Last Mentioned By: <@{grabbed_message["author_id"]}>",
+                value=f"{grabbed_message["content"]}"
             )
 
         await ctx.send(embed=em)
