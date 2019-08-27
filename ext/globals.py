@@ -30,8 +30,3 @@ BOT_DESCRIPTION = "Fox Utilities"
 # Config Variables
 BOT_PREFIX = "f."
 BOT_DEFAULT_STATUS = "with code."
-
-# Role Tags
-role_tag = {
-    "msgrole": "fox:msgrole"
-}
