@@ -82,7 +82,7 @@ class DeveloperTools(commands.Cog):
     @commands.command(
         name="botsay",
         aliases=["bs"],
-        brief="Make the bot say something. Developer only command!"
+        brief="Make the bot say something. Developer only command!",
         usage="<string>",
         hidden=True
     )
