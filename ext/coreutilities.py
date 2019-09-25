@@ -43,7 +43,7 @@ class CoreUtilities(commands.Cog):
 
     @commands.command(
         name="tags",
-        brief="Lists all bot-permission tags.",
+        brief="Information about bot-permission tags.",
         usage=""
     )
     async def tags(self, ctx, *args):
