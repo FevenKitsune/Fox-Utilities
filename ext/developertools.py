@@ -32,7 +32,7 @@ class DeveloperTools(commands.Cog):
         # Command
         em.add_field(
             name="Response",
-            value="Hello world! [This is a test](https://www.google.com) <:OxygenUpdater:623848747235016714>"
+            value="Hello world! [This is a test](https://www.google.com)"
         )
         await ctx.send(embed=em)
 
