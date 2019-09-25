@@ -21,7 +21,7 @@ class DeveloperTools(commands.Cog):
 
     @commands.command(
         name="hello",
-        brief="A simple Hello World! command.",
+        brief="A simple \"Hello World!\" command. Things are running smoothly!",
         usage=""
     )
     async def hello_world(self, ctx):
@@ -38,7 +38,7 @@ class DeveloperTools(commands.Cog):
 
     @commands.command(
         name="except",
-        brief="Throw a text exception.",
+        brief="Throw a test error. Used to test the exception handler.",
         usage=""
     )
     async def test_exception(self, ctx):
@@ -46,7 +46,7 @@ class DeveloperTools(commands.Cog):
 
     @commands.command(
         name="cbs",
-        brief="Change bot status. Developer command.",
+        brief="Change the bot status. Developer only command!",
         usage="string",
         hidden=True
     )
@@ -59,7 +59,7 @@ class DeveloperTools(commands.Cog):
     @commands.command(
         name="system_uptime",
         aliases=["suptime"],
-        brief="Checks the container /proc/uptime.",
+        brief="Checks the container /proc/uptime. Developer only command!",
         usage="",
         hidden=True
     )
@@ -82,6 +82,7 @@ class DeveloperTools(commands.Cog):
     @commands.command(
         name="botsay",
         aliases=["bs"],
+        brief="Make the bot say something. Developer only command!"
         usage="<string>",
         hidden=True
     )
