@@ -14,7 +14,7 @@ async def on_command_error(ctx, error):
         # If CommandNotFound, fail silently
         if isinstance(error, discord.ext.commands.CommandNotFound):
             return
-        
+
         # Generate formatted string
         exc = f"{type(error).__name__}: {error}"
         em = discord.Embed(

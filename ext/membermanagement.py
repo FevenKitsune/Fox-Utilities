@@ -30,7 +30,8 @@ class MemberManagement(commands.Cog):
     async def member_list(self, ctx, *args):
         # Error checking
         if len(args) < 1:
-            raise UserWarning("You must mention or name one role for this command")
+            raise UserWarning(
+                "You must mention or name one role for this command")
 
         if len(ctx.message.role_mentions) < 1:  # If no mentions, do search.
             found_name = process.extractOne(
@@ -40,7 +41,8 @@ class MemberManagement(commands.Cog):
                 lambda m: m.name == found_name[0], ctx.message.guild.roles
             )  # Do search on guild roles.
             if found_role is None:  # If no roles found, error.
-                raise UserWarning(f"You must mention or name one role for this command.")
+                raise UserWarning(
+                    f"You must mention or name one role for this command.")
         else:
             found_role = ctx.message.role_mentions[0]
 
@@ -54,7 +56,7 @@ class MemberManagement(commands.Cog):
         chunked_members = [
             # https://www.geeksforgeeks.org/break-list-chunks-size-n-python/
             found_role.members[
-            i * n:(i + 1) * n
+                i * n:(i + 1) * n
             ] for i in range(
                 (len(found_role.members) + n - 1) // n
             )
@@ -124,7 +126,8 @@ class MemberManagement(commands.Cog):
                     color=message_color
                 )
                 em_sent.set_footer(text=f"Sent from: {ctx.guild.name}")
-                em_sent.set_author(name=ctx.guild.name, icon_url=ctx.guild.icon_url)
+                em_sent.set_author(name=ctx.guild.name,
+                                   icon_url=ctx.guild.icon_url)
                 await member.send(embed=em_sent)
             except Exception as e:
                 em.add_field(

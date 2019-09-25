@@ -25,8 +25,8 @@ class SnipeTools(commands.Cog):
             snipe_db.update({
                 f"{member.id}": {
                     f"{message.channel.id}": {
-                        "author_id" : str(message.author.id),
-                        "content" : str(message.content)
+                        "author_id": str(message.author.id),
+                        "content": str(message.content)
                     }
                 }
             })

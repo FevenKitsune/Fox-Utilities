@@ -32,7 +32,8 @@ class SystemTools(commands.Cog):
     @is_developer()
     async def git_pull(self, ctx):
         # Command
-        repo = git.Repo(os.getcwd(), search_parent_directories=True)  # Find git
+        repo = git.Repo(
+            os.getcwd(), search_parent_directories=True)  # Find git
 
         # Setup embed/command
         em = discord.Embed(
