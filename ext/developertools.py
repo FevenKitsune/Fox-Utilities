@@ -58,7 +58,7 @@ class DeveloperTools(commands.Cog):
 
     @commands.command(
         name="system_uptime",
-        aliases=["suptime"],
+        aliases=["suptime", "uptime"],
         brief="Checks the container /proc/uptime. Developer only command!",
         usage="",
         hidden=True
