@@ -38,7 +38,7 @@ class SnipeTools(commands.Cog):
     )
     async def sniped(self, ctx):
         # Embed setup
-        em = discord.Embed(color=COL_MESSAGE)
+        em = discord.Embed(color=message_color)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command

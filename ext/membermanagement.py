@@ -61,7 +61,7 @@ class MemberManagement(commands.Cog):
         ]
 
         # Embed setup
-        em = discord.Embed(color=COL_MESSAGE)
+        em = discord.Embed(color=message_color)
         em.set_footer(
             text=f"Page {page_count}/{str(len(chunked_members))} "
                  f"| Invoked by: {ctx.author.name}"
@@ -111,7 +111,7 @@ class MemberManagement(commands.Cog):
         em = discord.Embed(
             title="Sending messages...",
             description="Sending requested messages!",
-            color=COL_MESSAGE
+            color=message_color
         )
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
@@ -121,7 +121,7 @@ class MemberManagement(commands.Cog):
                 em_sent = discord.Embed(
                     title=f"Role message from {ctx.message.author.name}",
                     description=f"{ctx.message.clean_content}",
-                    color=COL_MESSAGE
+                    color=message_color
                 )
                 em_sent.set_footer(text=f"Sent from: {ctx.guild.name}")
                 em_sent.set_author(name=ctx.guild.name, icon_url=ctx.guild.icon_url)

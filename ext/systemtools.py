@@ -38,7 +38,7 @@ class SystemTools(commands.Cog):
         em = discord.Embed(
             title="Fox Utilities GitHub",
             description=f"```smalltalk\n{str(repo.git.pull())}\n```",
-            color=COL_MESSAGE
+            color=message_color
         )  # Run git pull and post results into embed.
         em.set_footer(text="Invoked by: The Developer")
         await ctx.send(embed=em)
@@ -54,7 +54,7 @@ class SystemTools(commands.Cog):
         em = discord.Embed(
             title="Rebooting the bot!",
             description="Please wait while the bot reboots...",
-            color=COL_MESSAGE
+            color=message_color
         )
         em.set_footer(text="Invoked by: The Developer")
         await ctx.send(embed=em)
@@ -76,7 +76,7 @@ class SystemTools(commands.Cog):
     @is_developer()
     async def reload(self, ctx, *args):
         # Setup embed
-        em = discord.Embed(color=COL_MESSAGE)
+        em = discord.Embed(color=message_color)
         em.set_footer(text="Invoked by: The Developer")
 
         # Command

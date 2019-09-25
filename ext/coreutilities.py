@@ -25,12 +25,12 @@ class CoreUtilities(commands.Cog):
     )
     async def help(self, ctx, *args):
         # Setup embed
-        em = discord.Embed(color=COL_MESSAGE)
+        em = discord.Embed(color=message_color)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command
         for cmd in sorted(self.client.commands, key=lambda command: command.cog_name):
-            if cmd.hidden and not (ctx.author.id == DEV_ID):
+            if cmd.hidden and not (ctx.author.id == developer_id):
                 pass  # If not developer, do not show hidden commands.
             else:
                 em.add_field(
@@ -51,7 +51,7 @@ class CoreUtilities(commands.Cog):
         em = discord.Embed(
             title="Fox Utilities Permission Tags",
             description="Create a role with the syntax `fox:name_of_command` to give them permission to access that command! Will work with any admin command!",
-            color=COL_MESSAGE)
+            color=message_color)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         await ctx.send(embed=em)

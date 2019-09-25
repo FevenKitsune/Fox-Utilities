@@ -26,7 +26,7 @@ class DeveloperTools(commands.Cog):
     )
     async def hello_world(self, ctx):
         # Setup embed
-        em = discord.Embed(color=COL_MESSAGE)
+        em = discord.Embed(color=message_color)
         em.set_footer(text=f"Invoked by: {ctx.author.name}")
 
         # Command
@@ -66,7 +66,7 @@ class DeveloperTools(commands.Cog):
     @is_developer()
     async def sys_uptime(self, ctx):
         # Setup embed
-        em = discord.Embed(color=COL_MESSAGE)
+        em = discord.Embed(color=message_color)
         em.set_footer(text=f"Invoked by: {ctx.author.name}")
 
         # Command

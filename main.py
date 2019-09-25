@@ -19,14 +19,14 @@ logger = logging.getLogger("discord")  # Set up logger called "discord"
 logger.setLevel(logging.INFO)  # Log all
 
 # Client
-client = commands.Bot(description=BOT_DESCRIPTION, command_prefix=get_prefix)
+client = commands.Bot(description=bot_description, command_prefix=get_prefix)
 
 
 # Executes once the bot has finished starting.
 @client.event
 async def on_ready():
-    logger.info(f"Setting client presence to: {BOT_DEFAULT_STATUS}")
-    await client.change_presence(activity=discord.Game(BOT_DEFAULT_STATUS)) # Set the bot status
+    logger.info(f"Setting client presence to: {bot_default_status}")
+    await client.change_presence(activity=discord.Game(bot_default_status)) # Set the bot status
     logger.info("Fox Utilities is now ready!")
 
 
@@ -52,4 +52,4 @@ if __name__ == "__main__":
 
     # Start Bot
     logger.info("Starting client.")
-    client.run(BOT_KEY)  # Start server.
+    client.run(bot_key)  # Start server.

@@ -26,7 +26,7 @@ class BotCommands(commands.Cog):
     )
     async def server_count(self, ctx):
         # Embed setup
-        em = discord.Embed(color=COL_MESSAGE)
+        em = discord.Embed(color=message_color)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command
@@ -44,7 +44,7 @@ class BotCommands(commands.Cog):
     )
     async def user_count(self, ctx):
         # Embed setup
-        em = discord.Embed(color=COL_MESSAGE)
+        em = discord.Embed(color=message_color)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command
@@ -62,7 +62,7 @@ class BotCommands(commands.Cog):
     )
     async def ping_bot(self, ctx):
         # Embed setup
-        em = discord.Embed(color=COL_MESSAGE)
+        em = discord.Embed(color=message_color)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command
@@ -80,13 +80,13 @@ class BotCommands(commands.Cog):
     )
     async def invite_bot(self, ctx):
         # Embed setup
-        em = discord.Embed(color=COL_MESSAGE)
+        em = discord.Embed(color=message_color)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command
         em.add_field(
             name="Invite me!",
-            value=f"[Invite link!]({BOT_INVITE})\n[Development server!]({BOT_DEVSERVER})\n[GitHub!]({BOT_SOURCE})"
+            value=f"[Invite link!]({bot_invite})\n[Development server!]({bot_development_server})\n[GitHub!]({bot_source})"
         )
         await ctx.send(embed=em)
 
@@ -97,7 +97,7 @@ class BotCommands(commands.Cog):
     )
     async def privacy_information(self, ctx):
         # Embed setup
-        em = discord.Embed(color=COL_MESSAGE)
+        em = discord.Embed(color=message_color)
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command

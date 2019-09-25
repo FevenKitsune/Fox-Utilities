@@ -19,18 +19,18 @@ extensions = [
 ]
 
 # Global variables
-COL_MESSAGE = 0xFFB600 # Color of the message embeds.
-COL_ERROR = 0xFF0000 # Color of errors
-DEV_ID = 276531286443556865 # ID of the developer (FevenKitsune)
-BOT_KEY = os.environ['FU_KEY'] # Environment variable name
-BOT_INVITE = "https://discordapp.com/oauth2/authorize?client_id=476166340328161280&scope=bot&permissions=1543761142" # Link to invite the bot
-BOT_DEVSERVER = "https://discord.gg/ZVJasmz" # Link to the bot Development Server
-BOT_SOURCE = "https://github.com/FevenKitsune/Fox-Utilities" # Link to the bot Github
-BOT_DESCRIPTION = "Fox Utilities" # Discord.Bot description input
+message_color = 0xFFB600 # Color of the message embeds.
+error_color = 0xFF0000 # Color of errors
+developer_id = 276531286443556865 # ID of the developer (FevenKitsune)
+bot_key = os.environ['FU_KEY'] # Environment variable name
+bot_invite = "https://discordapp.com/oauth2/authorize?client_id=476166340328161280&scope=bot&permissions=1543761142" # Link to invite the bot
+bot_development_server = "https://discord.gg/ZVJasmz" # Link to the bot Development Server
+bot_source = "https://github.com/FevenKitsune/Fox-Utilities" # Link to the bot Github
+bot_description = "Fox Utilities" # Discord.Bot description input
 
 # Config Variables
-BOT_PREFIX = "f." # Default prefix
-BOT_DEFAULT_STATUS = "with code." # Default status
+bot_prefix = "f." # Default prefix
+bot_default_status = "with code." # Default status
 
 # Snipe Dict
 snipe_db = {} # Active storage for snipes
