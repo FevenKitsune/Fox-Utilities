@@ -22,17 +22,16 @@ logger.setLevel(logging.INFO)  # Log all
 client = commands.Bot(description=BOT_DESCRIPTION, command_prefix=get_prefix)
 
 
-# Startup
+# Executes once the bot has finished starting.
 @client.event
 async def on_ready():
-    logger.info("Setting client presence.")
-    await client.change_presence(activity=discord.Game(BOT_DEFAULT_STATUS))
+    logger.info(f"Setting client presence to: {BOT_DEFAULT_STATUS}")
+    await client.change_presence(activity=discord.Game(BOT_DEFAULT_STATUS)) # Set the bot status
     logger.info("Fox Utilities is now ready!")
 
 
-# Extension Loading
+# Bot setup and loading
 if __name__ == "__main__":
-
     # Remove default help command, this is replaced in coreutilities.
     logger.info("Removing default help command.")
     client.remove_command("help")
