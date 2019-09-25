@@ -119,6 +119,7 @@ class SystemTools(commands.Cog):
 
     @commands.command(
         name="stop",
+        brief="Force stop the bot.",
         hidden=True,
         usage=""
     )
