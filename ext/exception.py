@@ -11,8 +11,11 @@ from ext.globals import *
 
 async def on_command_error(ctx, error):
     try:
+        # If CommandNotFound, fail silently
         if isinstance(error, discord.ext.commands.CommandNotFound):
             return
+        
+        # Generate formatted string
         exc = f"{type(error).__name__}: {error}"
         em = discord.Embed(
             title="Something isn't right...",
@@ -22,4 +25,5 @@ async def on_command_error(ctx, error):
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
         await ctx.send(embed=em)
     except Exception as error:
+        # If there is an issue with sending a message to the error channel, just ignore it.
         pass
