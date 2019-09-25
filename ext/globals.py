@@ -15,7 +15,8 @@ extensions = [
     "ext.botcommands",
     "ext.invitetools",
     "ext.systemtools",
-    "ext.snipetools"
+    "ext.snipetools",
+    "ext.misctools"
 ]
 
 # Global variables
