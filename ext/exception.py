@@ -11,6 +11,8 @@ from ext.globals import *
 
 async def on_command_error(ctx, error):
     try:
+        if isinstance(error, commands.CommandNotFound):
+            return
         exc = f"{type(error).__name__}: {error}"
         em = discord.Embed(
             title="Something isn't right...",
