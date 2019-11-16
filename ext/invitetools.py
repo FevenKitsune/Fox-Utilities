@@ -17,7 +17,7 @@ class InviteTools(commands.Cog):
 
     # Constructor
     def __init__(self, client):
-        self.client = clientt
+        self.client = client
 
     @commands.command(
         name="invites",
