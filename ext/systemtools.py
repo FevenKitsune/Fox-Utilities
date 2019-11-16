@@ -115,14 +115,14 @@ class SystemTools(commands.Cog):
             name=":white_check_mark: Load Passed:",
             value='\n'.join([
                 f"`{i}: PASS`" for i in success
-            ]) if success else "None"
+            ]) if success else "`None`"
         )
 
         em.add_field(
             name=":warning: Load Failed:",
             value='\n'.join([
                 f"`{i[0]}: {i[1]}`" for i in failed
-            ]) if failed else "None"
+            ]) if failed else "`None`"
         )
         await ctx.send(embed=em)
 
