@@ -25,7 +25,7 @@ error_color = 0xFF0000  # Color of errors
 developer_id = 276531286443556865  # ID of the developer (FevenKitsune)
 bot_key = os.environ['FU_KEY']  # Environment variable name
 # Link to invite the bot
-bot_invite = "https://discordapp.com/oauth2/authorize?client_id=476166340328161280&scope=bot&permissions=1543761142"
+bot_invite = "https://discordapp.com/api/oauth2/authorize?client_id=476166340328161280&permissions=8&scope=bot"
 # Link to the bot Development Server
 bot_development_server = "https://discord.gg/ZVJasmz"
 bot_source = "https://github.com/FevenKitsune/Fox-Utilities"  # Link to the bot Github
