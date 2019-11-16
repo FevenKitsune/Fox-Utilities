@@ -83,6 +83,10 @@ class SystemTools(commands.Cog):
         )
         em.set_footer(text="Invoked by: The Developer")
 
+        # Command variables
+        success = []
+        failed = []
+
         # Command
         if len(extensions) == 0:  # Check for extensions first.
             em.add_field(
@@ -100,15 +104,26 @@ class SystemTools(commands.Cog):
                 self.client.load_extension(extension)  # Load extension
             except Exception as e:  # Post error to embed if load failed.
                 expt = f"{type(e).__name__}: {e}"
-                em.add_field(
-                    name=f"{extension}",
-                    value=f"Failed to load extension {extension}\nException: {expt}"
-                )
+                failed.append([
+                    extension,
+                    expt
+                ])
             else:  # Post to embed if load succeeded.
-                em.add_field(
-                    name=f"{extension} :white_check_mark:",
-                    value=f"```Successfully loaded extension {extension}```"
-                )
+                success.append(extension)
+        
+        em.add_field(
+            name=":white_check_mark: Load Passed:",
+            value='\n'.join([
+                f"`{i}: PASS`" for i in success
+            ]) if success else "None"
+        )
+
+        em.add_field(
+            name=":warning: Load Failed:",
+            value='\n'.join([
+                f"`{i[0]}: {i[1]}`" for i in failed
+            ]) if failed else "None"
+        )
         await ctx.send(embed=em)
 
     @commands.command(
