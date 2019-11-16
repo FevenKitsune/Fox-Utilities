@@ -140,4 +140,5 @@ class MemberManagement(commands.Cog):
 
 # Extension setup
 def setup(client):
+    """Register class with client object."""
     client.add_cog(MemberManagement(client))

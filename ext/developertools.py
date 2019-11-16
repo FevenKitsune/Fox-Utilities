@@ -25,6 +25,7 @@ class DeveloperTools(commands.Cog):
         usage=""
     )
     async def hello_world(self, ctx):
+        """Respond with an embedded response."""
         # Setup embed
         em = discord.Embed(color=message_color)
         em.set_footer(text=f"Invoked by: {ctx.author.name}")
@@ -42,6 +43,7 @@ class DeveloperTools(commands.Cog):
         usage=""
     )
     async def test_exception(self, ctx):
+        """Throw an exception to test the exception functions"""
         raise UserWarning("Testing exception!")
 
     @commands.command(
@@ -52,6 +54,7 @@ class DeveloperTools(commands.Cog):
     )
     @is_developer()
     async def change_status(self, ctx, args):
+        """Change the game status of the bot."""
         # Command
         await ctx.bot.change_presence(activity=discord.Game(args))
         await ctx.send(args)
@@ -65,6 +68,7 @@ class DeveloperTools(commands.Cog):
     )
     @is_developer()
     async def sys_uptime(self, ctx):
+        """Get system uptime from container."""
         # Setup embed
         em = discord.Embed(color=message_color)
         em.set_footer(text=f"Invoked by: {ctx.author.name}")
@@ -88,6 +92,7 @@ class DeveloperTools(commands.Cog):
     )
     @is_developer()
     async def botsay(self, ctx, args):
+        """Echo back a string as an embedded message."""
         # Command
         await ctx.message.delete()
         await ctx.send(args)
@@ -95,4 +100,5 @@ class DeveloperTools(commands.Cog):
 
 # Extension setup
 def setup(client):
+    """Register class with client object."""
     client.add_cog(DeveloperTools(client))

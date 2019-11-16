@@ -61,4 +61,5 @@ class SnipeTools(commands.Cog):
 
 
 def setup(client):
+    """Register class with client object."""
     client.add_cog(SnipeTools(client))

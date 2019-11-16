@@ -118,4 +118,5 @@ class BotCommands(commands.Cog):
 
 # Extension setup
 def setup(client):
+    """Register class with client object."""
     client.add_cog(BotCommands(client))
