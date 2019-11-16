@@ -107,7 +107,7 @@ class SystemTools(commands.Cog):
             else:  # Post to embed if load succeeded.
                 em.add_field(
                     name=f"{extension} :white_check_mark:",
-                    value=f"Successfully loaded extension {extension}"
+                    value=f"```Successfully loaded extension {extension}```"
                 )
         await ctx.send(embed=em)
 
