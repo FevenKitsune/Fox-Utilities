@@ -26,14 +26,13 @@ class BotTools(commands.Cog):
     )
     async def server_count(self, ctx):
         # Embed setup
-        em = discord.Embed(color=message_color)
+        em = discord.Embed(
+            title="Server Count",
+            description=f"I am currently connected to {len(self.client.guilds):,} servers.",
+            color=message_color
+        )
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
-        # Command
-        em.add_field(
-            name="Server Count",
-            value=f"I am currently connected to {len(self.client.guilds):,} servers."
-        )
         await ctx.send(embed=em)
 
     @commands.command(
