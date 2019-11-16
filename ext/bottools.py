@@ -62,14 +62,13 @@ class BotTools(commands.Cog):
     )
     async def ping_bot(self, ctx):
         # Embed setup
-        em = discord.Embed(color=message_color)
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
-
-        # Command
-        em.add_field(
-            name="Pong!",
-            value="Hello! Everything seems to be operational."
+        em = discord.Embed(
+            title="Pong!",
+            description="Hello! Everything seems to be operational.",
+            color=message_color
         )
+        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        
         await ctx.send(embed=em)
 
     @commands.command(
@@ -80,14 +79,13 @@ class BotTools(commands.Cog):
     )
     async def invite_bot(self, ctx):
         # Embed setup
-        em = discord.Embed(color=message_color)
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
-
-        # Command
-        em.add_field(
-            name="Invite me!",
-            value=f"[Invite link!]({bot_invite})\n[Development server!]({bot_development_server})\n[GitHub!]({bot_source})"
+        em = discord.Embed(
+            title="Invite me!",
+            description=f"[Invite link!]({bot_invite})\n[Development server!]({bot_development_server})\n[GitHub!]({bot_source})",
+            color=message_color
         )
+        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        
         await ctx.send(embed=em)
 
     @commands.command(
@@ -97,22 +95,34 @@ class BotTools(commands.Cog):
     )
     async def privacy_information(self, ctx):
         # Embed setup
-        em = discord.Embed(color=message_color)
+        em = discord.Embed(
+            title="Privacy Information",
+            description="Privacy is important to everyone, so this is a quick overview of the data we have stored.",
+            color=message_color
+        )
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command
         em.add_field(
-            name="Privacy Information",
-            value="Privacy is important to everyone, so we put a quick "
-                  "not-legally-rigorous overview of the data we have stored.\n\n"
-                  "**1)** If a command returns an error, the contents of the "
-                  "command will be logged for debug purposes. The name of the "
-                  "sender and the server it was sent on is **not** logged.\n\n"
-                  "**2)** We do not store data persistently! All logs are cleared "
-                  "on system reboot to ensure privacy.\n\n**3)** We do not, nor "
-                  "will we ever use the bot to access information not specified "
-                  "by this privacy notice.\n\n- The Fox Utilities Team"
+            name="Error Logging",
+            value="If a command returns an error, the contents of the command will be logged for debugging purposes. Neither the name of the sender nor the name of the server will be logged."
         )
+
+        em.add_field(
+            name="Data Persistence",
+            value="Besides error logging, all data (Ex: snipe tool) is stored in memory, meaning it is wiped as soon as the bot stops running."
+        )
+
+        em.add_field(
+            name="Misuse Policy",
+            value="We do not, nor will we ever use the bot to access information not specified by this privacy notice."
+        )
+
+        em.add_field(
+            name="Questions?",
+            value="Feel free to ask questions in the Development Server!"
+        )
+
         await ctx.author.send(embed=em)
 
 
