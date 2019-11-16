@@ -33,7 +33,7 @@ bot_source = "https://github.com/FevenKitsune/Fox-Utilities"
 # Config Variables
 bot_prefix = "f."  # Default prefix
 bot_default_status = "with code."  # Default status
-bot_description = "Fox Utilities"  # Discord.Bot description input
+bot_description = "Fox Utilities is a utility bot covering a selection of niche functions to assist in server administration."  # Discord.Bot description input
 
 # Snipe Dict
 snipe_db = {}  # Active storage for snipes

@@ -37,20 +37,19 @@ class BotTools(commands.Cog):
 
     @commands.command(
         name="usercount",
-        aliases=["ucount", "membercount", "mcount", "users"],
+        aliases=["ucount", "membercount", "mcount", "users", "memcount"],
         brief="Displays the number of users the bot sees.",
         usage=""
     )
     async def user_count(self, ctx):
         # Embed setup
-        em = discord.Embed(color=message_color)
+        em = discord.Embed(
+            title="User Count",
+            description=f"I can see a total of {len(ctx.bot.users):,} users!",
+            color=message_color
+        )
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
-        # Command
-        em.add_field(
-            name="User Count",
-            value=f"I can see a total of {len(ctx.bot.users):,} users!"
-        )
         await ctx.send(embed=em)
 
     @commands.command(

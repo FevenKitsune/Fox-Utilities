@@ -25,7 +25,11 @@ class CoreTools(commands.Cog):
     )
     async def help(self, ctx, *args):
         # Setup embed
-        em = discord.Embed(color=message_color)
+        em = discord.Embed(
+            title="Fox Utilities Help Guide",
+            description=bot_description
+            color=message_color
+        )
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
 
         # Command

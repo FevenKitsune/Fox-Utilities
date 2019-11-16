@@ -33,7 +33,9 @@ class InviteTools(commands.Cog):
             user = ctx.message.author
         # Embed setup
         em = discord.Embed(
-            title="**{}\'s Invites**".format(user.name), color=message_color)
+            title="**{}\'s Invites**".format(user.name),
+            color=message_color
+        )
         em.set_footer(text="Invoked by: {}".format(ctx.author.name))
         # Command
         if not ctx.message.guild:

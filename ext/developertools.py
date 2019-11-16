@@ -27,14 +27,13 @@ class DeveloperTools(commands.Cog):
     async def hello_world(self, ctx):
         """Respond with an embedded response."""
         # Setup embed
-        em = discord.Embed(color=message_color)
+        em = discord.Embed(
+            title="Response",
+            description="Hello world!",
+            color=message_color
+        )
         em.set_footer(text=f"Invoked by: {ctx.author.name}")
 
-        # Command
-        em.add_field(
-            name="Response",
-            value="Hello world! [This is a test](https://www.google.com)"
-        )
         await ctx.send(embed=em)
 
     @commands.command(
@@ -69,18 +68,17 @@ class DeveloperTools(commands.Cog):
     @is_developer()
     async def sys_uptime(self, ctx):
         """Get system uptime from container."""
-        # Setup embed
-        em = discord.Embed(color=message_color)
-        em.set_footer(text=f"Invoked by: {ctx.author.name}")
-
-        # Command
         with open("/proc/uptime", "r") as proc_ut:  # Read system uptime.
             ut = float(proc_ut.readline().split()[0])
 
-        em.add_field(
-            name="Container Uptime",
-            value=f"/proc/uptime: {str(datetime.timedelta(seconds=int(ut)))}"
+        # Setup embed
+        em = discord.Embed(
+            title="Container Uptime",
+            description=f"/proc/uptime: {str(datetime.timedelta(seconds=int(ut)))}",
+            color=message_color
         )
+        em.set_footer(text=f"Invoked by: {ctx.author.name}")
+
         await ctx.send(embed=em)
 
     @commands.command(
