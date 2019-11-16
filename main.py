@@ -34,11 +34,11 @@ async def on_ready():
 # Bot setup and loading
 if __name__ == "__main__":
     # Remove default help command, this is replaced in coreutilities.
-    logger.info("Removing default help command.")
+    logging.info("Removing default help command.")
     client.remove_command("help")
 
     # Register exception.py as the exception handler.
-    logger.info("Registering error handler.")
+    logging.info("Registering error handler.")
     client.add_listener(exception.on_command_error)
 
     # External cogs
@@ -52,5 +52,5 @@ if __name__ == "__main__":
             logger.info(f"Loaded extension {extension}")
 
     # Start Bot
-    logger.info("Starting client.")
+    logging.info("Starting client.")
     client.run(bot_key)  # Start server.

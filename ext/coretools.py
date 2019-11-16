@@ -60,4 +60,4 @@ class CoreTools(commands.Cog):
 # Extension setup
 def setup(client):
     """Register class with client object."""
-    client.add_cog(CoreUtilities(client))
+    client.add_cog(CoreTools(client))
