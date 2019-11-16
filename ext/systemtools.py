@@ -77,7 +77,10 @@ class SystemTools(commands.Cog):
     @is_developer()
     async def reload(self, ctx, *args):
         # Setup embed
-        em = discord.Embed(color=message_color)
+        em = discord.Embed(
+            title="System Reload",
+            color=message_color
+        )
         em.set_footer(text="Invoked by: The Developer")
 
         # Command
@@ -90,17 +93,8 @@ class SystemTools(commands.Cog):
         for extension in extensions:
             try:
                 self.client.unload_extension(extension)  # Unload extension
-            except Exception as e:  # Post error to embed if unload failed.
-                expt = f"{type(e).__name__}: {e}"
-                em.add_field(
-                    name=f"{extension}",
-                    value=f"Failed to unload extension {extension}\nException: {expt}"
-                )
-            else:  # Post to embed if unload succeeded.
-                em.add_field(
-                    name=f"{extension}",
-                    value=f"Successfully unloaded extension {extension}"
-                )
+            except Exception as e:  # Continue if unload failed.
+                pass
         for extension in extensions:
             try:
                 self.client.load_extension(extension)  # Load extension
@@ -112,7 +106,7 @@ class SystemTools(commands.Cog):
                 )
             else:  # Post to embed if load succeeded.
                 em.add_field(
-                    name=f"{extension}",
+                    name=f"{extension} :white_check_mark:",
                     value=f"Successfully loaded extension {extension}"
                 )
         await ctx.send(embed=em)

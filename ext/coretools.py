@@ -27,7 +27,7 @@ class CoreTools(commands.Cog):
         # Setup embed
         em = discord.Embed(
             title="Fox Utilities Help Guide",
-            description=bot_description
+            description=bot_description,
             color=message_color
         )
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
