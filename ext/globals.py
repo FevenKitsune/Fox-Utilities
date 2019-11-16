@@ -9,10 +9,10 @@ import os
 
 # Globally accessible list of extensions.
 extensions = [
-    "ext.coreutilities",
+    "ext.coretools",
     "ext.developertools",
-    "ext.membermanagement",
-    "ext.botcommands",
+    "ext.membertools",
+    "ext.bottools",
     "ext.invitetools",
     "ext.systemtools",
     "ext.snipetools",

@@ -1,5 +1,5 @@
 """
-Fox Utilities > coreutilities.py
+Fox Utilities > coretools.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
@@ -8,9 +8,9 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 from ext.checks import *
 
 
-class CoreUtilities(commands.Cog):
+class CoreTools(commands.Cog):
     """
-    CoreUtilities class
+    CoreTools class
 
     Core system operation commands.
     """

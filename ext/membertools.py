@@ -1,5 +1,5 @@
 """
-Fox Utilities > membermanagement.py
+Fox Utilities > membertools.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
@@ -10,9 +10,9 @@ from ext.checks import *
 from fuzzywuzzy import process
 
 
-class MemberManagement(commands.Cog):
+class MemberTools(commands.Cog):
     """
-    MemberManagement class
+    MemberTools class
 
     Server administration commands and useful utilities.
     """
