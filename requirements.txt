@@ -2,7 +2,7 @@ aiohttp==3.5.4
 async-timeout==3.0.1
 attrs==19.3.0
 chardet==3.0.4
-discord.py==1.2.4
+discord.py==1.2.5
 fuzzywuzzy==0.17.0
 gitdb2==2.0.6
 GitPython==3.0.5
