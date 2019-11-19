@@ -47,10 +47,8 @@ class MemberTools(commands.Cog):
             found_role = ctx.message.role_mentions[0]
 
         # Page argument
-        page_count = 1  # Default to 1st page
-        if (len(args) == 2):
-            page_count = int(args[1])
-
+        page_count = 1 if (len(args) < 2) else int(args[1])  # Default to 1st page
+        
         # Generates a list containing n sized chunks of found_role.members
         n = 25  # Page size
         chunked_members = [
