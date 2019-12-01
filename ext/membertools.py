@@ -61,7 +61,10 @@ class MemberTools(commands.Cog):
         ]
 
         # Embed setup
-        em = discord.Embed(color=message_color)
+        em = discord.Embed(
+            title=f":memo: {found_role.mention} Member List",
+            color=message_color
+        )
         em.set_footer(
             text=f"Page {page_count}/{str(len(chunked_members))} "
                  f"| Invoked by: {ctx.author.name}"
