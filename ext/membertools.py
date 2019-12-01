@@ -110,7 +110,7 @@ class MemberTools(commands.Cog):
         # Embed setup
         em = discord.Embed(
             title="Sending messages...",
-            description="Sending requested messages!",
+            description=f"Sending requested messages to {found_role.mention}",
             color=message_color
         )
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
