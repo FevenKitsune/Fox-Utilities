@@ -27,7 +27,7 @@ class MiscTools(commands.Cog):
     async def epoch_time(self, ctx):
         # Embed setup
         em = discord.Embed(
-            title="Current Epoch Time",
+            title=":clock1130: Current Epoch Time",
             description=f"{time.time():,.2f}s\n\n[What?](https://en.wikipedia.org/wiki/Unix_time)",
             color=message_color
         )
