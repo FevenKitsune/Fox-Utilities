@@ -6,7 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 # Imports
 from ext.checks import *
-
+import time
 
 class MiscTools(commands.Cog):
     """
@@ -17,6 +17,22 @@ class MiscTools(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+
+    @commands.command(
+        name="time",
+        aliases=["epoch"],
+        brief="Returns current UNIX time",
+        usage=""
+    )
+    def epoch_time(self, ctx):
+        # Embed setup
+        em = discord.Embed(
+            title="Current Epoch Time",
+            description=f"{str(time.time())}",
+            color=message_color
+        )
+        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        await ctx.send(embed=em)
 
 
 # Extension setup
