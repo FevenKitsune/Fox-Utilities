@@ -24,7 +24,7 @@ class MiscTools(commands.Cog):
         brief="Returns current UNIX time",
         usage=""
     )
-    def epoch_time(self, ctx):
+    async def epoch_time(self, ctx):
         # Embed setup
         em = discord.Embed(
             title="Current Epoch Time",
