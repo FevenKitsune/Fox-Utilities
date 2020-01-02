@@ -28,7 +28,7 @@ class MiscTools(commands.Cog):
         # Embed setup
         em = discord.Embed(
             title="Current Epoch Time",
-            description=f"{str(time.time()):,.2f}",
+            description=f"{time.time():,.2f}",
             color=message_color
         )
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
