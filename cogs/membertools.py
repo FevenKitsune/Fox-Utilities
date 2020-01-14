@@ -5,7 +5,11 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 # Imports
+<<<<<<< HEAD:cogs/membertools.py
 from utility.checks import *
+=======
+from ext.checks import *
+>>>>>>> 63e7596485a0bc46aa0ce63977335994af23cb3e:ext/membertools.py
 from fuzzywuzzy import process
 
 
@@ -61,7 +65,7 @@ class MemberTools(commands.Cog):
 
         # Embed setup
         em = discord.Embed(
-            title=f":memo: {found_role.mention} Member List",
+            title=f":memo: {found_role.name} Member List",
             color=message_color
         )
         em.set_footer(
@@ -73,7 +77,7 @@ class MemberTools(commands.Cog):
         try:
             for member in chunked_members[page_count - 1]:
                 em.add_field(
-                    name=member.top_role,
+                    name=f":top: {member.top_role}",
                     value=f"`User`: {member.mention}\n"
                           f"`Tag`: {member.name}#{member.discriminator}"
                 )
