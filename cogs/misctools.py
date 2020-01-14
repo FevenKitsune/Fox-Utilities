@@ -47,12 +47,14 @@ class MiscTools(commands.Cog):
         
         try:
             d_index = args[0].lower().index('d')
+            qty = int(args[0].lower()[0:d_index])
+            faces = int(args[0].lower()[d_index+1:])
         except ValueError:
             raise UserWarning("Invalid formatting of dice roll!")
 
         # Embed setup
         em = discord.Embed(
-            title=f"Substring index: {d_index}",
+            title=f"Substring index: {d_index}, qty: {qty}, faces: {faces}",
             color=message_color
         )
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
