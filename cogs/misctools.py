@@ -34,6 +34,15 @@ class MiscTools(commands.Cog):
         )
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
         await ctx.send(embed=em)
+    
+    @commands.command(
+        name="roll",
+        aliases="dice",
+        brief="Rolls the specified dice.",
+        usage="[#dice]d[#face]"
+    )
+    async def roll(self, ctx, *args):
+        await ctx.send(args)
 
 
 # Extension setup
