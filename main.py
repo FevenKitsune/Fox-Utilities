@@ -8,8 +8,6 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 import discord
 from discord.ext import commands
 import logging
-
-# Program Imports
 from utility.globals import *
 from utility.checks import get_prefix
 import utility.exception as exception
@@ -20,16 +18,6 @@ logger.setLevel(logging.INFO)  # Log all
 
 # Client
 client = commands.Bot(description=bot_description, command_prefix=get_prefix)
-
-
-# Executes once the bot has finished starting.
-@client.event
-async def on_ready():
-    logger.info(f"Setting client presence to: {bot_default_status}")
-    # Set the bot status
-    await client.change_presence(activity=discord.Game(bot_default_status))
-    logger.info("Fox Utilities is now ready!")
-
 
 # Bot setup and loading
 if __name__ == "__main__":

@@ -6,7 +6,6 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 # Imports
 from utility.checks import *
-
 import psutil
 import sys
 import os

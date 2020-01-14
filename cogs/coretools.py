@@ -6,6 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 # Imports
 from utility.checks import *
+from main import logger
 
 
 class CoreTools(commands.Cog):
@@ -17,6 +18,14 @@ class CoreTools(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+
+    # Executes once the bot has finished starting.
+    @commands.Cog.listener()
+    async def on_ready(self):
+        logger.info(f"Setting client presence to: {bot_default_status}")
+        # Set the bot status
+        await client.change_presence(activity=discord.Game(bot_default_status))
+        logger.info("Fox Utilities is now ready!")
 
     @commands.command(
         name="help",
