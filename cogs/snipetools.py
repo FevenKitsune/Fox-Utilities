@@ -5,8 +5,8 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 # Imports
-from ext.checks import *
-from ext.globals import snipe_db
+from utility.checks import *
+from utility.globals import snipe_db
 
 
 class SnipeTools(commands.Cog):

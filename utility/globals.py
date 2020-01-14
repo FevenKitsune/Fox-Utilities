@@ -9,14 +9,14 @@ import os
 
 # Globally accessible list of extensions.
 extensions = [
-    "ext.coretools",
-    "ext.developertools",
-    "ext.membertools",
-    "ext.bottools",
-    "ext.invitetools",
-    "ext.systemtools",
-    "ext.snipetools",
-    "ext.misctools"
+    "cogs.coretools",
+    "cogs.developertools",
+    "cogs.membertools",
+    "cogs.bottools",
+    "cogs.invitetools",
+    "cogs.systemtools",
+    "cogs.snipetools",
+    "cogs.misctools"
 ]
 
 # Global variables

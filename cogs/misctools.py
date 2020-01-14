@@ -5,7 +5,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 # Imports
-from ext.checks import *
+from utility.checks import *
 
 
 class MiscTools(commands.Cog):
