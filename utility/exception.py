@@ -5,13 +5,8 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 # Imports
-<<<<<<< HEAD:utility/exception.py
 import discord
 from utility.globals import *
-=======
-from ext.globals import *
-import discord
->>>>>>> 63e7596485a0bc46aa0ce63977335994af23cb3e:ext/exception.py
 
 
 async def on_command_error(ctx, error):

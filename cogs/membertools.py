@@ -5,11 +5,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 # Imports
-<<<<<<< HEAD:cogs/membertools.py
 from utility.checks import *
-=======
-from ext.checks import *
->>>>>>> 63e7596485a0bc46aa0ce63977335994af23cb3e:ext/membertools.py
 from fuzzywuzzy import process
 
 

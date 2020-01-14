@@ -5,14 +5,9 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 # Imports
-<<<<<<< HEAD:cogs/misctools.py
 from utility.checks import *
 import time
 
-=======
-from ext.checks import *
-
->>>>>>> 63e7596485a0bc46aa0ce63977335994af23cb3e:ext/misctools.py
 
 class MiscTools(commands.Cog):
     """
