@@ -53,15 +53,15 @@ class MiscTools(commands.Cog):
         except ValueError:
             raise UserWarning("Invalid formatting of dice roll!")
 
-        if qty > 25: raise UserWarning("Maximum of 25 dice at once.")
-        if faces > 1000: raise UserWarning("Maximum of 1,000 faces per die.")
+        if qty > 50: raise UserWarning("Maximum of 50 dice at once.")
+        if faces > 10000: raise UserWarning("Maximum of 10,000 faces per die.")
 
         rolls = sample(range(1, faces + 1), qty)
 
         # Embed setup
         em = discord.Embed(
             title=f"Rolling {qty}d{faces}...",
-            description=f"{', '.join([str(i) for i in rolls])}\nTotal: {sum(rolls)}",
+            description=f"{', '.join([str(i) for i in rolls])}\n\nTotal: {sum(rolls)}",
             color=message_color
         )
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
