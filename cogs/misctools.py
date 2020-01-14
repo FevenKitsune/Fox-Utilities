@@ -42,7 +42,21 @@ class MiscTools(commands.Cog):
         usage="[#dice]d[#face]"
     )
     async def roll(self, ctx, *args):
-        await ctx.send(args)
+        if len(args) < 1:
+            raise UserWarning("You must specify a roll to use this command!")
+        
+        try:
+            d_index = args[0].lower().index('d')
+        except ValueError:
+            raise UserWarning("Invalid formatting of dice roll!")
+
+        # Embed setup
+        em = discord.Embed(
+            title=f"Substring index: {d_index}",
+            color=message_color
+        )
+        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        await ctx.send(embed=em)
 
 
 # Extension setup
