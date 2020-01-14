@@ -37,7 +37,7 @@ class MiscTools(commands.Cog):
     
     @commands.command(
         name="roll",
-        aliases="dice",
+        aliases=["dice"],
         brief="Rolls the specified dice.",
         usage="[#dice]d[#face]"
     )
