@@ -12,7 +12,7 @@ class MiscTools(commands.Cog):
     """
     MiscTools class
 
-    Miscellaneous commands and utilities.
+    Miscellaneous commands that don't need their own cog.
     """
 
     def __init__(self, client):

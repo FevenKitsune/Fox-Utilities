@@ -13,7 +13,7 @@ class CoreTools(commands.Cog):
     """
     CoreTools class
 
-    Core system operation commands.
+    Core bot functions and commands.
     """
 
     def __init__(self, client):

@@ -13,7 +13,7 @@ class MemberTools(commands.Cog):
     """
     MemberTools class
 
-    Server administration commands and useful utilities.
+    Server administration and utility commands.
     """
 
     # Constructor
