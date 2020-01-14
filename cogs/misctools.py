@@ -61,7 +61,7 @@ class MiscTools(commands.Cog):
         # Embed setup
         em = discord.Embed(
             title=f"Rolling {qty}d{faces}...",
-            description=f"{', '.join([str(i) for i in rolls])}\nTotal: {sum(rolls)}"
+            description=f"{', '.join([str(i) for i in rolls])}\nTotal: {sum(rolls)}",
             color=message_color
         )
         em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
