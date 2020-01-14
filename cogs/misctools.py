@@ -60,7 +60,7 @@ class MiscTools(commands.Cog):
 
         # Embed setup
         em = discord.Embed(
-            title=f"Rolling {qty}d{'{:,}'.format(faces)}...",
+            title=f":game_die: Rolling {qty}d{'{:,}'.format(faces)}...",
             description=f"{', '.join(['{:,}'.format(i) for i in rolls])}\n\nTotal: {'{:,}'.format(sum(rolls))}",
             color=message_color
         )
