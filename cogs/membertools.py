@@ -78,10 +78,13 @@ class MemberTools(commands.Cog):
                           f"`Tag`: {member.name}#{member.discriminator}"
                 )
         except IndexError:
-            em.add_field(
-                name="Uh-oh!",
-                value="This role has no members!"
-            )
+            # Find cause of IndexError
+            if page_count > len(chunked_members) and len(chunked_members) != 0:
+                raise UserWarning("There are no more pages for this role!")
+            elif len(chunked_members) == 0:
+                raise UserWarning("This role has no members!")
+            else:
+                raise UserWarning("An unknown IndexError has occured!")
         await ctx.send(embed=em)
 
     @commands.command(
