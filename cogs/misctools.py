@@ -40,7 +40,7 @@ class MiscTools(commands.Cog):
         name="roll",
         aliases=["dice"],
         brief="Rolls the specified dice.",
-        usage="[#dice]d[#face]"
+        usage="[#dice]d[#faces]"
     )
     async def roll(self, ctx, *args):
         if len(args) < 1:
