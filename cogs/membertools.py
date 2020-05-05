@@ -7,6 +7,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 # Imports
 from utility.checks import *
 from fuzzywuzzy import process
+from utility.generators import generate_footer
 
 
 class MemberTools(commands.Cog):
@@ -66,7 +67,7 @@ class MemberTools(commands.Cog):
         )
         em.set_footer(
             text=f"Page {page_count}/{str(len(chunked_members))} "
-                 f"| Invoked by: {ctx.author.name}"
+                 f"| {generate_footer(ctx)}"
         )
 
         # Command logic
@@ -118,7 +119,7 @@ class MemberTools(commands.Cog):
             description=f"Sending requested messages to {found_role.mention}",
             color=message_color
         )
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.set_footer(text=generate_footer(ctx))
 
         # Command
         for member in found_role.members:

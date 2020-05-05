@@ -10,6 +10,7 @@ import psutil
 import sys
 import os
 import git
+from utility.generators import generate_footer
 
 
 class SystemTools(commands.Cog):
@@ -40,7 +41,7 @@ class SystemTools(commands.Cog):
             description=f"```smalltalk\n{str(repo.git.pull())}\n```",
             color=message_color
         )  # Run git pull and post results into embed.
-        em.set_footer(text="Invoked by: The Developer")
+        em.set_footer(text=generate_footer(ctx))
         await ctx.send(embed=em)
 
     @commands.command(
@@ -56,7 +57,7 @@ class SystemTools(commands.Cog):
             description="Please wait while the bot reboots...",
             color=message_color
         )
-        em.set_footer(text="Invoked by: The Developer")
+        em.set_footer(text=generate_footer(ctx))
         await ctx.send(embed=em)
 
         # Command
@@ -80,7 +81,7 @@ class SystemTools(commands.Cog):
             title="System Reload",
             color=message_color
         )
-        em.set_footer(text="Invoked by: The Developer")
+        em.set_footer(text=generate_footer(ctx))
 
         # Command variables
         success = []

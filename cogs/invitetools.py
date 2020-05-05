@@ -6,6 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 # Imports
 from utility.checks import *
+from utility.generators import generate_footer
 
 
 class InviteTools(commands.Cog):
@@ -36,7 +37,7 @@ class InviteTools(commands.Cog):
             title="**{}\'s Invites**".format(user.name),
             color=message_color
         )
-        em.set_footer(text="Invoked by: {}".format(ctx.author.name))
+        em.set_footer(text=generate_footer(ctx))
         # Command
         if not ctx.message.guild:
             raise UserWarning("This is a DM channel!")

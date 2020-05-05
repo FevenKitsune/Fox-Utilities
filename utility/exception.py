@@ -7,6 +7,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 # Imports
 import discord
 from utility.globals import *
+from utility.generators import generate_footer
 
 
 async def on_command_error(ctx, error):
@@ -22,7 +23,7 @@ async def on_command_error(ctx, error):
             description=f"`{exc}`",
             color=error_color
         )
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.set_footer(text=generate_footer(ctx))
         await ctx.send(embed=em)
     except Exception as error:
         # If there is an issue with sending a message to the error channel, just ignore it.

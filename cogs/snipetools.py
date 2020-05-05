@@ -7,6 +7,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 # Imports
 from utility.checks import *
 from utility.globals import snipe_db
+from utility.generators import generate_footer
 
 
 class SnipeTools(commands.Cog):
@@ -39,7 +40,7 @@ class SnipeTools(commands.Cog):
     async def sniped(self, ctx):
         # Embed setup
         em = discord.Embed(color=message_color)
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.set_footer(text=generate_footer(ctx))
 
         # Command
         try:

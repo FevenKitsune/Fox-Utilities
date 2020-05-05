@@ -8,6 +8,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 from utility.checks import *
 import time
 from random import sample
+from utility.generators import generate_footer
 
 
 class MiscTools(commands.Cog):
@@ -33,7 +34,7 @@ class MiscTools(commands.Cog):
             description=f"{time.time():,.2f}s\n\n[What?](https://en.wikipedia.org/wiki/Unix_time)",
             color=message_color
         )
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.set_footer(text=generate_footer(ctx))
         await ctx.send(embed=em)
     
     @commands.command(
@@ -64,7 +65,7 @@ class MiscTools(commands.Cog):
             description=f"{', '.join(['{:,}'.format(i) for i in rolls])}\n\nTotal: {'{:,}'.format(sum(rolls))}",
             color=message_color
         )
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.set_footer(text=generate_footer(ctx))
         await ctx.send(embed=em)
 
 

@@ -7,6 +7,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 # Imports
 from utility.checks import *
 from main import logger
+from utility.generators import generate_footer
 
 
 class CoreTools(commands.Cog):
@@ -39,7 +40,7 @@ class CoreTools(commands.Cog):
             description=bot_description,
             color=message_color
         )
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.set_footer(text=generate_footer(ctx))
 
         # Command
         for cmd in sorted(self.client.commands, key=lambda command: command.cog_name):
@@ -65,7 +66,7 @@ class CoreTools(commands.Cog):
             title="Fox Utilities Permission Tags",
             description="Create a role with the syntax `fox:name_of_command` to give them permission to access that command! Will work with any admin command!",
             color=message_color)
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.set_footer(text=generate_footer(ctx))
 
         await ctx.send(embed=em)
 

@@ -8,6 +8,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 from utility.checks import *
 from utility.generators import generate_footer
 
+
 class BotTools(commands.Cog):
     """
     BotTools class
@@ -31,7 +32,7 @@ class BotTools(commands.Cog):
             description=f"I am currently connected to {len(self.client.guilds):,} servers.",
             color=message_color
         )
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.set_footer(text=generate_footer(ctx))
 
         await ctx.send(embed=em)
 
@@ -48,7 +49,7 @@ class BotTools(commands.Cog):
             description=f"I can see a total of {len(ctx.bot.users):,} users!",
             color=message_color
         )
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.set_footer(text=generate_footer(ctx))
 
         await ctx.send(embed=em)
 
@@ -65,7 +66,7 @@ class BotTools(commands.Cog):
             description="Hello! Everything seems to be operational.",
             color=message_color
         )
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.set_footer(text=generate_footer(ctx))
         
         await ctx.send(embed=em)
 
@@ -82,7 +83,7 @@ class BotTools(commands.Cog):
             description=f"[Invite link!]({bot_invite})\n[Development server!]({bot_development_server})\n[GitHub!]({bot_source})",
             color=message_color
         )
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.set_footer(text=generate_footer(ctx))
         
         await ctx.send(embed=em)
 
@@ -98,7 +99,7 @@ class BotTools(commands.Cog):
             description="Privacy is important to everyone, so this is a quick overview of the data we have stored.",
             color=message_color
         )
-        em.set_footer(text=f"Invoked by: {ctx.message.author.name}")
+        em.set_footer(text=generate_footer(ctx))
 
         # Command
         em.add_field(

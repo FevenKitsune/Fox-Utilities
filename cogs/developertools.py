@@ -7,6 +7,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 # Imports
 from utility.checks import *
 import datetime
+from utility.generators import generate_footer
 
 
 class DeveloperTools(commands.Cog):
@@ -32,7 +33,7 @@ class DeveloperTools(commands.Cog):
             description="Hello world!",
             color=message_color
         )
-        em.set_footer(text=f"Invoked by: {ctx.author.name}")
+        em.set_footer(text=generate_footer(ctx))
 
         await ctx.send(embed=em)
 
@@ -77,7 +78,7 @@ class DeveloperTools(commands.Cog):
             description=f"/proc/uptime: {str(datetime.timedelta(seconds=int(ut)))}",
             color=message_color
         )
-        em.set_footer(text=f"Invoked by: {ctx.author.name}")
+        em.set_footer(text=generate_footer(ctx))
 
         await ctx.send(embed=em)
 
