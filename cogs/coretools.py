@@ -24,7 +24,7 @@ class CoreTools(commands.Cog):
     async def on_ready(self):
         logger.info(f"Setting client presence to: {bot_default_status}")
         # Set the bot status
-        await client.change_presence(activity=discord.Game(bot_default_status))
+        await self.client.change_presence(activity=discord.Game(bot_default_status))
         logger.info("Fox Utilities is now ready!")
 
     @commands.command(
