@@ -4,7 +4,6 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-# Imports
 from utility.checks import *
 from main import logger
 from utility.generators import generate_footer

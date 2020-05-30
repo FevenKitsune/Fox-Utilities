@@ -4,7 +4,6 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-# Imports
 from utility.checks import *
 import psutil
 import sys
@@ -110,7 +109,7 @@ class SystemTools(commands.Cog):
                 ])
             else:  # Post to embed if load succeeded.
                 success.append(extension)
-        
+
         em.add_field(
             name=":white_check_mark: Load Passed:",
             value='\n'.join([

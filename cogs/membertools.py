@@ -4,7 +4,6 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-# Imports
 from utility.checks import *
 from fuzzywuzzy import process
 from utility.generators import generate_footer
@@ -48,13 +47,13 @@ class MemberTools(commands.Cog):
 
         # Page argument
         page_count = 1 if (len(args) < 2) else int(args[1])  # Default to 1st page
-        
+
         # Generates a list containing n sized chunks of found_role.members
         n = 25  # Page size
         chunked_members = [
             # https://www.geeksforgeeks.org/break-list-chunks-size-n-python/
             found_role.members[
-                i * n:(i + 1) * n
+            i * n:(i + 1) * n
             ] for i in range(
                 (len(found_role.members) + n - 1) // n
             )

@@ -4,7 +4,6 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-# Imports
 from utility.checks import *
 import time
 from random import sample
@@ -36,7 +35,7 @@ class MiscTools(commands.Cog):
         )
         em.set_footer(text=generate_footer(ctx))
         await ctx.send(embed=em)
-    
+
     @commands.command(
         name="roll",
         aliases=["dice"],
@@ -46,11 +45,11 @@ class MiscTools(commands.Cog):
     async def roll(self, ctx, *args):
         if len(args) < 1:
             raise UserWarning("You must specify a roll to use this command!")
-        
+
         try:
             d_index = args[0].lower().index('d')
             qty = int(args[0].lower()[0:d_index])
-            faces = int(args[0].lower()[d_index+1:])
+            faces = int(args[0].lower()[d_index + 1:])
         except ValueError:
             raise UserWarning("Invalid formatting of dice roll!")
 

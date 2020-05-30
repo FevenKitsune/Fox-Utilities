@@ -4,7 +4,6 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-# Imports
 from utility.checks import *
 from utility.generators import generate_footer
 
@@ -67,7 +66,7 @@ class BotTools(commands.Cog):
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
-        
+
         await ctx.send(embed=em)
 
     @commands.command(
@@ -84,7 +83,7 @@ class BotTools(commands.Cog):
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
-        
+
         await ctx.send(embed=em)
 
     @commands.command(

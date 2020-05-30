@@ -4,7 +4,6 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-# Imports
 import discord
 from discord.ext import commands
 from config.globals import *
@@ -13,10 +12,10 @@ from config.globals import *
 def is_admin():
     async def predicate(ctx):
         return (
-            ctx.message.channel.permissions_for(
-                ctx.message.author).administrator
-            or (ctx.author.id == developer_id)  # Permissions for dev.
-            or (discord.utils.get(ctx.author.roles, name=str(f"fox:{ctx.command.name}")))
+                ctx.message.channel.permissions_for(
+                    ctx.message.author).administrator
+                or (ctx.author.id == developer_id)  # Permissions for dev.
+                or (discord.utils.get(ctx.author.roles, name=str(f"fox:{ctx.command.name}")))
         )
 
     return commands.check(predicate)
@@ -25,7 +24,7 @@ def is_admin():
 def is_developer():
     async def predicate(ctx):
         return (
-            ctx.author.id == developer_id
+                ctx.author.id == developer_id
         )
 
     return commands.check(predicate)
