@@ -7,6 +7,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 from utility.checks import *
 from fuzzywuzzy import process
 from utility.generators import generate_footer
+from foxlib.listtools import chunklist
 
 
 class MemberTools(commands.Cog):
@@ -50,14 +51,7 @@ class MemberTools(commands.Cog):
 
         # Generates a list containing n sized chunks of found_role.members
         n = 25  # Page size
-        chunked_members = [
-            # https://www.geeksforgeeks.org/break-list-chunks-size-n-python/
-            found_role.members[
-            i * n:(i + 1) * n
-            ] for i in range(
-                (len(found_role.members) + n - 1) // n
-            )
-        ]
+        chunked_members = chunklist.chunklist(found_role.members, 25)
 
         # Embed setup
         em = discord.Embed(
