@@ -69,6 +69,23 @@ class CoreTools(commands.Cog):
 
         await ctx.send(embed=em)
 
+    @commands.command(
+        name="report",
+        aliases=["bug", "error", "contact"],
+        brief="Need to report a bug? Get information on how to do so here.",
+        usage=""
+    )
+    async def report_bug(self, ctx):
+        # Setup embed
+        em = discord.Embed(
+            title="Found a bug?",
+            description="You can report bugs on the [Fox Utilities Issues](https://github.com/FevenKitsune/Fox-Utilities/issues) page on GitHub!",
+            color=message_color
+        )
+        em.set_footer(text=generate_footer(ctx))
+
+        await ctx.send(embed=em)
+
 
 # Extension setup
 def setup(client):
