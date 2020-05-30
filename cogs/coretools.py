@@ -79,7 +79,7 @@ class CoreTools(commands.Cog):
         # Setup embed
         em = discord.Embed(
             title="Found a bug? :bee:",
-            description="You can report bugs on the [Fox Utilities Issues](https://github.com/FevenKitsune/Fox-Utilities/issues) page on GitHub!",
+            description="You can report bugs on the [Fox Utilities issues](https://github.com/FevenKitsune/Fox-Utilities/issues) page on GitHub!",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
