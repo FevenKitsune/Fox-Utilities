@@ -78,7 +78,7 @@ class CoreTools(commands.Cog):
     async def report_bug(self, ctx):
         # Setup embed
         em = discord.Embed(
-            title="Found a bug?",
+            title="Found a bug? :bee:",
             description="You can report bugs on the [Fox Utilities Issues](https://github.com/FevenKitsune/Fox-Utilities/issues) page on GitHub!",
             color=message_color
         )
