@@ -6,7 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 # Imports
 from utility.checks import *
-from utility.globals import snipe_db
+from config.globals import snipe_db
 from utility.generators import generate_footer
 
 

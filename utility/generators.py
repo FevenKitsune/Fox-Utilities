@@ -6,7 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 import discord
 from discord.ext import commands
-from utility.globals import *
+from config.globals import *
 
 def generate_footer(ctx):
     if ctx.author.id == developer_id:

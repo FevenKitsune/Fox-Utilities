@@ -6,7 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 # Imports
 import discord
-from utility.globals import *
+from config.globals import *
 from utility.generators import generate_footer
 
 

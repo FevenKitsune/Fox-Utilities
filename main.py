@@ -8,7 +8,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 import discord
 from discord.ext import commands
 import logging
-from utility.globals import *
+from config.globals import *
 from utility.checks import get_prefix
 import utility.exception as exception
 
