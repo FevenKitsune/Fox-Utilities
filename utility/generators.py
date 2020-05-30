@@ -4,8 +4,7 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-import discord
-from discord.ext import commands
+
 from config.globals import *
 
 def generate_footer(ctx):
