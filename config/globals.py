@@ -22,7 +22,6 @@ extensions = [
 message_color = 0xFFB600  # Color of the message embeds.
 error_color = 0xFF0000  # Color of errors
 developer_id = 276531286443556865  # ID of the developer (FevenKitsune)
-bot_key = os.environ['FU_KEY']  # Environment variable name
 
 # Bot Links
 bot_invite = "https://discordapp.com/api/oauth2/authorize?client_id=476166340328161280&permissions=8&scope=bot"
@@ -37,3 +36,12 @@ bot_footer_prefix = "Invoked by: "
 
 # Snipe Dict
 snipe_db = {}  # Active storage for snipes
+
+""" 
+Bot Key
+There are multiple options here, if you don't want to mess around with environment variables, then comment out the 
+Environment Variable option and uncomment the key option. Make sure you keep your key safe! The developer will never
+ask for your key.
+"""
+bot_key = os.environ['FU_KEY']  # Environment Variable option
+# bot_key = "KEY_HERE"
