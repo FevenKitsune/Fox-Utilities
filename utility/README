@@ -1,0 +1,1 @@
+Utility functions are found here. These are functions that are not directly used to run a command, but are called upon often enough to make a helper function.
