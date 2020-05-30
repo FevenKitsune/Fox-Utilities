@@ -51,7 +51,7 @@ class MemberTools(commands.Cog):
 
         # Generates a list containing n sized chunks of found_role.members
         n = 25  # Page size
-        chunked_members = chunklist.chunklist(found_role.members, 25)
+        chunked_members = chunklist(found_role.members, 25)
 
         # Embed setup
         em = discord.Embed(
