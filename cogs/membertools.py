@@ -5,6 +5,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 from utility.checks import *
+from config.globals import *
 from fuzzywuzzy import process
 from utility.generators import generate_footer
 from foxlib.listtools import chunklist
@@ -50,8 +51,7 @@ class MemberTools(commands.Cog):
         page_count = 1 if (len(args) < 2) else int(args[1])  # Default to 1st page
 
         # Generates a list containing n sized chunks of found_role.members
-        n = 25  # Page size
-        chunked_members = chunklist(found_role.members, 25)
+        chunked_members = chunklist(found_role.members, bot_member_page_size)
 
         # Embed setup
         em = discord.Embed(
