@@ -1,1 +1,1 @@
-foxlib is a collection of independantly functioning helper functions. These functions can operate outside of the bot as well, and can be repurposed for other uses as well.
+foxlib is a library of helper functions that can also operate independently of the bot.
