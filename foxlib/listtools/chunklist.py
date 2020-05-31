@@ -13,6 +13,9 @@ def chunklist(inlist: list, chunksize: int) -> list:
     chunkSize -- number of elements in each chunk
     """
 
+    if not isinstance(inlist, list):
+        raise TypeError
+
     def __chunkyield() -> list:
         # https://www.geeksforgeeks.org/break-list-chunks-size-n-python/
         for i in range(0, len(inlist), chunksize):
