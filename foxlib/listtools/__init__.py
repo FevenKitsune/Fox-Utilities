@@ -5,5 +5,5 @@ This work is licensed under a This work is licensed under a Creative Commons Att
 """
 
 
-__version__ = "0.0.1"
+from .. import __version__
 from .chunklist import *
