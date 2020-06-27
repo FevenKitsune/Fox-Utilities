@@ -9,6 +9,7 @@ from config.globals import *
 from fuzzywuzzy import process
 from utility.generators import generate_footer
 from foxlib.listtools import chunklist
+import unicodedata
 
 
 class MemberTools(commands.Cog):
@@ -36,11 +37,12 @@ class MemberTools(commands.Cog):
 
         if len(ctx.message.role_mentions) < 1:  # If no mentions, do search.
             found_name = process.extractOne(
-                args[0], [role.name for role in ctx.message.guild.roles]
-            )
+                unicodedata.normalize("NFKC", args[0]),
+                [unicodedata.normalize("NFKC", role.name) for role in ctx.message.guild.roles]
+            )  # This is terrible
             found_role = discord.utils.find(
-                lambda m: m.name == found_name[0], ctx.message.guild.roles
-            )  # Do search on guild roles.
+                lambda m: unicodedata.normalize("NFKC", m.name) == found_name[0], ctx.message.guild.roles
+            )  # Do search on guild roles...
             if found_role is None:  # If no roles found, error.
                 raise UserWarning(
                     f"You must mention or name one role for this command.")
@@ -92,11 +94,12 @@ class MemberTools(commands.Cog):
         # Check if there's a mentioned role. If not, string match.
         if len(ctx.message.role_mentions) < 1:
             found_name = process.extractOne(
-                args[0], [role.name for role in ctx.message.guild.roles]
+                unicodedata.normalize("NFKC", args[0]),
+                [unicodedata.normalize("NFKC", role.name) for role in ctx.message.guild.roles]
             )
             found_role = discord.utils.find(
-                lambda m: m.name == found_name[0], ctx.message.guild.roles
-            )  # Do search on guild roles.
+                lambda m: unicodedata.normalize("NFKC", m.name) == found_name[0], ctx.message.guild.roles
+            )  # Do search on guild roles...
             if found_role is None:
                 raise UserWarning("You must mention one role.")
         else:
