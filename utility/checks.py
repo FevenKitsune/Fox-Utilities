@@ -35,4 +35,9 @@ async def get_prefix(bot, message):
     for role_name in my_roles:
         if role_name[:11] == "fox_prefix:":
             return role_name[11:]
-    return bot_prefix
+    if bot.user.id == stable_client_id:
+        return bot_prefix
+    if bot.user.id == testing_client_id:
+        return testing_bot_prefix
+    else:
+        raise UserWarning("Client ID does not match a valid branch configuration!")

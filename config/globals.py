@@ -22,6 +22,8 @@ extensions = [
 message_color = 0xFFB600  # Color of the message embeds.
 error_color = 0xFF0000  # Color of errors
 developer_id = 276531286443556865  # ID of the developer (FevenKitsune)
+stable_client_id = 476166340328161280
+testing_client_id = 728052111593570304
 
 # Bot Links
 bot_invite = "https://discordapp.com/api/oauth2/authorize?client_id=476166340328161280&permissions=8&scope=bot"
@@ -30,6 +32,7 @@ bot_source = "https://github.com/FevenKitsune/Fox-Utilities"
 
 # Config Variables
 bot_prefix = "f."  # Default prefix
+testing_bot_prefix = "f!"
 bot_default_status = "with code."  # Default status
 bot_description = "Fox Utilities is a utility bot covering a selection of niche functions to assist in server administration."  # Discord.Bot description input
 bot_footer_prefix = "Invoked by: "
