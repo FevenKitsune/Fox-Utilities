@@ -9,6 +9,10 @@ RUN git clone https://github.com/FevenKitsune/Fox-Utilities.git
 # Set working directory to newly downloaded repository  
 WORKDIR /usr/src/app/Fox-Utilities
 
+# Switch to requested branch
+ARG branch
+RUN git checkout $branch
+
 # Install required libraries from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
