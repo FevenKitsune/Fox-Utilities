@@ -35,6 +35,11 @@ class MemberTools(commands.Cog):
             raise UserWarning(
                 "You must mention or name one role for this command")
 
+        if isinstance(ctx.message.channel, discord.DMChannel):
+            raise UserWarning(
+                "This command cannot be run in a DM channel!"
+            )
+
         if len(ctx.message.role_mentions) < 1:  # If no mentions, do search.
             found_name = process.extractOne(
                 unicodedata.normalize("NFKC", args[0]),
@@ -91,6 +96,12 @@ class MemberTools(commands.Cog):
     )
     @is_admin()
     async def message_role(self, ctx, *args):
+        # Check if running in a DM channel
+        if isinstance(ctx.message.channel, discord.DMChannel):
+            raise UserWarning(
+                "This command cannot be run in a DM channel!"
+            )
+
         # Check if there's a mentioned role. If not, string match.
         if len(ctx.message.role_mentions) < 1:
             found_name = process.extractOne(
