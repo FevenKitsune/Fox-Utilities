@@ -4,6 +4,7 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
+from discord.ext.commands import guild_only
 from utility.checks import *
 from config.globals import *
 from fuzzywuzzy import process
@@ -29,6 +30,7 @@ class MemberTools(commands.Cog):
         brief="Lists all members in a mentioned role.",
         usage="@role/\"role_name\" <page #>"
     )
+    @guild_only()
     async def member_list(self, ctx, *args):
         # Error checking
         if len(args) < 1:
@@ -95,6 +97,7 @@ class MemberTools(commands.Cog):
         usage="@role"
     )
     @is_admin()
+    @guild_only()
     async def message_role(self, ctx, *args):
         # Check if running in a DM channel
         if isinstance(ctx.message.channel, discord.DMChannel):
