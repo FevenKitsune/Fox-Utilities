@@ -171,6 +171,15 @@ class MemberTools(commands.Cog):
         query = session.query(UserSettings)
         to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
 
+        # Check that a valid ID was passed.
+        try:
+            int(args)
+        except ValueError:
+            raise UserWarning("ID given was not a valid ID.")
+
+        if len(args) != 18:
+            raise UserWarning("ID given is the incorrect length.")
+
         if to_set is None:
             to_set = UserSettings(discord_id=ctx.message.author.id,
                                   msgrole_block=json.dumps([int(args)])
@@ -192,8 +201,9 @@ class MemberTools(commands.Cog):
         )
         em.set_footer(text=generate_footer(ctx))
         for guild_id in block_list:
+            guild = self.client.get_guild(guild_id)
             em.add_field(
-                name=f"{self.client.get_guild(guild_id)}",
+                name=f"{guild if guild else 'No longer in this guild.'}",
                 value=f"`ID`: {guild_id}"
             )
 
@@ -210,6 +220,15 @@ class MemberTools(commands.Cog):
         # Command
         query = session.query(UserSettings)
         to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
+
+        # Check that a valid ID was passed.
+        try:
+            int(args)
+        except ValueError:
+            raise UserWarning("ID given was not a valid ID.")
+
+        if len(args) != 18:
+            raise UserWarning("ID given is the incorrect length.")
 
         if to_set is None:
             raise UserWarning("You have no guilds blocked!")
@@ -229,8 +248,9 @@ class MemberTools(commands.Cog):
         )
         em.set_footer(text=generate_footer(ctx))
         for guild_id in block_list:
+            guild = self.client.get_guild(guild_id)
             em.add_field(
-                name=f"{self.client.get_guild(guild_id)}",
+                name=f"{guild if guild else 'No longer in this guild.'}",
                 value=f"`ID`: {guild_id}"
             )
 
@@ -290,8 +310,9 @@ class MemberTools(commands.Cog):
         )
         em.set_footer(text=generate_footer(ctx))
         for guild_id in block_list:
+            guild = self.client.get_guild(guild_id)
             em.add_field(
-                name=f"{self.client.get_guild(guild_id)}",
+                name=f"{guild if guild else 'No longer in this guild.'}",
                 value=f"`ID`: {guild_id}"
             )
 
