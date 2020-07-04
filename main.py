@@ -16,7 +16,7 @@ logger = logging.getLogger("discord")  # Set up logger called "discord"
 logger.setLevel(logging.INFO)  # Log all
 
 # Ensure database is created and up to date.
-db.utility.create_all()
+db.create_all()
 
 # Client
 client = commands.Bot(description=bot_description, command_prefix=get_prefix)
