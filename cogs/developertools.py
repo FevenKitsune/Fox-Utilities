@@ -107,7 +107,13 @@ class DeveloperTools(commands.Cog):
         # Command
         query = session.query(UserSettings)
         to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
-        to_set.settings_json = args
+        if to_set is None:
+            to_set = UserSettings(discord_id=ctx.message.author.id,
+                                  settings_json=args
+                                  )
+            session.add(to_set)
+        else:
+            to_set.settings_json = args
         session.commit()
 
         await ctx.send(f"Setting has been changed to {to_set.settings_json}")
