@@ -146,7 +146,7 @@ class DeveloperTools(commands.Cog):
         string_buffer = ""
         query = session.query(UserSettings).all()
         for setting in query:
-            string_buffer.join(str(setting) + "\n")
+            string_buffer += str(setting) + "\n"
 
         await ctx.send(f"```{string_buffer}```")
 
