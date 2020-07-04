@@ -4,13 +4,15 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-from discord.ext.commands import guild_only
+from discord.ext.commands import guild_only, dm_only
 from utility.checks import *
 from config.globals import *
 from fuzzywuzzy import process
 from utility.generators import generate_footer
 from foxlib.listtools import chunklist
+from db import session, UserSettings
 import unicodedata
+import json
 
 
 class MemberTools(commands.Cog):
@@ -134,12 +136,18 @@ class MemberTools(commands.Cog):
         # Command
         for member in found_role.members:
             try:
+                # Command
+                query = session.query(UserSettings)
+                block_pref = query.filter(UserSettings.discord_id == member.id).first()
+                if block_pref is not None and ctx.guild.id in json.loads(block_pref.msgrole_block):
+                    raise UserWarning("This user has blocked msgrole.")
                 em_sent = discord.Embed(
                     title=f"Role message from {ctx.message.author.name}",
                     description=f"{ctx.message.clean_content}",
                     color=message_color
                 )
-                em_sent.set_footer(text=f"Sent from: {ctx.guild.name}")
+                em_sent.set_footer(
+                    text=f"Sent from: {ctx.guild.name} | Use f.block {ctx.guild.id} if you no longer wish to recieve messages from this guild.")
                 em_sent.set_author(name=ctx.guild.name,
                                    icon_url=ctx.guild.icon_url)
                 await member.send(embed=em_sent)
@@ -149,6 +157,165 @@ class MemberTools(commands.Cog):
                     value=f"`{type(e).__name__}: {e}`"
                 )
                 pass
+        await ctx.send(embed=em)
+
+    @commands.command(
+        name="block",
+        brief="Blocks msgrole from a given guild.",
+        usage="guild_id"
+    )
+    @dm_only()
+    async def block_msgrole(self, ctx, args):
+        """Push block settings to database."""
+        # Command
+        query = session.query(UserSettings)
+        to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
+
+        # Check that a valid ID was passed.
+        try:
+            int(args)
+        except ValueError:
+            raise UserWarning("ID given was not a valid ID.")
+
+        if len(args) != 18:
+            raise UserWarning("ID given is the incorrect length.")
+
+        if to_set is None:
+            to_set = UserSettings(discord_id=ctx.message.author.id,
+                                  msgrole_block=json.dumps([int(args)])
+                                  )
+            session.add(to_set)
+        else:
+            block_list = json.loads(to_set.msgrole_block)
+            if int(args) in block_list:
+                raise UserWarning("This guild is already blocked!")
+            block_list.append(int(args))
+            to_set.msgrole_block = json.dumps(block_list)
+
+        session.commit()
+
+        em = discord.Embed(
+            title="Msgrole Blocked",
+            description=f"You have successfully blocked ID {args}",
+            color=message_color
+        )
+        em.set_footer(text=generate_footer(ctx))
+        for guild_id in block_list:
+            guild = self.client.get_guild(guild_id)
+            em.add_field(
+                name=f"{guild if guild else 'No longer in this guild.'}",
+                value=f"`ID`: {guild_id}"
+            )
+
+        await ctx.send(embed=em)
+
+    @commands.command(
+        name="unblock",
+        brief="Unblocks msgrole from a given guild.",
+        usage="guild_id"
+    )
+    @dm_only()
+    async def unblock_msgrole(self, ctx, args):
+        """Push unblock settings to database."""
+        # Command
+        query = session.query(UserSettings)
+        to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
+
+        # Check that a valid ID was passed.
+        try:
+            int(args)
+        except ValueError:
+            raise UserWarning("ID given was not a valid ID.")
+
+        if len(args) != 18:
+            raise UserWarning("ID given is the incorrect length.")
+
+        if to_set is None:
+            raise UserWarning("You have no guilds blocked!")
+        else:
+            block_list = json.loads(to_set.msgrole_block)
+            if int(args) not in block_list:
+                raise UserWarning("This guild is not blocked!")
+            block_list.remove(int(args))
+            to_set.msgrole_block = json.dumps(block_list)
+
+        session.commit()
+
+        em = discord.Embed(
+            title="Msgrole Unblocked",
+            description=f"You have successfully unblocked ID {args}",
+            color=message_color
+        )
+        em.set_footer(text=generate_footer(ctx))
+        for guild_id in block_list:
+            guild = self.client.get_guild(guild_id)
+            em.add_field(
+                name=f"{guild if guild else 'No longer in this guild.'}",
+                value=f"`ID`: {guild_id}"
+            )
+
+        await ctx.send(embed=em)
+
+    @commands.command(
+        name="purgeblock",
+        brief="Erases all entries in block list.",
+        usage=""
+    )
+    @dm_only()
+    async def purge_block_msgrole(self, ctx):
+        """Push unblock settings to database."""
+        # Command
+        query = session.query(UserSettings)
+        to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
+
+        if to_set is None:
+            raise UserWarning("You have no guilds blocked!")
+        else:
+            to_set.msgrole_block = json.dumps([])
+
+        session.commit()
+
+        em = discord.Embed(
+            title="Msgrole Purged",
+            description=f"You have successfully erased your block list.",
+            color=message_color
+        )
+        em.set_footer(text=generate_footer(ctx))
+
+        await ctx.send(embed=em)
+
+    @commands.command(
+        name="blocklist",
+        brief="Lists your current blocks.",
+        usage=""
+    )
+    @dm_only()
+    async def block_list_msgrole(self, ctx):
+        """Push unblock settings to database."""
+        # Command
+        query = session.query(UserSettings)
+        to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
+
+        if to_set is None:
+            raise UserWarning("You have no guilds blocked!")
+        else:
+            block_list = json.loads(to_set.msgrole_block)
+            if not block_list:
+                raise UserWarning("You have no guilds blocked!")
+
+        em = discord.Embed(
+            title="Msgrole Block List",
+            description=f"Guilds that you have blocked.",
+            color=message_color
+        )
+        em.set_footer(text=generate_footer(ctx))
+        for guild_id in block_list:
+            guild = self.client.get_guild(guild_id)
+            em.add_field(
+                name=f"{guild if guild else 'No longer in this guild.'}",
+                value=f"`ID`: {guild_id}"
+            )
+
         await ctx.send(embed=em)
 
 

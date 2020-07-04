@@ -6,6 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 from discord.ext import commands
 import logging
+import db
 from config.globals import *
 from utility.checks import get_prefix
 import utility.exception as exception
@@ -13,6 +14,9 @@ import utility.exception as exception
 # Logging
 logger = logging.getLogger("discord")  # Set up logger called "discord"
 logger.setLevel(logging.INFO)  # Log all
+
+# Ensure database is created and up to date.
+db.create_all()
 
 # Client
 client = commands.Bot(description=bot_description, command_prefix=get_prefix)
