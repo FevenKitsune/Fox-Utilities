@@ -242,7 +242,7 @@ class MemberTools(commands.Cog):
         usage=""
     )
     @dm_only()
-    async def purge_block_msgrole(self, ctx, args):
+    async def purge_block_msgrole(self, ctx):
         """Push unblock settings to database."""
         # Command
         query = session.query(UserSettings)
