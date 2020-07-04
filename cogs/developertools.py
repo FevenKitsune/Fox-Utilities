@@ -134,6 +134,22 @@ class DeveloperTools(commands.Cog):
         else:
             await ctx.send(to_get.settings_json)
 
+    @commands.command(
+        name="dumpdb",
+        brief="Testing the database function.",
+        usage="",
+        hidden=True
+    )
+    async def dump_db(self, ctx):
+        """Dump contents of database to chat."""
+        # Command
+        string_buffer = ""
+        query = session.query(UserSettings).all()
+        for setting in query:
+            string_buffer.join(str(setting) + "\n")
+
+        await ctx.send(f"```{string_buffer}```")
+
 
 # Extension setup
 def setup(client):
