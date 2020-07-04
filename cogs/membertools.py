@@ -4,7 +4,7 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-from discord.ext.commands import guild_only
+from discord.ext.commands import guild_only, dm_only
 from utility.checks import *
 from config.globals import *
 from fuzzywuzzy import process
@@ -12,6 +12,7 @@ from utility.generators import generate_footer
 from foxlib.listtools import chunklist
 from db import session, UserSettings
 import unicodedata
+import json
 
 
 class MemberTools(commands.Cog):
@@ -156,6 +157,44 @@ class MemberTools(commands.Cog):
                     value=f"`{type(e).__name__}: {e}`"
                 )
                 pass
+        await ctx.send(embed=em)
+
+    @commands.command(
+        name="block",
+        brief="Blocks msgrole from a given guild.",
+        usage="guild_id"
+    )
+    @dm_only
+    async def block_msgrole(self, ctx, args):
+        """Push block settings to database."""
+        # Command
+        query = session.query(UserSettings)
+        to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
+
+        if to_set is None:
+            to_set = UserSettings(discord_id=ctx.message.author.id,
+                                  msgrole_block=json.dumps([int(args)])
+                                  )
+            session.add(to_set)
+        else:
+            block_list = json.loads(to_set.msgrole_block)
+            block_list.append(int(args))
+            to_set.msgrole_block = json.dumps(block_list)
+
+        session.commit()
+
+        em = discord.Embed(
+            title="Msgrole Blocked",
+            description=f"You have successfully blocked ID {args}",
+            color=message_color
+        )
+        em.set_footer(text=generate_footer(ctx))
+        for guild_id in to_set.msgrole_block:
+            em.add_field(
+                name=f"{self.client.get_guild(guild_id)}",
+                value=f"`ID`: {guild_id}"
+            )
+
         await ctx.send(embed=em)
 
 
