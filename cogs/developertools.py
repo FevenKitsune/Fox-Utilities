@@ -118,6 +118,22 @@ class DeveloperTools(commands.Cog):
 
         await ctx.send(f"Setting has been changed to {to_set.settings_json}")
 
+    @commands.command(
+        name="getsetting",
+        brief="Testing the database function.",
+        usage="",
+        hidden=True
+    )
+    async def get_setting(self, ctx):
+        """Read setting from database and return as message"""
+        # Command
+        query = session.query(UserSettings)
+        to_get = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
+        if to_get is None:
+            await ctx.send("You have no setting json stored in the database.")
+        else:
+            await ctx.send(to_get.settings_json)
+
 
 # Extension setup
 def setup(client):
