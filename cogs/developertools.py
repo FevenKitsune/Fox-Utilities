@@ -6,6 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 from utility.checks import *
 import datetime
+from db import session, UserSettings
 from utility.generators import generate_footer
 
 
@@ -94,6 +95,22 @@ class DeveloperTools(commands.Cog):
         # Command
         await ctx.message.delete()
         await ctx.send(args)
+
+    @commands.command(
+        name="setsetting",
+        brief="Testing the database function.",
+        usage="<string>",
+        hidden=True
+    )
+    async def set_setting(self, ctx, *args):
+        """Push a string setting to the database."""
+        # Command
+        query = session.query(UserSettings)
+        to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
+        to_set.settings_json = args
+        session.commit()
+
+        await ctx.send(f"Setting has been changed to {to_set.settings_json}")
 
 
 # Extension setup
