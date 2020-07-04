@@ -10,6 +10,7 @@ from config.globals import *
 from fuzzywuzzy import process
 from utility.generators import generate_footer
 from foxlib.listtools import chunklist
+from db import session, UserSettings
 import unicodedata
 
 
@@ -134,12 +135,18 @@ class MemberTools(commands.Cog):
         # Command
         for member in found_role.members:
             try:
+                # Command
+                query = session.query(UserSettings)
+                block_pref = query.filter(UserSettings.discord_id == member.id).first()
+                if ctx.guild.id in block_pref.msgrole_block:
+                    raise UserWarning("This user has blocked msgrole.")
                 em_sent = discord.Embed(
                     title=f"Role message from {ctx.message.author.name}",
                     description=f"{ctx.message.clean_content}",
                     color=message_color
                 )
-                em_sent.set_footer(text=f"Sent from: {ctx.guild.name}")
+                em_sent.set_footer(
+                    text=f"Sent from: {ctx.guild.name} | Use f.block {ctx.guild.id} if you no longer wish to recieve messages from this guild.")
                 em_sent.set_author(name=ctx.guild.name,
                                    icon_url=ctx.guild.icon_url)
                 await member.send(embed=em_sent)
