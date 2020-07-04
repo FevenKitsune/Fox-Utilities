@@ -164,7 +164,7 @@ class MemberTools(commands.Cog):
         brief="Blocks msgrole from a given guild.",
         usage="guild_id"
     )
-    @dm_only
+    @dm_only()
     async def block_msgrole(self, ctx, args):
         """Push block settings to database."""
         # Command
