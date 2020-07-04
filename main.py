@@ -6,6 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 from discord.ext import commands
 import logging
+from db.engine import engine
 from config.globals import *
 from utility.checks import get_prefix
 import utility.exception as exception
