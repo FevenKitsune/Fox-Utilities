@@ -102,7 +102,7 @@ class DeveloperTools(commands.Cog):
         usage="<string>",
         hidden=True
     )
-    async def set_setting(self, ctx, *args):
+    async def set_setting(self, ctx, args):
         """Push a string setting to the database."""
         # Command
         query = session.query(UserSettings)
