@@ -139,8 +139,10 @@ class MemberTools(commands.Cog):
                 # Command
                 query = session.query(UserSettings)
                 block_pref = query.filter(UserSettings.discord_id == member.id).first()
-                if block_pref is not None and ctx.guild.id in json.loads(block_pref.msgrole_block):
-                    raise UserWarning("This user has blocked msgrole.")
+                if block_pref is not None:
+                    if isinstance(block_pref.msgrole_block, str):
+                        if ctx.guild.id in json.loads(block_pref.msgrole_block):
+                            raise UserWarning("This user has blocked msgrole.")
                 em_sent = discord.Embed(
                     title=f"Role message from {ctx.message.author.name}",
                     description=f"{ctx.message.clean_content}",

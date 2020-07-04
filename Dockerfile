@@ -3,6 +3,9 @@ FROM python:3
 # Set work directory to app
 WORKDIR /usr/src/app
 
+# Create db directory
+RUN mkdir db
+
 # Download latest version of Fox-Utilities
 RUN git clone https://github.com/FevenKitsune/Fox-Utilities.git
 
