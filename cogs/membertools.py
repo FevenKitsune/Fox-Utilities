@@ -178,6 +178,8 @@ class MemberTools(commands.Cog):
             session.add(to_set)
         else:
             block_list = json.loads(to_set.msgrole_block)
+            if int(args) in block_list:
+                raise UserWarning("This guild is already blocked!")
             block_list.append(int(args))
             to_set.msgrole_block = json.dumps(block_list)
 
