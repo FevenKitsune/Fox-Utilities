@@ -102,6 +102,7 @@ class DeveloperTools(commands.Cog):
         usage="<string>",
         hidden=True
     )
+    @is_developer()
     async def set_setting(self, ctx, args):
         """Push a string setting to the database."""
         # Command
@@ -124,6 +125,7 @@ class DeveloperTools(commands.Cog):
         usage="",
         hidden=True
     )
+    @is_developer()
     async def get_setting(self, ctx):
         """Read setting from database and return as message"""
         # Command
@@ -140,6 +142,7 @@ class DeveloperTools(commands.Cog):
         usage="",
         hidden=True
     )
+    @is_developer()
     async def dump_db(self, ctx):
         """Dump contents of database to chat."""
         # Command
