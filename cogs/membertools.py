@@ -189,7 +189,7 @@ class MemberTools(commands.Cog):
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
-        for guild_id in to_set.msgrole_block:
+        for guild_id in block_list:
             em.add_field(
                 name=f"{self.client.get_guild(guild_id)}",
                 value=f"`ID`: {guild_id}"
