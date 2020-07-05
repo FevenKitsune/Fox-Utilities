@@ -15,13 +15,16 @@ async def on_command_error(ctx, error):
         if isinstance(error, discord.ext.commands.CommandNotFound):
             return
 
+        # error.__cause__ finds cause of CommandInvokeError, useful if exception thrown from inside command.
         if isinstance(error.__cause__, UserWarning):
-            title = "There was a user error running the command..."
+            title = "There was a user warning while running the command..."
+            # Generate formatted string
+            exc = f"{type(error.__cause__).__name__}: {error.__cause__}"
         else:
-            title = "Something isn't right..."
+            title = "There was an unknown error while running the command..."
+            # Generate formatted string
+            exc = f"{type(error).__name__}: {error}"
 
-        # Generate formatted string
-        exc = f"{type(error).__name__}: {error}"
         em = discord.Embed(
             title=title,
             description=f"`{exc}`",
