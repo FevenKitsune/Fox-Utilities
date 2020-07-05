@@ -108,7 +108,8 @@ class BotTools(commands.Cog):
 
         em.add_field(
             name="Data Persistence",
-            value="Besides error logging, all data (Ex: snipe tool) is stored in memory, meaning it is wiped as soon as the bot stops running."
+            value="Snipe tool data: the contents of your last mention is stored in memory, meaning it is wiped as soon as the bot stops running.\n"
+                  "User preferences: the user ID and guild ID (where applicable) is stored in a local database."
         )
 
         em.add_field(
