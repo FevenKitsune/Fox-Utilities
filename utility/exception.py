@@ -15,10 +15,15 @@ async def on_command_error(ctx, error):
         if isinstance(error, discord.ext.commands.CommandNotFound):
             return
 
+        if isinstance(error, UserWarning):
+            title = "There was a user error running the command..."
+        else:
+            title = "Something isn't right..."
+
         # Generate formatted string
         exc = f"{type(error).__name__}: {error}"
         em = discord.Embed(
-            title="Something isn't right...",
+            title=title,
             description=f"`{exc}`",
             color=error_color
         )
