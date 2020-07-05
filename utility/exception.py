@@ -15,7 +15,7 @@ async def on_command_error(ctx, error):
         if isinstance(error, discord.ext.commands.CommandNotFound):
             return
 
-        if isinstance(error, UserWarning):
+        if isinstance(error.__cause__, UserWarning):
             title = "There was a user error running the command..."
         else:
             title = "Something isn't right..."
