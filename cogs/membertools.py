@@ -39,11 +39,6 @@ class MemberTools(commands.Cog):
             raise UserWarning(
                 "You must mention or name one role for this command")
 
-        if isinstance(ctx.message.channel, discord.DMChannel):
-            raise UserWarning(
-                "This command cannot be run in a DM channel!"
-            )
-
         if len(ctx.message.role_mentions) < 1:  # If no mentions, do search.
             found_name = process.extractOne(
                 unicodedata.normalize("NFKC", args[0]),
@@ -101,12 +96,6 @@ class MemberTools(commands.Cog):
     @is_admin()
     @guild_only()
     async def message_role(self, ctx, *args):
-        # Check if running in a DM channel
-        if isinstance(ctx.message.channel, discord.DMChannel):
-            raise UserWarning(
-                "This command cannot be run in a DM channel!"
-            )
-
         # Check if there's a mentioned role. If not, string match.
         if len(ctx.message.role_mentions) < 1:
             found_name = process.extractOne(
@@ -136,29 +125,35 @@ class MemberTools(commands.Cog):
         # Command
         for member in found_role.members:
             try:
-                # Command
+                # Query database to get member preferences.
                 query = session.query(UserSettings)
                 block_pref = query.filter(UserSettings.discord_id == member.id).first()
-                if block_pref is not None:
-                    if isinstance(block_pref.msgrole_block, str):
-                        if ctx.guild.id in json.loads(block_pref.msgrole_block):
-                            raise UserWarning("This user has blocked msgrole.")
+
+                if block_pref is not None:  # Ensure query returned something.
+                    if isinstance(block_pref.msgrole_block, str):  # Check that their blocklist is populated.
+                        if ctx.guild.id in json.loads(block_pref.msgrole_block):  # Check if guild id is in blocklist.
+                            raise UserWarning("This user has blocked msgrole.")  # If so, raise exception.
+
+                # Send embedded msgrole.
                 em_sent = discord.Embed(
                     title=f"Role message from {ctx.message.author.name}",
                     description=f"{ctx.message.clean_content}",
                     color=message_color
                 )
                 em_sent.set_footer(
-                    text=f"Sent from: {ctx.guild.name} | Use f.block {ctx.guild.id} if you no longer wish to recieve messages from this guild.")
+                    text=f"Sent from: {ctx.guild.name}\n"
+                         f"Use f.block {ctx.guild.id} if you no longer wish to receive messages from this guild.")
                 em_sent.set_author(name=ctx.guild.name,
                                    icon_url=ctx.guild.icon_url)
                 await member.send(embed=em_sent)
             except Exception as e:
+                # If sending dm failed, add entry to list.
                 em.add_field(
                     name=f"Failed to send message to {member.name}",
                     value=f"`{type(e).__name__}: {e}`"
                 )
                 pass
+        # Send success/fail list back to guild.
         await ctx.send(embed=em)
 
     @commands.command(
@@ -182,12 +177,14 @@ class MemberTools(commands.Cog):
         if len(args) != 18:
             raise UserWarning("ID given is the incorrect length.")
 
+        # If user is not in database, create new entry.
         if to_set is None:
             to_set = UserSettings(discord_id=ctx.message.author.id,
                                   msgrole_block=json.dumps([int(args)])
                                   )
             session.add(to_set)
         else:
+            # Load in blocklist and append requested guild.
             block_list = json.loads(to_set.msgrole_block)
             if int(args) in block_list:
                 raise UserWarning("This guild is already blocked!")
@@ -232,9 +229,11 @@ class MemberTools(commands.Cog):
         if len(args) != 18:
             raise UserWarning("ID given is the incorrect length.")
 
+        # If user is not in database, ignore request.
         if to_set is None:
             raise UserWarning("You have no guilds blocked!")
         else:
+            # Load in blocklist and remove requested guild.
             block_list = json.loads(to_set.msgrole_block)
             if int(args) not in block_list:
                 raise UserWarning("This guild is not blocked!")
@@ -314,7 +313,7 @@ class MemberTools(commands.Cog):
         for guild_id in block_list:
             guild = self.client.get_guild(guild_id)
             em.add_field(
-                name=f"{guild if guild else 'No longer in this guild.'}",
+                name=f"{guild if guild else 'No longer in this guild.'}",  # Client can only see names of guilds it's in
                 value=f"`ID`: {guild_id}"
             )
 
