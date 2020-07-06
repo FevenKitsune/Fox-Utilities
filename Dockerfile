@@ -19,5 +19,8 @@ RUN git checkout $branch
 # Install required libraries from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Set database location for Docker
+ENV FU_DB=/usr/src/app/db/db.db
+
 # Run main.py
 CMD [ "python", "./main.py" ]
