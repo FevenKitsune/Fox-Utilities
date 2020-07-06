@@ -90,13 +90,7 @@ class MemberTools(commands.Cog):
     async def message_role(self, ctx, *args):
         # Check if there's a mentioned role. If not, string match.
         if len(ctx.message.role_mentions) < 1:
-            found_name = process.extractOne(
-                unicodedata.normalize("NFKC", args[0]),
-                [unicodedata.normalize("NFKC", role.name) for role in ctx.message.guild.roles]
-            )
-            found_role = discord.utils.find(
-                lambda m: unicodedata.normalize("NFKC", m.name) == found_name[0], ctx.message.guild.roles
-            )  # Do search on guild roles...
+            found_role = await find_by_name(args[0], ctx.message.guild.roles)
             if found_role is None:
                 raise UserWarning("You must mention one role.")
         else:
