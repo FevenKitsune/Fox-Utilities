@@ -6,12 +6,11 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 from discord.ext.commands import guild_only, dm_only
 from utility.checks import *
+from utility.findbyname import find_by_name
 from config.globals import *
-from fuzzywuzzy import process
 from utility.generators import generate_footer
 from foxlib.listtools import chunklist
 from db import session, UserSettings
-import unicodedata
 import json
 
 
@@ -40,16 +39,9 @@ class MemberTools(commands.Cog):
                 "You must mention or name one role for this command")
 
         if len(ctx.message.role_mentions) < 1:  # If no mentions, do search.
-            found_name = process.extractOne(
-                unicodedata.normalize("NFKC", args[0]),
-                [unicodedata.normalize("NFKC", role.name) for role in ctx.message.guild.roles]
-            )  # This is terrible
-            found_role = discord.utils.find(
-                lambda m: unicodedata.normalize("NFKC", m.name) == found_name[0], ctx.message.guild.roles
-            )  # Do search on guild roles...
+            found_role = await find_by_name(args[0], ctx.message.guild.roles)
             if found_role is None:  # If no roles found, error.
-                raise UserWarning(
-                    f"You must mention or name one role for this command.")
+                raise UserWarning("You must mention or name one role for this command.")
         else:
             found_role = ctx.message.role_mentions[0]
 
@@ -98,13 +90,7 @@ class MemberTools(commands.Cog):
     async def message_role(self, ctx, *args):
         # Check if there's a mentioned role. If not, string match.
         if len(ctx.message.role_mentions) < 1:
-            found_name = process.extractOne(
-                unicodedata.normalize("NFKC", args[0]),
-                [unicodedata.normalize("NFKC", role.name) for role in ctx.message.guild.roles]
-            )
-            found_role = discord.utils.find(
-                lambda m: unicodedata.normalize("NFKC", m.name) == found_name[0], ctx.message.guild.roles
-            )  # Do search on guild roles...
+            found_role = await find_by_name(args[0], ctx.message.guild.roles)
             if found_role is None:
                 raise UserWarning("You must mention one role.")
         else:
