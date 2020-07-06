@@ -96,7 +96,7 @@ class MemberTools(commands.Cog):
         name="msgrole",
         aliases=["mr", "msgr"],
         brief="Messages all members of a tagged role.",
-        usage="@role"
+        usage="@role/\"role_name\""
     )
     @is_admin()
     @guild_only()
