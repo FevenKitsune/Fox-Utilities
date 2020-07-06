@@ -11,5 +11,5 @@ from unicodedata import normalize
 
 async def find_by_name(name, search_in):
     found_name = process.extractOne(normalize("NFKC", name), [normalize("NFKC", item.name) for item in search_in])
-    found_item = find(lambda m: normalize("NFKC", m.name) == found_item[0], search_in)
+    found_item = find(lambda m: normalize("NFKC", m.name) == found_name[0], search_in)
     return found_item
