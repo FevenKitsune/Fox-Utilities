@@ -6,6 +6,9 @@ WORKDIR /usr/src/app
 # Create db directory
 RUN mkdir db
 
+# Set database location for Docker
+ENV FU_DB=/usr/src/app/db/db.db
+
 # Download latest version of Fox-Utilities
 RUN git clone https://github.com/FevenKitsune/Fox-Utilities.git
 
@@ -18,9 +21,6 @@ RUN git checkout $branch
 
 # Install required libraries from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Set database location for Docker
-ENV FU_DB=/usr/src/app/db/db.db
 
 # Run main.py
 CMD [ "python", "./main.py" ]

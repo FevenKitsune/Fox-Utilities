@@ -8,4 +8,4 @@ from sqlalchemy import create_engine
 from os import environ
 
 # Create database in root folder outside of Git repository.
-engine = create_engine(f"sqlite:///{environ['FU_DB']}\\db.db")
+engine = create_engine(f"sqlite:///{environ['FU_DB']}")
