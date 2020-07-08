@@ -169,6 +169,7 @@ class MemberTools(commands.Cog):
                                   msgrole_block=json.dumps([int(args)])
                                   )
             session.add(to_set)
+            block_list = json.loads(to_set.msgrole_block)  # load block_list for posting in msg
         else:
             # Load in blocklist and append requested guild.
             block_list = json.loads(to_set.msgrole_block)
