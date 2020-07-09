@@ -251,7 +251,7 @@ class MemberTools(commands.Cog):
     )
     @dm_only()
     async def purge_block_msgrole(self, ctx):
-        """Push unblock settings to database."""
+        """Delete all block_list entries from database."""
         # Command
         query = session.query(UserSettings)
         to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
@@ -279,7 +279,7 @@ class MemberTools(commands.Cog):
     )
     @dm_only()
     async def block_list_msgrole(self, ctx):
-        """Push unblock settings to database."""
+        """List all block_list entries in database."""
         # Command
         query = session.query(UserSettings)
         to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
