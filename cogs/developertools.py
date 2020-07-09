@@ -27,7 +27,6 @@ class DeveloperTools(commands.Cog):
     )
     async def hello_world(self, ctx):
         """Respond with an embedded response."""
-        # Setup embed
         em = discord.Embed(
             title="Response",
             description="Hello world!",
@@ -55,7 +54,6 @@ class DeveloperTools(commands.Cog):
     @is_developer()
     async def change_status(self, ctx, args):
         """Change the game status of the bot."""
-        # Command
         await ctx.bot.change_presence(activity=discord.Game(args))
         await ctx.send(args)
 
@@ -69,10 +67,10 @@ class DeveloperTools(commands.Cog):
     @is_developer()
     async def sys_uptime(self, ctx):
         """Get system uptime from container."""
-        with open("/proc/uptime", "r") as proc_ut:  # Read system uptime.
+        # Read system uptime.
+        with open("/proc/uptime", "r") as proc_ut:
             ut = float(proc_ut.readline().split()[0])
 
-        # Setup embed
         em = discord.Embed(
             title="Container Uptime",
             description=f"/proc/uptime: {str(datetime.timedelta(seconds=int(ut)))}",
@@ -91,8 +89,7 @@ class DeveloperTools(commands.Cog):
     )
     @is_developer()
     async def botsay(self, ctx, args):
-        """Echo back a string as an embedded message."""
-        # Command
+        """Echo back a string as a message."""
         await ctx.message.delete()
         await ctx.send(args)
 
@@ -105,13 +102,10 @@ class DeveloperTools(commands.Cog):
     @is_developer()
     async def set_setting(self, ctx, args):
         """Push a string setting to the database."""
-        # Command
         query = session.query(UserSettings)
         to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
         if to_set is None:
-            to_set = UserSettings(discord_id=ctx.message.author.id,
-                                  settings_json=args
-                                  )
+            to_set = UserSettings(discord_id=ctx.message.author.id, settings_json=args)
             session.add(to_set)
         else:
             to_set.settings_json = args
@@ -128,7 +122,6 @@ class DeveloperTools(commands.Cog):
     @is_developer()
     async def get_setting(self, ctx):
         """Read setting from database and return as message"""
-        # Command
         query = session.query(UserSettings)
         to_get = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
         if to_get is None:
@@ -145,7 +138,6 @@ class DeveloperTools(commands.Cog):
     @is_developer()
     async def dump_db(self, ctx):
         """Dump contents of database to chat."""
-        # Command
         string_buffer = ""
         query = session.query(UserSettings).all()
         for setting in query:
@@ -154,7 +146,6 @@ class DeveloperTools(commands.Cog):
         await ctx.send(f"```{string_buffer}```")
 
 
-# Extension setup
 def setup(client):
     """Register class with client object."""
     client.add_cog(DeveloperTools(client))

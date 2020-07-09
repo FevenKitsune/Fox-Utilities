@@ -37,11 +37,10 @@ class SnipeTools(commands.Cog):
         usage=""
     )
     async def sniped(self, ctx):
-        # Embed setup
+        """Retrieves the last mention within a given channel, even if that mention was deleted."""
         em = discord.Embed(color=message_color)
         em.set_footer(text=generate_footer(ctx))
 
-        # Command
         try:
             grabbed_message = snipe_db[f"{ctx.author.id}"][f"{ctx.channel.id}"]
         except Exception:
@@ -58,7 +57,6 @@ class SnipeTools(commands.Cog):
         await ctx.send(embed=em)
 
 
-# Extension setup
 def setup(client):
     """Register class with client object."""
     client.add_cog(SnipeTools(client))

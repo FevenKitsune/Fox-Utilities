@@ -30,16 +30,16 @@ class SystemTools(commands.Cog):
     )
     @is_developer()
     async def git_pull(self, ctx):
-        # Command
-        repo = git.Repo(
-            os.getcwd(), search_parent_directories=True)  # Find git
+        """Pulls the latest version of the bot from Git"""
+        # Find Git repository the bot is stored in
+        repo = git.Repo(os.getcwd(), search_parent_directories=True)
 
-        # Setup embed/command
+        # Run git pull and post results into embed.
         em = discord.Embed(
             title="Fox Utilities GitHub",
             description=f"```smalltalk\n{str(repo.git.pull())}\n```",
             color=message_color
-        )  # Run git pull and post results into embed.
+        )
         em.set_footer(text=generate_footer(ctx))
         await ctx.send(embed=em)
 
@@ -51,6 +51,7 @@ class SystemTools(commands.Cog):
     )
     @is_developer()
     async def reboot(self, ctx):
+        """Restart the bot on the system level."""
         em = discord.Embed(
             title="Rebooting the bot!",
             description="Please wait while the bot reboots...",
@@ -59,13 +60,16 @@ class SystemTools(commands.Cog):
         em.set_footer(text=generate_footer(ctx))
         await ctx.send(embed=em)
 
-        # Command
-        p = psutil.Process(os.getpid())  # Get bot process
+        # Get bot process
+        p = psutil.Process(os.getpid())
         for handler in p.open_files() + p.connections():
-            os.close(handler.fd)  # Close all active connections and processes
+            # Close all active connections and processes
+            os.close(handler.fd)
 
-        python = sys.executable  # Get python exec
-        os.execl(python, python, *sys.argv)  # Start python process
+        # Get python exec
+        python = sys.executable
+        # Start python process
+        os.execl(python, python, *sys.argv)
 
     @commands.command(
         name="reload",
@@ -75,19 +79,19 @@ class SystemTools(commands.Cog):
     )
     @is_developer()
     async def reload(self, ctx, *args):
-        # Setup embed
+        """Unload all discord.py cogs and load them back. Easier than a full reboot."""
         em = discord.Embed(
             title="System Reload",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
 
-        # Command variables
+        # Stores which cogs passed and which cogs failed.
         success = []
         failed = []
 
-        # Command
-        if len(extensions) == 0:  # Check for extensions first.
+        # Check for extensions first.
+        if len(extensions) == 0:
             em.add_field(
                 name="Oh well.",
                 value="Doesn't look like there are any extensions defined.")
@@ -95,19 +99,21 @@ class SystemTools(commands.Cog):
             return
         for extension in extensions:
             try:
-                self.client.unload_extension(extension)  # Unload extension
-            except Exception as e:  # Continue if unload failed.
+                # Unload extension
+                self.client.unload_extension(extension)
+            # Continue if unload failed.
+            except Exception as e:
                 pass
         for extension in extensions:
             try:
-                self.client.load_extension(extension)  # Load extension
-            except Exception as e:  # Post error to embed if load failed.
+                # Load extension
+                self.client.load_extension(extension)
+            except Exception as e:
+                # Post error to embed if load failed.
                 expt = f"{type(e).__name__}: {e}"
-                failed.append([
-                    extension,
-                    expt
-                ])
-            else:  # Post to embed if load succeeded.
+                failed.append([extension, expt])
+            else:
+                # Post to embed if load succeeded.
                 success.append(extension)
 
         em.add_field(
@@ -133,10 +139,10 @@ class SystemTools(commands.Cog):
     )
     @is_developer()
     async def stop_bot(self, ctx):
+        """Force stops the bot."""
         exit()
 
 
-# Extension setup
 def setup(client):
     """Register class with client object."""
     client.add_cog(SystemTools(client))

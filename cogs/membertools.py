@@ -33,25 +33,25 @@ class MemberTools(commands.Cog):
     )
     @guild_only()
     async def member_list(self, ctx, *args):
-        # Error checking
+        """Post a formatted list of the members in a given role."""
         if len(args) < 1:
-            raise UserWarning(
-                "You must mention or name one role for this command")
+            raise UserWarning("You must mention or name one role for this command")
 
-        if len(ctx.message.role_mentions) < 1:  # If no mentions, do search.
+        # If no mentions, do search.
+        if len(ctx.message.role_mentions) < 1:
             found_role = await find_by_name(args[0], ctx.message.guild.roles)
-            if found_role is None:  # If no roles found, error.
+            # If no roles found, error.
+            if found_role is None:
                 raise UserWarning("You must mention or name one role for this command.")
         else:
             found_role = ctx.message.role_mentions[0]
 
-        # Page argument
-        page_count = 1 if (len(args) < 2) else int(args[1])  # Default to 1st page
+        # Parse page argument. Defaults to the 1st page.
+        page_count = 1 if (len(args) < 2) else int(args[1])
 
         # Generates a list containing n sized chunks of found_role.members
         chunked_members = chunklist(found_role.members, bot_member_page_size)
 
-        # Embed setup
         em = discord.Embed(
             title=f":memo: {found_role.name} Member List",
             color=message_color
@@ -61,7 +61,6 @@ class MemberTools(commands.Cog):
                  f"| {generate_footer(ctx)}"
         )
 
-        # Command logic
         try:
             for member in chunked_members[page_count - 1]:
                 em.add_field(
@@ -71,7 +70,7 @@ class MemberTools(commands.Cog):
                 )
         except IndexError:
             # Find cause of IndexError
-            if page_count > len(chunked_members) and len(chunked_members) != 0:
+            if page_count > len(chunked_members) != 0:
                 raise UserWarning("There are no more pages for this role!")
             elif len(chunked_members) == 0:
                 raise UserWarning("This role has no members!")
@@ -100,7 +99,6 @@ class MemberTools(commands.Cog):
         if len(found_role.members) == 0:
             raise UserWarning("That role has no members!")
 
-        # Embed setup
         em = discord.Embed(
             title=":mega: Sending messages...",
             description=f"Sending requested messages to {found_role.mention}",
@@ -108,17 +106,21 @@ class MemberTools(commands.Cog):
         )
         em.set_footer(text=generate_footer(ctx))
 
-        # Command
+        # Send message to all users in selected role.
         for member in found_role.members:
             try:
                 # Query database to get member preferences.
                 query = session.query(UserSettings)
                 block_pref = query.filter(UserSettings.discord_id == member.id).first()
 
-                if block_pref is not None:  # Ensure query returned something.
-                    if isinstance(block_pref.msgrole_block, str):  # Check that their blocklist is populated.
-                        if ctx.guild.id in json.loads(block_pref.msgrole_block):  # Check if guild id is in blocklist.
-                            raise UserWarning("This user has blocked msgrole.")  # If so, raise exception.
+                # Ensure query returned something.
+                if block_pref is not None:
+                    # Check that their blocklist is populated.
+                    if isinstance(block_pref.msgrole_block, str):
+                        # Check if guild id is in blocklist.
+                        if ctx.guild.id in json.loads(block_pref.msgrole_block):
+                            # If so, raise exception.
+                            raise UserWarning("This user has blocked msgrole.")
 
                 # Send embedded msgrole.
                 em_sent = discord.Embed(
@@ -150,7 +152,6 @@ class MemberTools(commands.Cog):
     @dm_only()
     async def block_msgrole(self, ctx, args):
         """Push block settings to database."""
-        # Command
         query = session.query(UserSettings)
         to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
 
@@ -165,13 +166,12 @@ class MemberTools(commands.Cog):
 
         # If user is not in database, create new entry.
         if to_set is None:
-            to_set = UserSettings(discord_id=ctx.message.author.id,
-                                  msgrole_block=json.dumps([int(args)])
-                                  )
+            to_set = UserSettings(discord_id=ctx.message.author.id, msgrole_block=json.dumps([int(args)]))
             session.add(to_set)
-            block_list = json.loads(to_set.msgrole_block)  # load block_list for posting in msg
+            # Load block_list for posting in msg
+            block_list = json.loads(to_set.msgrole_block)
         else:
-            # Load in blocklist and append requested guild.
+            # Load in block_list and append requested guild.
             block_list = json.loads(to_set.msgrole_block)
             if int(args) in block_list:
                 raise UserWarning("This guild is already blocked!")
@@ -186,6 +186,8 @@ class MemberTools(commands.Cog):
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
+
+        # Add fields for all guild's blocked.
         for guild_id in block_list:
             guild = self.client.get_guild(guild_id)
             em.add_field(
@@ -203,7 +205,6 @@ class MemberTools(commands.Cog):
     @dm_only()
     async def unblock_msgrole(self, ctx, args):
         """Push unblock settings to database."""
-        # Command
         query = session.query(UserSettings)
         to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
 
@@ -220,7 +221,7 @@ class MemberTools(commands.Cog):
         if to_set is None:
             raise UserWarning("You have no guilds blocked!")
         else:
-            # Load in blocklist and remove requested guild.
+            # Load in block_list and remove requested guild.
             block_list = json.loads(to_set.msgrole_block)
             if int(args) not in block_list:
                 raise UserWarning("This guild is not blocked!")
@@ -252,7 +253,6 @@ class MemberTools(commands.Cog):
     @dm_only()
     async def purge_block_msgrole(self, ctx):
         """Delete all block_list entries from database."""
-        # Command
         query = session.query(UserSettings)
         to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
 
@@ -280,7 +280,6 @@ class MemberTools(commands.Cog):
     @dm_only()
     async def block_list_msgrole(self, ctx):
         """List all block_list entries in database."""
-        # Command
         query = session.query(UserSettings)
         to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
 
@@ -300,14 +299,14 @@ class MemberTools(commands.Cog):
         for guild_id in block_list:
             guild = self.client.get_guild(guild_id)
             em.add_field(
-                name=f"{guild if guild else 'No longer in this guild.'}",  # Client can only see names of guilds it's in
+                # Client can only see names of guilds it's in. Placeholder if it can't find the name.
+                name=f"{guild if guild else 'No longer in this guild.'}",
                 value=f"`ID`: {guild_id}"
             )
 
         await ctx.send(embed=em)
 
 
-# Extension setup
 def setup(client):
     """Register class with client object."""
     client.add_cog(MemberTools(client))

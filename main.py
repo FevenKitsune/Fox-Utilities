@@ -11,14 +11,14 @@ from config.globals import *
 from utility.checks import get_prefix
 import utility.exception as exception
 
-# Logging
-logger = logging.getLogger("discord")  # Set up logger called "discord"
-logger.setLevel(logging.INFO)  # Log all
+# Set up logger called "discord". Log level is set to INFO.
+logger = logging.getLogger("discord")
+logger.setLevel(logging.INFO)
 
 # Ensure database is created and up to date.
 db.create_all()
 
-# Client
+# Create discord.py Bot object.
 client = commands.Bot(description=bot_description, command_prefix=get_prefix)
 
 # Bot setup and loading
@@ -34,13 +34,16 @@ if __name__ == "__main__":
     # External cogs
     for extension in extensions:
         try:
-            client.load_extension(extension)  # Load all extensions
-        except Exception as e:  # If load failed, post to log.
+            # Load all extensions
+            client.load_extension(extension)
+        except Exception as e:
+            # If load failed, post to log.
             exc = f"{type(e).__name__}: {e}"
             logger.warning(f"Failed to load extension {extension}\n{exc}")
-        else:  # If load succeeded, post to log.
+        else:
+            # If load succeeded, post to log.
             logger.info(f"Loaded extension {extension}")
 
-    # Start Bot
+    # Start server.
     logging.info("Starting client.")
-    client.run(bot_key)  # Start server.
+    client.run(bot_key)

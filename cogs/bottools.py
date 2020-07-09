@@ -25,7 +25,7 @@ class BotTools(commands.Cog):
         usage=""
     )
     async def server_count(self, ctx):
-        # Embed setup
+        """Counts the number of servers the bot is connected to."""
         em = discord.Embed(
             title="Server Count",
             description=f"I am currently connected to {len(self.client.guilds):,} servers.",
@@ -42,7 +42,7 @@ class BotTools(commands.Cog):
         usage=""
     )
     async def user_count(self, ctx):
-        # Embed setup
+        """Counts the number of unique users the bot is connected to."""
         em = discord.Embed(
             title="User Count",
             description=f"I can see a total of {len(ctx.bot.users):,} users!",
@@ -59,7 +59,7 @@ class BotTools(commands.Cog):
         usage=""
     )
     async def ping_bot(self, ctx):
-        # Embed setup
+        """Basic call and response command"""
         em = discord.Embed(
             title="Pong!",
             description="Hello! Everything seems to be operational.",
@@ -76,10 +76,12 @@ class BotTools(commands.Cog):
         usage=""
     )
     async def invite_bot(self, ctx):
-        # Embed setup
+        """Sends information on the development server, the GitHub, and the invite link."""
         em = discord.Embed(
             title="Invite me!",
-            description=f"[Invite link!]({bot_invite})\n[Development server!]({bot_development_server})\n[GitHub!]({bot_source})",
+            description=f"[Invite link!]({bot_invite})\n"
+                        f"[Development server!]({bot_development_server})\n"
+                        f"[GitHub!]({bot_source})",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
@@ -92,7 +94,7 @@ class BotTools(commands.Cog):
         usage=""
     )
     async def privacy_information(self, ctx):
-        # Embed setup
+        """Sends information on what data this bot collects and how we use it."""
         em = discord.Embed(
             title="Privacy Information",
             description="Privacy is important to everyone, so this is a quick overview of the data we have stored.",
@@ -103,12 +105,14 @@ class BotTools(commands.Cog):
         # Command
         em.add_field(
             name="Error Logging",
-            value="If a command returns an error, the contents of the command will be logged for debugging purposes. Neither the name of the sender nor the name of the server will be logged."
+            value="If a command returns an error, the contents of the command will be logged for debugging purposes. "
+                  "Neither the name of the sender nor the name of the server will be logged."
         )
 
         em.add_field(
             name="Data Persistence",
-            value="Snipe tool data: the contents of your last mention is stored in memory, meaning it is wiped as soon as the bot stops running.\n"
+            value="Snipe tool data: the contents of your last mention is stored in "
+                  "memory, meaning it is wiped as soon as the bot stops running.\n"
                   "User preferences: the user ID and guild ID (where applicable) is stored in a local database."
         )
 
@@ -125,7 +129,6 @@ class BotTools(commands.Cog):
         await ctx.author.send(embed=em)
 
 
-# Extension setup
 def setup(client):
     """Register class with client object."""
     client.add_cog(BotTools(client))
