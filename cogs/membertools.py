@@ -39,7 +39,7 @@ class MemberTools(commands.Cog):
 
         # If no mentions, do search.
         if len(ctx.message.role_mentions) < 1:
-            found_role = await find_by_name(args[0], ctx.message.guild.roles)[0]
+            found_role = await find_by_name(args[0], ctx.message.guild.roles)
             # If no roles found, error.
             if found_role is None:
                 raise UserWarning("You must mention or name one role for this command.")
@@ -89,7 +89,7 @@ class MemberTools(commands.Cog):
     async def message_role(self, ctx, *args):
         # Check if there's a mentioned role. If not, string match.
         if len(ctx.message.role_mentions) < 1:
-            found_role = await find_by_name(args[0], ctx.message.guild.roles)[0]
+            found_role = await find_by_name(args[0], ctx.message.guild.roles)
             if found_role is None:
                 raise UserWarning("You must mention one role.")
         else:
