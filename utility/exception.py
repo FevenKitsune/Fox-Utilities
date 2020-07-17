@@ -10,6 +10,7 @@ from utility.generators import generate_footer
 
 
 async def on_command_error(ctx, error):
+    """Error handler, parses how message author should be notified about an error."""
     try:
         # If CommandNotFound, fail silently
         if isinstance(error, discord.ext.commands.CommandNotFound):

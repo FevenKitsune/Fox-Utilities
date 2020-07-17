@@ -19,9 +19,9 @@ class CoreTools(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    # Executes once the bot has finished starting.
     @commands.Cog.listener()
     async def on_ready(self):
+        """Executes once the bot has finished starting up."""
         logger.info(f"Setting client presence to: {bot_default_status}")
         # Set the bot status
         await self.client.change_presence(activity=discord.Game(bot_default_status))
@@ -32,8 +32,8 @@ class CoreTools(commands.Cog):
         brief="Display this message.",
         usage=""
     )
-    async def help(self, ctx, *args):
-        # Setup embed
+    async def help(self, ctx):
+        """Help menu. Processes the list of available commands into a readable menu."""
         em = discord.Embed(
             title="Fox Utilities Help Guide",
             description=bot_description,
@@ -41,16 +41,17 @@ class CoreTools(commands.Cog):
         )
         em.set_footer(text=generate_footer(ctx))
 
-        # Command
         for cmd in sorted(self.client.commands, key=lambda command: command.cog_name):
+            # If not developer, do not show hidden commands.
             if cmd.hidden and not (ctx.author.id == developer_id):
-                pass  # If not developer, do not show hidden commands.
+                pass
             else:
+                # Help field formatter.
                 em.add_field(
                     name=f"{'#' if cmd.hidden else ''}`{cmd.cog_name}`> {cmd.name} {cmd.usage}",
                     value=cmd.brief,
                     inline=False
-                )  # Help field formatter.
+                )
 
         await ctx.author.send(embed=em)
 
@@ -59,11 +60,12 @@ class CoreTools(commands.Cog):
         brief="Information about bot-permission tags.",
         usage=""
     )
-    async def tags(self, ctx, *args):
-        # Setup embed
+    async def tags(self, ctx):
+        """Gives the user information on permission tags, which allow non-admins to access admin commands."""
         em = discord.Embed(
             title="Fox Utilities Permission Tags",
-            description="Create a role with the syntax `fox:name_of_command` to give them permission to access that command! Will work with any admin command!",
+            description="Create a role with the syntax `fox:name_of_command` to give them "
+                        "permission to access that command! Will work with any admin command!",
             color=message_color)
         em.set_footer(text=generate_footer(ctx))
 
@@ -76,10 +78,11 @@ class CoreTools(commands.Cog):
         usage=""
     )
     async def report_bug(self, ctx):
-        # Setup embed
+        """Gives the user information on how to report bugs they find."""
         em = discord.Embed(
             title="Found a bug? :bee:",
-            description="You can report bugs on the [Fox Utilities issues](https://github.com/FevenKitsune/Fox-Utilities/issues) page on GitHub!",
+            description="You can report bugs on the "
+                        "[Fox Utilities issues](https://github.com/FevenKitsune/Fox-Utilities/issues) page on GitHub!",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
@@ -87,7 +90,6 @@ class CoreTools(commands.Cog):
         await ctx.send(embed=em)
 
 
-# Extension setup
 def setup(client):
     """Register class with client object."""
     client.add_cog(CoreTools(client))

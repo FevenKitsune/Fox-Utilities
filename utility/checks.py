@@ -10,27 +10,27 @@ from config.globals import *
 
 
 def is_admin():
+    """Checks if author is a server administrator, or has the correct permission tags."""
     async def predicate(ctx):
         return (
                 ctx.message.channel.permissions_for(
                     ctx.message.author).administrator
-                or (ctx.author.id == developer_id)  # Permissions for dev.
+                # Permissions for dev.
+                or (ctx.author.id == developer_id)
                 or (discord.utils.get(ctx.author.roles, name=str(f"fox:{ctx.command.name}")))
         )
-
     return commands.check(predicate)
 
 
 def is_developer():
+    """Checks if author is the developer of this bot."""
     async def predicate(ctx):
-        return (
-                ctx.author.id == developer_id
-        )
-
+        return ctx.author.id == developer_id
     return commands.check(predicate)
 
 
 async def get_default_prefix(bot):
+    """Grabs the default prefix based on the branch version that is running. Allows testing and stable to coexist."""
     if bot.user.id == stable_client_id:
         return bot_prefix
     if bot.user.id == testing_client_id:
@@ -40,6 +40,7 @@ async def get_default_prefix(bot):
 
 
 async def get_prefix(bot, message):
+    """Checks if the bot has a configuration tag for the prefix. Otherwise, gets the default."""
     default_prefix = await get_default_prefix(bot)
     if isinstance(message.channel, discord.DMChannel):
         return default_prefix
