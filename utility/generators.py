@@ -12,3 +12,25 @@ def generate_footer(ctx):
     if ctx.author.id == developer_id:
         return f"{bot_footer_prefix}The Developer"
     return f"{bot_footer_prefix}{ctx.author.name}"
+
+
+def generate_clean_msgrole(ctx, args):
+    """Parse string to remove the arguments from a msgrole string."""
+    # split out the command.
+    text = ctx.message.content.split(' ', 1)[1]
+
+    # figure out how the role is defined
+    if len(ctx.message.role_mentions) < 1:
+        # if no mentions, then message was matched with args. remove the match term from the string.
+        text = text.replace(args[0], "", 1)
+        # if there are two quotes at the start then remove those too.
+        while text[0] and (text[0] == "'" or text[0] == "\""):
+            if len(text) == 1:
+                raise UserWarning("String decomposes into empty. No message given!")
+            else:
+                text = text[1:]
+    else:
+        # role was called with a mention, remove next mention using the same method to remove command.
+        text = text.split(' ', 1)[1]
+
+    return text

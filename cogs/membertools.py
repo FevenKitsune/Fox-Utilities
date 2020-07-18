@@ -8,7 +8,7 @@ from discord.ext.commands import guild_only, dm_only
 from utility.checks import *
 from utility.findbyname import find_by_name
 from config.globals import *
-from utility.generators import generate_footer
+from utility.generators import generate_footer, generate_clean_msgrole
 from foxlib.listtools import chunklist
 from db import session, UserSettings
 import json
@@ -125,7 +125,7 @@ class MemberTools(commands.Cog):
                 # Send embedded msgrole.
                 em_sent = discord.Embed(
                     title=f"Role message from {ctx.message.author.name}",
-                    description=f"{ctx.message.clean_content}",
+                    description=generate_clean_msgrole(ctx, args),
                     color=message_color
                 )
                 em_sent.set_footer(
