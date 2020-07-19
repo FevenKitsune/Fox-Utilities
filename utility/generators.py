@@ -31,6 +31,9 @@ def generate_clean_msgrole(ctx, args):
                 text = text[1:]
     else:
         # role was called with a mention, remove next mention using the same method to remove command.
-        text = text.split(' ', 1)[1]
+        try:
+            text = text.split(' ', 1)[1]
+        except IndexError:
+            raise UserWarning("String failed to split. No message given!")
 
     return text
