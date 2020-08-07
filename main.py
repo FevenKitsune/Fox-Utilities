@@ -8,7 +8,7 @@ from discord.ext import commands
 import logging
 import db
 from config.globals import *
-from utility.checks import get_prefix
+from utility.prefix import get_prefix
 import utility.exception as exception
 
 # Set up logger called "discord". Log level is set to INFO.

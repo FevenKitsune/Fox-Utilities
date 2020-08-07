@@ -10,6 +10,7 @@ import os
 extensions = [
     "cogs.coretools",
     "cogs.developertools",
+    "cogs.help",
     "cogs.membertools",
     "cogs.bottools",
     "cogs.invitetools",
