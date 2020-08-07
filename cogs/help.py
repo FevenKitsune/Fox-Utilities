@@ -42,6 +42,9 @@ class Help(commands.Cog):
                     name=f"{'#' if command.hidden else ''}`{command.cog_name}`\n{command.name} {command.usage}",
                     value=command.help
                 )
+            else:
+                # If the argument given was not a valid command, throw an error.
+                raise UserWarning(f"Command \"{args[0]}\" was not found.")
         else:
             for cmd in sorted(self.client.commands, key=lambda command: command.cog_name):
                 # If not developer, do not show hidden commands.
