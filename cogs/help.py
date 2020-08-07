@@ -46,17 +46,19 @@ class Help(commands.Cog):
                 # If the argument given was not a valid command, throw an error.
                 raise UserWarning(f"Command \"{args[0]}\" was not found.")
         else:
-            for cmd in sorted(self.client.commands, key=lambda command: command.cog_name):
-                # If not developer, do not show hidden commands.
-                if cmd.hidden and not (ctx.author.id == developer_id):
-                    pass
-                else:
-                    # Help field formatter.
-                    em.add_field(
-                        name=f"{'#' if cmd.hidden else ''}`{cmd.cog_name}`> {cmd.name} {cmd.usage}",
-                        value=cmd.brief,
-                        inline=False
+            for cog in [self.client.get_cog(cog_name) for cog_name in sorted(self.client.cogs)]:
+                # List of formatted strings containing each command.
+                command_list = []
+                # Get each command and figure out how they should be formatted.
+                for command in sorted(cog.walk_commands(), key=lambda key: key.name):
+                    if command.hidden and not (ctx.author.id == developer_id):
+                        pass
+                    # Add formatted string to the list.
+                    command_list.append(
+                        f"{'#' if command.hidden else ''}"
+                        f"`{' '.join((command.name, command.usage)).strip()}` {command.brief}"
                     )
+                em.add_field(name=cog.qualified_name, value="\n".join(command_list), inline=False)
 
         await ctx.author.send(embed=em)
 
