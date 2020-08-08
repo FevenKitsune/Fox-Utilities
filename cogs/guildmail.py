@@ -153,7 +153,7 @@ class GuildMail(commands.Cog):
         name="mailrole",
         aliases=["msgrole", "mr", "msgr"],
         brief="Mails all members of a tagged role.",
-        usage="@role/\"role_name\""
+        usage="<-f/o> @role/\"role_name\""
     )
     @is_admin()
     @guild_only()
@@ -164,6 +164,40 @@ class GuildMail(commands.Cog):
         em = discord.Embed(
             title=":mega: Sending messages...",
             description=f"Sending {len(targets)} requested messages to {role.mention}",
+            color=message_color
+        )
+        em.set_footer(text=generate_footer(ctx))
+
+        # Send mail to determined targets and return a list of tuples containing any errors.
+        failed_messages = await self.mail_targets(ctx, targets, args)
+        # List of str for creating a formatted log of failed messages.
+        failed_messages_log = []
+
+        for member, error in failed_messages:
+            failed_messages_log.append(f"Failed to send message to {member.name}: `{type(error).__name__}: {error}`")
+
+        em.add_field(
+            name="Failed Messages:",
+            value='\n'.join(failed_messages_log) if failed_messages_log else "No failed messages detected."
+        )
+        # Send success/fail list back to guild.
+        await ctx.send(embed=em)
+
+    @commands.command(
+        name="mailnorole",
+        aliases=["msgnorole", "mnr", "msgnr"],
+        brief="Mails all members that have no role.",
+        usage="<-f/o>"
+    )
+    @is_admin()
+    @guild_only()
+    async def mail_no_role(self, ctx, *args):
+        # Determine list of members who should receive the message.
+        targets, role = await self.extract_mail_intent(ctx, args, "nr")
+
+        em = discord.Embed(
+            title=":mega: Sending messages...",
+            description=f"Sending {len(targets)} requested messages.",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
