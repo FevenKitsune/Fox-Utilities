@@ -103,25 +103,9 @@ class GuildMail(commands.Cog):
 
         return filtered_targets, role
 
-    @commands.command(
-        name="mailrole",
-        aliases=["msgrole", "mr", "msgr"],
-        brief="Mails all members of a tagged role.",
-        usage="@role/\"role_name\""
-    )
-    @is_admin()
-    @guild_only()
-    async def mail_role(self, ctx, *args):
-        targets, role = await self.extract_mail_intent(ctx, args, discord.Role)
-
-        em = discord.Embed(
-            title=":mega: Sending messages...",
-            description=f"Sending {len(targets)} requested messages to {role.mention}",
-            color=message_color
-        )
-        em.set_footer(text=generate_footer(ctx))
-
-        # Send message to all users in selected role.
+    async def mail_targets(self, ctx, targets, args) -> List[Tuple[discord.Member, Exception]]:
+        # Send message to all targeted users.
+        failed_messages = []
         for target in targets:
             try:
                 # Query database to get member preferences.
@@ -150,12 +134,37 @@ class GuildMail(commands.Cog):
                                    icon_url=ctx.guild.icon_url)
                 await target.send(embed=em_sent)
             except Exception as e:
-                # If sending dm failed, add entry to list.
-                em.add_field(
-                    name=f"Failed to send message to {target.name}",
-                    value=f"`{type(e).__name__}: {e}`"
-                )
-                pass
+                failed_messages.append((target, e))
+        return failed_messages
+
+    @commands.command(
+        name="mailrole",
+        aliases=["msgrole", "mr", "msgr"],
+        brief="Mails all members of a tagged role.",
+        usage="@role/\"role_name\""
+    )
+    @is_admin()
+    @guild_only()
+    async def mail_role(self, ctx, *args):
+        targets, role = await self.extract_mail_intent(ctx, args, discord.Role)
+
+        em = discord.Embed(
+            title=":mega: Sending messages...",
+            description=f"Sending {len(targets)} requested messages to {role.mention}",
+            color=message_color
+        )
+        em.set_footer(text=generate_footer(ctx))
+
+        failed_messages = await self.mail_targets(ctx, targets, args)
+        failed_messages_log = []
+
+        for member, error in failed_messages:
+            failed_messages_log.append(f"Failed to send message to {member.name}: `{type(error).__name__}: {error}`")
+
+        em.add_field(
+            name="Failed Messages:",
+            value='\n'.join(failed_messages_log) if failed_messages_log else "No failed messages detected."
+        )
         # Send success/fail list back to guild.
         await ctx.send(embed=em)
 
