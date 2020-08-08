@@ -42,5 +42,5 @@ async def find_by_name(name, search_in):
         raise UserWarning(f"Conflicting lookup found! Please provide more detail in your search.\n"
                           f"Conflicts:{build_conflicting_scores_string(extract_conflicting_scores(found_items))}")
 
-    # If there is no conflict, return the highest ranked item.
+    # If there is no conflict, return the highest ranked item
     return found_items[0][0]
