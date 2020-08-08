@@ -72,8 +72,10 @@ class BotTools(commands.Cog):
     @commands.command(
         name="invite",
         aliases=["source", "code"],
-        brief="Invite this bot to your server.",
-        usage=""
+        brief="Invite this bot to your guild.",
+        usage="",
+        help="The invite command can be used to get information on how to invite the bot to your guild. It also "
+             "contains links to the development server, GitHub page, and Wiki."
     )
     async def invite_bot(self, ctx):
         """Sends information on the development server, the GitHub, and the invite link."""
@@ -81,7 +83,8 @@ class BotTools(commands.Cog):
             title="Invite me!",
             description=f"[Invite link!]({bot_invite})\n"
                         f"[Development server!]({bot_development_server})\n"
-                        f"[GitHub!]({bot_source})",
+                        f"[GitHub!]({bot_source})\n"
+                        f"[Wiki!]({bot_wiki})",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
@@ -90,8 +93,9 @@ class BotTools(commands.Cog):
 
     @commands.command(
         name="privacy",
-        brief="Information about our bot's privacy.",
-        usage=""
+        brief="Information about our bots privacy.",
+        usage="",
+        help="The privacy command can be used to get information on how we store and process user data."
     )
     async def privacy_information(self, ctx):
         """Sends information on what data this bot collects and how we use it."""

@@ -31,6 +31,7 @@ testing_client_id = 728052111593570304
 bot_invite = "https://discordapp.com/api/oauth2/authorize?client_id=476166340328161280&permissions=8&scope=bot"
 bot_development_server = "https://discord.gg/ZVJasmz"
 bot_source = "https://github.com/FevenKitsune/Fox-Utilities"
+bot_wiki = "https://github.com/FevenKitsune/Fox-Utilities/wiki"
 
 # Config Variables
 bot_prefix = "f."  # Default prefix

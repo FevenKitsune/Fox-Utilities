@@ -30,7 +30,8 @@ class CoreTools(commands.Cog):
     @commands.command(
         name="tags",
         brief="Information about bot-permission tags.",
-        usage=""
+        usage="",
+        help="The tags command can be used to get information on role-assigned permissions."
     )
     async def tags(self, ctx):
         """Gives the user information on permission tags, which allow non-admins to access admin commands."""
@@ -47,7 +48,9 @@ class CoreTools(commands.Cog):
         name="report",
         aliases=["bug", "error", "contact"],
         brief="Need to report a bug? Get information on how to do so here.",
-        usage=""
+        usage="",
+        help="The report command can be used to get information and resources on where to report a bug. Bug reports "
+             "are vital in ensuring Fox Utilities is the best it can be."
     )
     async def report_bug(self, ctx):
         """Gives the user information on how to report bugs they find."""

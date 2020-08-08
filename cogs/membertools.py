@@ -29,7 +29,14 @@ class MemberTools(commands.Cog):
         name="members",
         aliases=["member", "memlist"],
         brief="Lists all members in a mentioned role.",
-        usage="@role/\"role_name\" <page #>"
+        usage="@role/\"role_name\" [page #]",
+        help="The members command can be used to retrieve a list of members within a given role.\n\n"
+             "**Usage Information**\n"
+             "*@role_tag/\"role_name\"*: The desired role can be targeted by either tagging the role, or typing the "
+             "name of the role in quotation marks. Roles using 𝓯𝓪𝓷𝓬𝔂 𝓽𝓮𝔁𝓽 will automatically be interpreted as "
+             "standard QWERTY letters.\n"
+             "*page #*: Member lists containing more than 25 members will be split between multiple pages. To see "
+             "more pages, specify which page number to view."
     )
     @guild_only()
     async def member_list(self, ctx, *args):

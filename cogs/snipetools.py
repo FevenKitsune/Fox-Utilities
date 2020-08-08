@@ -34,7 +34,9 @@ class SnipeTools(commands.Cog):
     @commands.command(
         name="snipe",
         brief="Tells you the last person who mentioned you in a channel.",
-        usage=""
+        usage="",
+        help="The snipe command can be used to see the last time you were mentioned in the channel. The channel used "
+             "will be the channel you send this command in."
     )
     async def sniped(self, ctx):
         """Retrieves the last mention within a given channel, even if that mention was deleted."""

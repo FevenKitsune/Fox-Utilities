@@ -24,7 +24,10 @@ class InviteTools(commands.Cog):
         name="invites",
         aliases=["myinvites"],
         brief="Display your own or a mentioned user's server invites.",
-        usage="[@user]"
+        usage="[@user]",
+        help="The invites command can be used to see how many invites a user has generated.\n\n"
+             "**Usage Information**\n"
+             "*@user*: A user can be targeted by tagging them. If no user is given, the sender will be used."
     )
     @guild_only()
     async def invites(self, ctx):
