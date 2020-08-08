@@ -66,15 +66,15 @@ class GuildMail(commands.Cog):
                     if found_role is not None:
                         role_data = found_role
                         target = role_data.members
-        if target_type == discord.Member:
+        elif target_type == discord.Member:
             # Target is one member. Message that one member.
             target = None  # TODO: Add find_by_name for members too
-        if target_type == "nr":
+        elif target_type == "nr":
             # Target is anyone with no roles
             target = []
             for member in ctx.message.guild.members:
                 # Everyone has the @everyone role.
-                if len(member.roles) == 1:
+                if len(member.roles) <= 1:
                     target.append(member)
         return target, role_data
 
@@ -87,13 +87,14 @@ class GuildMail(commands.Cog):
         filters = self.extract_args(args)
         filtered_targets = []
         if not filters:
-            return target
+            filtered_targets = target
 
         # For each target, test the determined filters and add them to the filtered list if
         # they qualify for any of them. OR style filtering.
+
         for t in target:
             if 'o' in filters:
-                if t.status == Status.online:
+                if t.status != Status.offline:
                     filtered_targets.append(t)
             if 'f' in filters:
                 if t.status == Status.offline:
@@ -108,14 +109,12 @@ class GuildMail(commands.Cog):
 
         if not target:
             raise UserWarning("Mail recipient could not be determined")
-
         # Run target list through filter.
         filtered_targets = await self.extract_mail_filter(ctx, args, target)
-
         # Return tuple containing targets and a targeted role if applicable.
         return filtered_targets, role
 
-    async def mail_targets(self, ctx, targets, args) -> List[Tuple[discord.Member, Exception]]:
+    async def mail_targets(self, ctx, targets, args, no_role=False) -> List[Tuple[discord.Member, Exception]]:
         # Send message to all targeted users.
         failed_messages = []
         for target in targets:
@@ -136,7 +135,7 @@ class GuildMail(commands.Cog):
                 # Send embedded guild mail.
                 em_sent = discord.Embed(
                     title=f"Guild mail from {ctx.message.author.name}",
-                    description=generate_clean_guild_mail(ctx, self.sieve_out_args(args)),
+                    description=generate_clean_guild_mail(ctx, self.sieve_out_args(args) if not no_role else ''),
                     color=message_color
                 )
                 em_sent.set_footer(
@@ -144,7 +143,7 @@ class GuildMail(commands.Cog):
                          f"Use f.block {ctx.guild.id} if you no longer wish to receive messages from this guild.")
                 em_sent.set_author(name=ctx.guild.name,
                                    icon_url=ctx.guild.icon_url)
-                await target.send(embed=em_sent)
+                await ctx.message.author.send(embed=em_sent)
             except Exception as e:
                 failed_messages.append((target, e))
         return failed_messages
@@ -194,7 +193,6 @@ class GuildMail(commands.Cog):
     async def mail_no_role(self, ctx, *args):
         # Determine list of members who should receive the message.
         targets, role = await self.extract_mail_intent(ctx, args, "nr")
-
         em = discord.Embed(
             title=":mega: Sending messages...",
             description=f"Sending {len(targets)} requested messages.",
@@ -203,7 +201,7 @@ class GuildMail(commands.Cog):
         em.set_footer(text=generate_footer(ctx))
 
         # Send mail to determined targets and return a list of tuples containing any errors.
-        failed_messages = await self.mail_targets(ctx, targets, args)
+        failed_messages = await self.mail_targets(ctx, targets, args, no_role=True)
         # List of str for creating a formatted log of failed messages.
         failed_messages_log = []
 
