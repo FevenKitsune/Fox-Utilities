@@ -27,15 +27,31 @@ class GuildMail(commands.Cog):
         self.client = client
 
     @staticmethod
-    def sieve_out_args(args):
+    def sieve_out_args(args: List[str]) -> str:
+        """
+        Find the first argument that isn't a filter argument.
+
+        :param args: A list of strings provided by discord.ext.commands.command
+        :return: The first string in the list that doesn't start with -
+        """
         # Finds the first string in args that doesn't start with -
         for arg in args:
             if arg[0] != '-':
                 return arg
 
     @staticmethod
-    def extract_args(args):
-        # Combines all flags from args
+    def extract_args(args: List[str]) -> List[str]:
+        """
+        Get filter arguments from guild mail.
+
+        :param args: A list of strings provided by discord.ext.commands.command
+        :return: Every letter prefixed with a - before the first occurrence of a word that doesn't start with -
+
+        Example:
+        args = ["-a", "-b", "user", "-c"]
+        return = ["a", "b"]
+        -c is not returned to allow text prefixed with a - in the body of the message.
+        """
         flags = []
         for arg in args:
             if arg[:1] == '-' and len(arg) > 1:
@@ -45,7 +61,16 @@ class GuildMail(commands.Cog):
                 break
         return flags
 
-    async def extract_mail_target(self, ctx, args, target_type) -> Tuple[List[discord.Member], discord.Role]:
+    async def extract_mail_target(self, ctx: discord.ext.commands.Context, args, target_type) -> Tuple[List[discord.Member], discord.Role]:
+        """
+        Abstracts finding the desired list of recipients by taking a target type and performing the appropriate search.
+
+        :param ctx: The discord.ext.commands.Context provided by discord.ext.commands.command.
+        :param args: A list of strings provided by discord.ext.commands.command.
+        :param target_type: Can be a string, discord.Role, or discord.Member.
+        :return: A tuple containing the unfiltered list of targets. If target_type = discord.Role, the role identified
+        will be returned as the second object in the tuple.
+        """
         target = None
         role_data = None
 
@@ -77,17 +102,23 @@ class GuildMail(commands.Cog):
                     target.append(member)
         return target, role_data
 
-    async def extract_mail_filter(self, ctx, args, target) -> List[discord.Member]:
+    async def extract_mail_filter(self, ctx: discord.ext.commands.Context, args, target: List[discord.Member]) -> List[discord.Member]:
         """
+        Searches through a given list of members and picks ones based on arguments extracted from extract_args(args)
+
+        :param ctx: The discord.ext.commands.Context provided by discord.ext.commands.command.
+        :param args: A list of strings provided by discord.ext.commands.command.
+        :param target: A list of pre-filtered targets.
+        :return: A filtered list of targets.
+
         Filter Options:
-        o = Online Only
-        f = Offline Only
+        o = Include Online, Away, Do Not Disturb
+        f = Include Offline
         """
         filters = self.extract_args(args)
         filtered_targets = []
         if not filters:
             filtered_targets = target
-
         # For each target, test the determined filters and add them to the filtered list if
         # they qualify for any of them. OR style filtering.
 
@@ -101,9 +132,16 @@ class GuildMail(commands.Cog):
 
         return filtered_targets
 
-    async def extract_mail_intent(self, ctx, args, target_type) -> Tuple[List[discord.Member], discord.Role]:
-        # Extracts flags and targets from mail.
-        # Target type should be discord.Role, discord.Member, or a flag
+    async def extract_mail_intent(self, ctx: discord.ext.commands.Context, args, target_type) -> Tuple[List[discord.Member], discord.Role]:
+        """
+        The interface for target extraction as well as filter handling.
+
+        :param ctx: The discord.ext.commands.Context provided by discord.ext.commands.command.
+        :param args: A list of strings provided by discord.ext.commands.command.
+        :param target_type: Can be a string, discord.Role, or discord.Member.
+        :return: A tuple containing the list of targets. If target_type = discord.Role, the role identified will be
+        returned as the second object in the tuple.
+        """
         target, role = await self.extract_mail_target(ctx, args, target_type)
 
         if not target:
@@ -113,8 +151,17 @@ class GuildMail(commands.Cog):
         # Return tuple containing targets and a targeted role if applicable.
         return filtered_targets, role
 
-    async def mail_targets(self, ctx, targets, args, no_role=False) -> List[Tuple[discord.Member, Exception]]:
-        # Send message to all targeted users.
+    async def mail_targets(self, ctx: discord.ext.commands.Context, targets: List[discord.Member], args, no_role=False) -> List[Tuple[discord.Member, Exception]]:
+        """
+        Generalized message sender for guild mail. Sends a guild mail to all targets.
+
+        :param ctx: The discord.ext.commands.Context provided by discord.ext.commands.command.
+        :param targets: A list of discord.Member to send the guildmail to.
+        :param args: A list of strings provided by discord.ext.commands.command.
+        :param no_role: Bypasses the removal of the role indicator. Otherwise will cause generate_clean_guildmail() to
+        begin removing message text.
+        :return: A list of tuples containing who and why a message failed to send. Returns [] if there were no errors.
+        """
         failed_messages = []
         for target in targets:
             try:
