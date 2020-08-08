@@ -4,7 +4,6 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-import discord
 from discord.ext.commands import guild_only, dm_only
 from utility.checks import *
 from utility.findbyname import find_by_name
