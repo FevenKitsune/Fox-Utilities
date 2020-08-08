@@ -197,8 +197,17 @@ class GuildMail(commands.Cog):
     @commands.command(
         name="mailrole",
         aliases=["msgrole", "mr", "msgr"],
-        brief="Mails all members of a tagged role.",
-        usage="<-f/o> @role/\"role_name\""
+        brief="Mails all members of a given role.",
+        usage="[-f] [-o] @role_tag/\"role_name\" message",
+        help="The mailrole command can be used to send a message to all members of a given role.\n\n"
+             "**Usage Information**\n"
+             "*-f*: Filters members to message offline users.\n"
+             "*-o*: Filters members to message online users.\n"
+             "*@role_tag/\"role_name\"*: The desired role can be targeted by either tagging the role, or typing the "
+             "name of the role in quotation marks. Roles using 𝓯𝓪𝓷𝓬𝔂 𝓽𝓮𝔁𝓽 will automatically be interpreted as "
+             "standard QWERTY letters.\n"
+             "*message*: The remainder of the command should contain the message you wish to send. All text before "
+             "this point will be removed from the message."
     )
     @is_admin()
     @guild_only()
@@ -232,7 +241,13 @@ class GuildMail(commands.Cog):
         name="mailnorole",
         aliases=["msgnorole", "mnr", "msgnr"],
         brief="Mails all members that have no role.",
-        usage="<-f/o>"
+        usage="[-f] [-o] message",
+        help="The mailnorole command can be used to send a message to all members that have no role.\n\n"
+             "**Usage Information**\n"
+             "*-f*: Filters members to message offline users.\n"
+             "*-o*: Filters members to message online users.\n"
+             "*message*: The remainder of the command should contain the message you wish to send. All text before "
+             "this point will be removed from the message."
     )
     @is_admin()
     @guild_only()
@@ -264,7 +279,10 @@ class GuildMail(commands.Cog):
     @commands.command(
         name="block",
         brief="Blocks guild mail from a given guild.",
-        usage="guild_id"
+        usage="guild_id",
+        help="The block command can be used to block a guild from sending you guild mail.\n\n"
+             "**Usage Information**\n"
+             "*guild_id*: The ID of the guild you wish to block. This can be found at the bottom of every guild mail."
     )
     @dm_only()
     async def block_guild_mail(self, ctx, args):
@@ -317,7 +335,10 @@ class GuildMail(commands.Cog):
     @commands.command(
         name="unblock",
         brief="Unblocks guild mail from a given guild.",
-        usage="guild_id"
+        usage="guild_id",
+        help="The unblock command can be used to unblock a guild from sending you guild mail.\n\n"
+             "**Usage Information**\n"
+             "*guild_id*: The ID of the guild you wish to unblock. This can be found using f.blocklist."
     )
     @dm_only()
     async def unblock_guild_mail(self, ctx, args):
@@ -365,7 +386,8 @@ class GuildMail(commands.Cog):
     @commands.command(
         name="unblockall",
         brief="Erases all entries in server mail block list.",
-        usage=""
+        usage="",
+        help="The unblockall command can be used to unblock all guilds from sending you guild mail."
     )
     @dm_only()
     async def unblock_all_guild_mail(self, ctx):
@@ -392,7 +414,8 @@ class GuildMail(commands.Cog):
     @commands.command(
         name="blocklist",
         brief="Lists your current blocks.",
-        usage=""
+        usage="",
+        help="The blocklist command can be used to see the name and ID of all guild's you've blocked."
     )
     @dm_only()
     async def block_list_guild_mail(self, ctx):

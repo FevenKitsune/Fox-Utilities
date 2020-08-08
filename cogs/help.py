@@ -21,9 +21,16 @@ class Help(commands.Cog):
     @commands.command(
         name="help",
         brief="Display this message.",
-        usage="<command>",
+        usage="[command]",
         help="The help command can be used to get a list of commands that are available to the user. "
-             "If you'd like to see more detailed information about a command, use `help <command>`."
+             "If you'd like to see more detailed information about a command, use `help [command]`.\n\n"
+             "**Usage Information**\n"
+             "Certain commands will have extra information on "
+             "[arguments](https://en.wikipedia.org/wiki/Command-line_interface#Arguments) you can give the command to"
+             "operate it.\n\n"
+             "*[argument]*: Arguments marked with [] are optional, and are not required.\n"
+             "*argument*: Arguments without [] are required to use the command.\n"
+             "*argument/\"argument\"*: Arguments separated with a slash delineate two ways of stating the same argument."
     )
     async def help(self, ctx, *args):
         """Help menu. Processes the list of available commands into a readable menu."""
@@ -40,7 +47,7 @@ class Help(commands.Cog):
             if command := self.client.get_command(search):
                 em.add_field(
                     name=f"{'#' if command.hidden else ''}`{command.cog_name}`\n{command.name} {command.usage}",
-                    value=command.help
+                    value=f"{command.help}\n\n**Aliases**\n{command.aliases}"
                 )
             else:
                 # If the argument given was not a valid command, throw an error.

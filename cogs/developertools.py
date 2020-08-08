@@ -94,56 +94,16 @@ class DeveloperTools(commands.Cog):
         await ctx.send(args)
 
     @commands.command(
-        name="setsetting",
-        brief="Testing the database function.",
-        usage="<string>",
-        hidden=True
-    )
-    @is_developer()
-    async def set_setting(self, ctx, args):
-        """Push a string setting to the database."""
-        query = session.query(UserSettings)
-        to_set = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
-        if to_set is None:
-            to_set = UserSettings(discord_id=ctx.message.author.id, settings_json=args)
-            session.add(to_set)
-        else:
-            to_set.settings_json = args
-        session.commit()
-
-        await ctx.send(f"Setting has been changed to {to_set.settings_json}")
-
-    @commands.command(
-        name="getsetting",
-        brief="Testing the database function.",
+        name="lendb",
+        brief="Check how many entries are in the database.",
         usage="",
         hidden=True
     )
     @is_developer()
-    async def get_setting(self, ctx):
-        """Read setting from database and return as message"""
-        query = session.query(UserSettings)
-        to_get = query.filter(UserSettings.discord_id == ctx.message.author.id).first()
-        if to_get is None:
-            await ctx.send("You have no setting json stored in the database.")
-        else:
-            await ctx.send(to_get.settings_json)
-
-    @commands.command(
-        name="dumpdb",
-        brief="Testing the database function.",
-        usage="",
-        hidden=True
-    )
-    @is_developer()
-    async def dump_db(self, ctx):
-        """Dump contents of database to chat."""
-        string_buffer = ""
+    async def len_db(self, ctx):
+        """Count the number of entries in the database."""
         query = session.query(UserSettings).all()
-        for setting in query:
-            string_buffer += str(setting) + "\n"
-
-        await ctx.send(f"```{string_buffer}```")
+        await ctx.send(f"```{len(query)}```")
 
 
 def setup(client):

@@ -24,7 +24,7 @@ class InviteTools(commands.Cog):
         name="invites",
         aliases=["myinvites"],
         brief="Display your own or a mentioned user's server invites.",
-        usage="@user"
+        usage="[@user]"
     )
     @guild_only()
     async def invites(self, ctx):
