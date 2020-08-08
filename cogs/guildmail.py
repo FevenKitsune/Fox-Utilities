@@ -143,7 +143,7 @@ class GuildMail(commands.Cog):
                          f"Use f.block {ctx.guild.id} if you no longer wish to receive messages from this guild.")
                 em_sent.set_author(name=ctx.guild.name,
                                    icon_url=ctx.guild.icon_url)
-                await ctx.message.author.send(embed=em_sent)
+                await target.send(embed=em_sent)
             except Exception as e:
                 failed_messages.append((target, e))
         return failed_messages
