@@ -34,5 +34,6 @@ async def on_command_error(ctx, error):
         em.set_footer(text=generate_footer(ctx))
         await ctx.send(embed=em)
     except Exception as error:
+        # TODO: THIS IS BAD
         # If there is an issue with sending a message to the error channel, just ignore it.
         pass
