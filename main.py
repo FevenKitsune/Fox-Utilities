@@ -23,7 +23,7 @@ client = commands.Bot(description=bot_description, command_prefix=get_prefix)
 
 # Bot setup and loading
 if __name__ == "__main__":
-    # Remove default help command, this is replaced in coreutilities.
+    # Remove default help command, this is replaced in Core Utilities.
     logging.info("Removing default help command.")
     client.remove_command("help")
 

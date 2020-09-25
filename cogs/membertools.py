@@ -10,6 +10,7 @@ from utility.findbyname import find_by_name
 from config.globals import *
 from utility.generators import generate_footer
 from foxlib.listtools import chunklist
+from foxlib.stringprep import make_renderable
 from db import session, UserSettings
 import json
 
@@ -60,7 +61,7 @@ class MemberTools(commands.Cog):
         chunked_members = chunklist(found_role.members, bot_member_page_size)
 
         em = discord.Embed(
-            title=f":memo: {found_role.name} Member List",
+            title=f":memo: {make_renderable(found_role.name)} Member List",
             color=message_color
         )
         em.set_footer(
@@ -71,7 +72,7 @@ class MemberTools(commands.Cog):
         try:
             for member in chunked_members[page_count - 1]:
                 em.add_field(
-                    name=f":top: {member.top_role}",
+                    name=f":high_brightness: {make_renderable(member.top_role.name)}",
                     value=f"`User`: {member.mention}\n"
                           f"`Tag`: {member.name}#{member.discriminator}"
                 )
