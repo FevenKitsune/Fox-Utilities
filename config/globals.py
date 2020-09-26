@@ -41,9 +41,6 @@ bot_description = "Fox Utilities is a utility bot covering a selection of niche 
 bot_footer_prefix = "Invoked by: "
 bot_member_page_size = 25
 
-# Snipe Dict
-snipe_db = {}  # Active storage for snipes
-
 """ 
 Bot Key
 There are multiple options here, if you don't want to mess around with environment variables, then comment out the 

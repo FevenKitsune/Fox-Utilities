@@ -5,7 +5,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 from utility.checks import *
-from config.globals import snipe_db
+from db.dict import snipe_dict
 from utility.generators import generate_footer
 
 
@@ -22,7 +22,7 @@ class SnipeTools(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         for member in message.mentions:
-            snipe_db.update({
+            snipe_dict.update({
                 f"{member.id}": {
                     f"{message.channel.id}": {
                         "author_id": str(message.author.id),
@@ -44,7 +44,7 @@ class SnipeTools(commands.Cog):
         em.set_footer(text=generate_footer(ctx))
 
         try:
-            grabbed_message = snipe_db[f"{ctx.author.id}"][f"{ctx.channel.id}"]
+            grabbed_message = snipe_dict[f"{ctx.author.id}"][f"{ctx.channel.id}"]
         except Exception:
             em.add_field(
                 name=f"I don't see the last mention...",
