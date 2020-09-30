@@ -6,6 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 import logging
 
+import discord
 from discord.ext import commands
 
 import db
@@ -20,8 +21,12 @@ logger.setLevel(logging.INFO)
 # Ensure database is created and up to date.
 db.create_all()
 
+# Declare system intents.
+intents = discord.Intents()
+intents.members = True
+
 # Create discord.py Bot object.
-client = commands.Bot(description=bot_description, command_prefix=get_prefix)
+client = commands.Bot(description=bot_description, command_prefix=get_prefix, intents=intents)
 
 # Bot setup and loading
 if __name__ == "__main__":
