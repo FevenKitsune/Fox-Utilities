@@ -12,6 +12,7 @@ from discord import Status
 from discord.ext import commands
 
 from config.globals import message_color
+from utils.checks import is_admin
 from db import session, UserSettings
 from utils.findbyname import find_by_name
 from utils.generators import generate_footer, generate_clean_guild_mail
@@ -211,7 +212,7 @@ class GuildMail(commands.Cog):
              "*message*: The remainder of the command should contain the message you wish to send. All text before "
              "this point will be removed from the message."
     )
-    @commands.is_admin()
+    @is_admin()
     @commands.guild_only()
     async def mail_role(self, ctx, *args):
         # Determine list of members who should receive the message.
@@ -251,7 +252,7 @@ class GuildMail(commands.Cog):
              "*message*: The remainder of the command should contain the message you wish to send. All text before "
              "this point will be removed from the message."
     )
-    @commands.is_admin()
+    @is_admin()
     @commands.guild_only()
     async def mail_no_role(self, ctx, *args):
         # Determine list of members who should receive the message.

@@ -13,6 +13,7 @@ import psutil
 from discord.ext import commands
 
 from utils.checks import is_developer
+from config.globals import message_color, extensions
 from utils.generators import generate_footer
 
 
