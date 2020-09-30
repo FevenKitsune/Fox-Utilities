@@ -6,7 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 import discord
 
-from config.globals import *
+from config.globals import error_color
 from utils.generators import generate_footer
 
 

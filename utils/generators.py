@@ -4,7 +4,7 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-from config.globals import *
+from config.globals import developer_id, bot_footer_prefix
 
 
 def generate_footer(ctx):
