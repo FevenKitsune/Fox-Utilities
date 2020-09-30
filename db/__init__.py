@@ -6,7 +6,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 
 from .base import *
 from .engine import *
+from .session import session
 from .usersettings import *
 from .utility import create_all
-from .session import session
 

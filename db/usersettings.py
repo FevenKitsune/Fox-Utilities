@@ -5,6 +5,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 from sqlalchemy import Column, Integer, String
+
 from .base import Base
 
 

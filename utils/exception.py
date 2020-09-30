@@ -5,8 +5,9 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 import discord
+
 from config.globals import *
-from utility.generators import generate_footer
+from utils.generators import generate_footer
 
 
 async def on_command_error(ctx, error):

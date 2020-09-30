@@ -4,6 +4,7 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
+# TODO: This should probably be a JSON file...
 import os
 
 # Globally accessible list of extensions.
@@ -37,7 +38,7 @@ bot_wiki = "https://github.com/FevenKitsune/Fox-Utilities/wiki"
 bot_prefix = "f."  # Default prefix
 testing_bot_prefix = "f!"
 bot_default_status = "with code. | f.help"  # Default status
-bot_description = "Fox Utilities is a utility bot covering a selection of niche functions to assist in server administration."  # Discord.Bot description input
+bot_description = "Fox Utilities is a utils bot covering a selection of niche functions to assist in server administration."  # Discord.Bot description input
 bot_footer_prefix = "Invoked by: "
 bot_member_page_size = 25
 

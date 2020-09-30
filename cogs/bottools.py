@@ -4,8 +4,11 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-from utility.checks import *
-from utility.generators import generate_footer
+import discord
+from discord.ext import commands
+
+from config.globals import message_color, bot_invite, bot_development_server, bot_source, bot_wiki
+from utils.generators import generate_footer
 
 
 class BotTools(commands.Cog):

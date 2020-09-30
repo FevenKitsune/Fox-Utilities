@@ -4,9 +4,12 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-from utility.checks import *
-from utility.generators import generate_footer
+import discord
+from discord.ext import commands
 from discord.ext.commands import guild_only
+
+from config.globals import message_color
+from utils.generators import generate_footer
 
 
 class InviteTools(commands.Cog):

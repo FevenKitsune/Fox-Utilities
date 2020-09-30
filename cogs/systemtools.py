@@ -4,12 +4,16 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-from utility.checks import *
-import psutil
-import sys
 import os
+import sys
+
+import discord
 import git
-from utility.generators import generate_footer
+import psutil
+from discord.ext import commands
+
+from utils.checks import is_developer
+from utils.generators import generate_footer
 
 
 class SystemTools(commands.Cog):

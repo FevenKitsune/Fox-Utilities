@@ -4,15 +4,17 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-from discord.ext.commands import guild_only, dm_only
-from utility.checks import *
-from utility.findbyname import find_by_name
-from config.globals import *
-from utility.generators import generate_footer, generate_clean_guild_mail
-from db import session, UserSettings
 import json
 from typing import List, Tuple
+
+import discord
 from discord import Status
+from discord.ext import commands
+
+from config.globals import message_color
+from db import session, UserSettings
+from utils.findbyname import find_by_name
+from utils.generators import generate_footer, generate_clean_guild_mail
 
 
 class GuildMail(commands.Cog):
@@ -209,8 +211,8 @@ class GuildMail(commands.Cog):
              "*message*: The remainder of the command should contain the message you wish to send. All text before "
              "this point will be removed from the message."
     )
-    @is_admin()
-    @guild_only()
+    @commands.is_admin()
+    @commands.guild_only()
     async def mail_role(self, ctx, *args):
         # Determine list of members who should receive the message.
         targets, role = await self.extract_mail_intent(ctx, args, discord.Role)
@@ -249,8 +251,8 @@ class GuildMail(commands.Cog):
              "*message*: The remainder of the command should contain the message you wish to send. All text before "
              "this point will be removed from the message."
     )
-    @is_admin()
-    @guild_only()
+    @commands.is_admin()
+    @commands.guild_only()
     async def mail_no_role(self, ctx, *args):
         # Determine list of members who should receive the message.
         targets, role = await self.extract_mail_intent(ctx, args, "nr")
@@ -284,7 +286,7 @@ class GuildMail(commands.Cog):
              "**Usage Information**\n"
              "*guild_id*: The ID of the guild you wish to block. This can be found at the bottom of every guild mail."
     )
-    @dm_only()
+    @commands.dm_only()
     async def block_guild_mail(self, ctx, args):
         """Push block settings to database."""
         query = session.query(UserSettings)
@@ -340,7 +342,7 @@ class GuildMail(commands.Cog):
              "**Usage Information**\n"
              "*guild_id*: The ID of the guild you wish to unblock. This can be found using f.blocklist."
     )
-    @dm_only()
+    @commands.dm_only()
     async def unblock_guild_mail(self, ctx, args):
         """Push unblock settings to database."""
         query = session.query(UserSettings)
@@ -389,7 +391,7 @@ class GuildMail(commands.Cog):
         usage="",
         help="The unblockall command can be used to unblock all guilds from sending you guild mail."
     )
-    @dm_only()
+    @commands.dm_only()
     async def unblock_all_guild_mail(self, ctx):
         """Delete all block_list entries from database."""
         query = session.query(UserSettings)
@@ -417,7 +419,7 @@ class GuildMail(commands.Cog):
         usage="",
         help="The blocklist command can be used to see the name and ID of all guild's you've blocked."
     )
-    @dm_only()
+    @commands.dm_only()
     async def block_list_guild_mail(self, ctx):
         """List all block_list entries in database."""
         query = session.query(UserSettings)

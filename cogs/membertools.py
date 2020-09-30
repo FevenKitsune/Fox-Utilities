@@ -4,22 +4,21 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-from discord.ext.commands import guild_only, dm_only
-from utility.checks import *
-from utility.findbyname import find_by_name
-from config.globals import *
-from utility.generators import generate_footer
-from foxlib.listtools import chunklist
-from foxlib.stringprep import make_renderable
-from db import session, UserSettings
-import json
+import discord
+from discord.ext import commands
+
+from config.globals import message_color
+from utils.chunklist import chunklist
+from utils.findbyname import find_by_name
+from utils.generators import generate_footer
+from utils.makerenderable import make_renderable
 
 
 class MemberTools(commands.Cog):
     """
     MemberTools class
 
-    Server administration and utility commands.
+    Server administration and utils commands.
     """
 
     # Constructor
@@ -39,7 +38,7 @@ class MemberTools(commands.Cog):
              "*page #*: Member lists containing more than 25 members will be split between multiple pages. To see "
              "more pages, specify which page number to view."
     )
-    @guild_only()
+    @commands.guild_only()
     async def member_list(self, ctx, *args):
         """Post a formatted list of the members in a given role."""
         if len(args) < 1:

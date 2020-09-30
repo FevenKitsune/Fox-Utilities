@@ -4,12 +4,14 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-from discord.ext import commands
 import logging
+
+from discord.ext import commands
+
 import db
-from config.globals import *
-from utility.prefix import get_prefix
-import utility.exception as exception
+import utils.exception as exception
+from config.globals import bot_description, extensions, bot_key
+from utils.prefix import get_prefix
 
 # Set up logger called "discord". Log level is set to INFO.
 logger = logging.getLogger("discord")

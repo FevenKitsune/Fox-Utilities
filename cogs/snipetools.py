@@ -4,9 +4,12 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-from utility.checks import *
+import discord
+from discord.ext import commands
+
+from config.globals import message_color
 from db.dict import snipe_dict
-from utility.generators import generate_footer
+from utils.generators import generate_footer
 
 
 class SnipeTools(commands.Cog):

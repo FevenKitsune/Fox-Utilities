@@ -5,6 +5,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 import discord
+
 from config.globals import stable_client_id, testing_bot_prefix, testing_client_id, bot_prefix
 
 
