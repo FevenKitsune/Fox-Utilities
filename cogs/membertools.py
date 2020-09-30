@@ -7,7 +7,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 import discord
 from discord.ext import commands
 
-from config.globals import message_color
+from config.globals import message_color, bot_member_page_size
 from utils.chunklist import chunklist
 from utils.findbyname import find_by_name
 from utils.generators import generate_footer
