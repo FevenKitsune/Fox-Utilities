@@ -65,7 +65,7 @@ class BotTools(commands.Cog):
         """Basic call and response command"""
         em = discord.Embed(
             title="Pong!",
-            description="Hello! Everything seems to be operational.",
+            description=f"Discord WebSocket latency: {round(ctx.bot.latency*1000)}ms",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
