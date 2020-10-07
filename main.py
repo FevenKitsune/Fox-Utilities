@@ -4,19 +4,15 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-import logging
 
 import discord
 from discord.ext import commands
 
 import db
 import utils.exception as exception
+from utils.log import logger
 from config.globals import bot_description, extensions, bot_key
 from utils.prefix import get_prefix
-
-# Set up logger called "discord". Log level is set to INFO.
-logger = logging.getLogger("discord")
-logger.setLevel(logging.INFO)
 
 # Ensure database is created and up to date.
 db.create_all()
@@ -31,11 +27,11 @@ client = commands.Bot(description=bot_description, command_prefix=get_prefix, in
 # Bot setup and loading
 if __name__ == "__main__":
     # Remove default help command, this is replaced in Core Utilities.
-    logging.info("Removing default help command.")
+    logger.info("Removing default help command.")
     client.remove_command("help")
 
     # Register exception.py as the exception handler.
-    logging.info("Registering error handler.")
+    logger.info("Registering error handler.")
     client.add_listener(exception.on_command_error)
 
     # External cogs
@@ -52,5 +48,5 @@ if __name__ == "__main__":
             logger.info(f"Loaded extension {extension}")
 
     # Start server.
-    logging.info("Starting client.")
+    logger.info("Starting client.")
     client.run(bot_key)

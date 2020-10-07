@@ -48,7 +48,7 @@ class SnipeTools(commands.Cog):
 
         try:
             grabbed_message = snipe_dict[f"{ctx.author.id}"][f"{ctx.channel.id}"]
-        except Exception:
+        except KeyError:
             em.add_field(
                 name=f"I don't see the last mention...",
                 value=f"Mentions are stored for a limited period of time!"

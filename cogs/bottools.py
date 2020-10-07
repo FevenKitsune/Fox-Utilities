@@ -56,23 +56,6 @@ class BotTools(commands.Cog):
         await ctx.send(embed=em)
 
     @commands.command(
-        name="ping",
-        aliases=["pong"],
-        brief="A simple command to see if the bot is running.",
-        usage=""
-    )
-    async def ping_bot(self, ctx):
-        """Basic call and response command"""
-        em = discord.Embed(
-            title="Pong!",
-            description="Hello! Everything seems to be operational.",
-            color=message_color
-        )
-        em.set_footer(text=generate_footer(ctx))
-
-        await ctx.send(embed=em)
-
-    @commands.command(
         name="invite",
         aliases=["source", "code"],
         brief="Invite this bot to your guild.",

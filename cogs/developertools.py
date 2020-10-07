@@ -110,6 +110,23 @@ class DeveloperTools(commands.Cog):
         query = session.query(UserSettings).all()
         await ctx.send(f"```{len(query)}```")
 
+    @commands.command(
+        name="ping",
+        aliases=["pong"],
+        brief="A simple command to see if the bot is running.",
+        usage=""
+    )
+    async def ping_bot(self, ctx):
+        """Basic call and response command"""
+        em = discord.Embed(
+            title="Pong!",
+            description=f"Discord WebSocket latency: {round(ctx.bot.latency * 1000)}ms",
+            color=message_color
+        )
+        em.set_footer(text=generate_footer(ctx))
+
+        await ctx.send(embed=em)
+
 
 def setup(client):
     """Register class with client object."""
