@@ -4,18 +4,14 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-import logging
 
 from discord.ext import commands
 
 import db
 import utils.exception as exception
+from utils.log import logger
 from config.globals import bot_description, extensions, bot_key
 from utils.prefix import get_prefix
-
-# Set up logger called "discord". Log level is set to INFO.
-logger = logging.getLogger("discord")
-logger.setLevel(logging.INFO)
 
 # Ensure database is created and up to date.
 db.create_all()
