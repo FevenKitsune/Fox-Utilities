@@ -5,6 +5,7 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 import discord
+import logging
 
 from config.globals import error_color
 from utils.generators import generate_footer
@@ -33,7 +34,14 @@ async def on_command_error(ctx, error):
             color=error_color
         )
         em.set_footer(text=generate_footer(ctx))
-        await ctx.send(embed=em)
+        try:
+            await ctx.send(embed=em)
+        except discord.Forbidden:
+            # Was unable to send exception message, ignore.
+            pass
+        except discord.HTTPException as http_exception:
+            # Was unable to send message due to HTTP error.
+            pass
     except Exception as error:
         # TODO: THIS IS BAD
         # If there is an issue with sending a message to the error channel, just ignore it.
