@@ -18,7 +18,7 @@ from utils.prefix import get_prefix
 db.create_all()
 
 # Declare system intents.
-intents = discord.Intents()
+intents = discord.Intents.default()
 intents.members = True
 
 # Create discord.py Bot object.
