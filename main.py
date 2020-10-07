@@ -26,11 +26,11 @@ client = commands.Bot(description=bot_description, command_prefix=get_prefix)
 # Bot setup and loading
 if __name__ == "__main__":
     # Remove default help command, this is replaced in Core Utilities.
-    logging.info("Removing default help command.")
+    logger.info("Removing default help command.")
     client.remove_command("help")
 
     # Register exception.py as the exception handler.
-    logging.info("Registering error handler.")
+    logger.info("Registering error handler.")
     client.add_listener(exception.on_command_error)
 
     # External cogs
@@ -47,5 +47,5 @@ if __name__ == "__main__":
             logger.info(f"Loaded extension {extension}")
 
     # Start server.
-    logging.info("Starting client.")
+    logger.info("Starting client.")
     client.run(bot_key)
