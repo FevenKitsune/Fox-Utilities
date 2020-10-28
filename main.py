@@ -22,7 +22,7 @@ intents = discord.Intents.default()
 intents.members = True
 
 # Create discord.py Bot object.
-client = commands.Bot(description=bot_description, command_prefix=get_prefix, intents=intents)
+client = commands.AutoShardedBot(description=bot_description, command_prefix=get_prefix, intents=intents)
 
 # Bot setup and loading
 if __name__ == "__main__":
