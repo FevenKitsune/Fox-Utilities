@@ -242,7 +242,7 @@ class GuildMail(commands.Cog):
 
     @commands.command(
         name="mailnorole",
-        aliases=["msgnorole", "mnr", "msgnr"],
+        aliases=["msgnorole", "mnr", "msgnr", "mail"],
         brief="Mails all members that have no role.",
         usage="[-f] [-o] message",
         help="The mailnorole command can be used to send a message to all members that have no role.\n\n"
