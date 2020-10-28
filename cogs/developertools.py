@@ -121,7 +121,7 @@ class DeveloperTools(commands.Cog):
         em = discord.Embed(
             title="Pong!",
             description=f"Discord WebSocket latency: {round(ctx.bot.latency * 1000)}ms\n"
-                        f"Shard Count: {len(ctx.bot.shard_ids if ctx.bot.shard_ids is not None else [])}",
+                        f"Shard Count: {len(ctx.bot.shards)}",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
