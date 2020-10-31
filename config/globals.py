@@ -9,18 +9,27 @@ import os
 
 # Globally accessible list of extensions.
 extensions = [
-    "cogs.coretools",
-    "cogs.developertools",
-    "cogs.guildmail",
+
     "cogs.help",
-    "cogs.membertools",
-    "cogs.bottools",
+
+    "cogs.stats.servercount",
+    "cogs.stats.usercount",
+    "cogs.info.invite",
+    "cogs.info.privacy",
+    "cogs.info.report",
+    "cogs.info.tags",
+    "listeners.setdefaultstatus"
+]
+"""
+"cogs.membertools",
     "cogs.invitetools",
     "cogs.systemtools",
     "cogs.snipetools",
-    "cogs.misctools"
-]
-
+    "cogs.misctools",
+    
+"cogs.developertools",
+"cogs.guildmail",
+"""
 # Global variables
 message_color = 0xFFB600  # Color of the message embeds.
 error_color = 0xFF0000  # Color of errors
