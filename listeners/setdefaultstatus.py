@@ -5,17 +5,17 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 from discord import Game
-from discord.ext import commands
+from discord.ext.commands import Cog
 
 from config.globals import bot_default_status
 from main import logger
 
 
-class DefaultStatus(commands.Cog):
+class DefaultStatus(Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.Cog.listener("on_ready")
+    @Cog.listener("on_ready")
     async def set_default_status(self):
         """Executes once the bot has finished starting up."""
         logger.info(f"Setting client presence to: {bot_default_status}")

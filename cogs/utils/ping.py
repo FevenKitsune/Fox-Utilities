@@ -11,23 +11,24 @@ from config.globals import message_color
 from utils.generators import generate_footer
 
 
-class UserCount(Cog):
-    category = "stats"
+class Ping(Cog):
+    category = "utils"
 
     def __init__(self, client):
         self.client = client
 
     @command(
-        name="usercount",
-        aliases=["ucount", "membercount", "mcount", "users", "memcount"],
-        brief="Displays the number of users the bot sees.",
+        name="ping",
+        aliases=["pong"],
+        brief="A simple command to see if the bot is running.",
         usage=""
     )
-    async def user_count(self, ctx):
-        """Counts the number of unique users the bot is connected to."""
+    async def ping_bot(self, ctx):
+        """Basic call and response command"""
         em = Embed(
-            title="User Count",
-            description=f"I can see a total of {len(ctx.bot.users):,} users!",
+            title="Pong!",
+            description=f"Discord WebSocket latency: {round(ctx.bot.latency * 1000)}ms\n"
+                        f"Shard Count: {len(ctx.bot.shards)}",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
@@ -36,4 +37,4 @@ class UserCount(Cog):
 
 
 def setup(client):
-    client.add_cog(UserCount(client))
+    client.add_cog(Ping(client))

@@ -1,29 +1,23 @@
 """
-Fox Utilities > invitetools.py
+Fox Utilities > stats > invites.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-import discord
-from discord.ext import commands
-from discord.ext.commands import guild_only
+from discord import Embed
+from discord.ext.commands import Cog, command, guild_only
 
 from config.globals import message_color
 from utils.generators import generate_footer
 
 
-class InviteTools(commands.Cog):
-    """
-    InviteTools class
+class Invites(Cog):
+    category = "stats"
 
-    Commands for tracking personal server invites.
-    """
-
-    # Constructor
     def __init__(self, client):
         self.client = client
 
-    @commands.command(
+    @command(
         name="invites",
         aliases=["myinvites"],
         brief="Display your own or a mentioned user's server invites.",
@@ -41,7 +35,7 @@ class InviteTools(commands.Cog):
         else:
             user = ctx.message.author
 
-        em = discord.Embed(
+        em = Embed(
             title="**{}\'s Invites**".format(user.name),
             color=message_color
         )
@@ -60,5 +54,4 @@ class InviteTools(commands.Cog):
 
 
 def setup(client):
-    """Register class with client object."""
-    client.add_cog(InviteTools(client))
+    client.add_cog(Invites(client))

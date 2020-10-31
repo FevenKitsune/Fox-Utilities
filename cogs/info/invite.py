@@ -5,19 +5,19 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 from discord import Embed
-from discord.ext import commands
+from discord.ext.commands import Cog, command
 
 from config.globals import message_color, bot_invite, bot_development_server, bot_source, bot_wiki
 from utils.generators import generate_footer
 
 
-class Invite(commands.Cog):
+class Invite(Cog):
     category = "info"
 
     def __init__(self, client):
         self.client = client
 
-    @commands.command(
+    @command(
         name="invite",
         aliases=["source", "code"],
         brief="Invite this bot to your guild.",

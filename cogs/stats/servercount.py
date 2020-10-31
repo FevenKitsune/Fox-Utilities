@@ -5,19 +5,19 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 from discord import Embed
-from discord.ext import commands
+from discord.ext.commands import Cog, command
 
 from config.globals import message_color
 from utils.generators import generate_footer
 
 
-class ServerCount(commands.Cog):
+class ServerCount(Cog):
     category = "stats"
 
     def __init__(self, client):
         self.client = client
 
-    @commands.command(
+    @command(
         name="servercount",
         aliases=["scount", "servers"],
         brief="Displays the number of servers the bot is currently connected to.",

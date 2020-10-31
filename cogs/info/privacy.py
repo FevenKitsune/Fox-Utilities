@@ -5,19 +5,19 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 from discord import Embed
-from discord.ext import commands
+from discord.ext.commands import Cog, command
 
 from config.globals import message_color
 from utils.generators import generate_footer
 
 
-class Privacy(commands.Cog):
+class Privacy(Cog):
     category = "info"
 
     def __init__(self, client):
         self.client = client
 
-    @commands.command(
+    @command(
         name="privacy",
         brief="Information about our bots privacy.",
         usage="",

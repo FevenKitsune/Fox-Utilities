@@ -5,19 +5,19 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 from discord import Embed
-from discord.ext import commands
+from discord.ext.commands import Cog, command
 
 from config.globals import message_color
 from utils.generators import generate_footer
 
 
-class Report(commands.Cog):
+class Report(Cog):
     category = "info"
 
     def __init__(self, client):
         self.client = client
 
-    @commands.command(
+    @command(
         name="report",
         aliases=["bug", "error", "contact"],
         brief="Need to report a bug? Get information on how to do so here.",
