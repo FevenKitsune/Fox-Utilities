@@ -1,11 +1,11 @@
 """
-Fox Utilities > membertools.py
+Fox Utilities > stats > members.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-import discord
-from discord.ext import commands
+from discord import Embed
+from discord.ext.commands import Cog, command, guild_only
 
 from config.globals import message_color, bot_member_page_size
 from utils.chunklist import chunklist
@@ -14,18 +14,13 @@ from utils.generators import generate_footer
 from utils.makerenderable import make_renderable
 
 
-class MemberTools(commands.Cog):
-    """
-    MemberTools class
+class Members(Cog):
+    category = "stats"
 
-    Server administration and utils commands.
-    """
-
-    # Constructor
     def __init__(self, client):
         self.client = client
 
-    @commands.command(
+    @command(
         name="members",
         aliases=["member", "memlist"],
         brief="Lists all members in a mentioned role.",
@@ -38,7 +33,7 @@ class MemberTools(commands.Cog):
              "*page #*: Member lists containing more than 25 members will be split between multiple pages. To see "
              "more pages, specify which page number to view."
     )
-    @commands.guild_only()
+    @guild_only()
     async def member_list(self, ctx, *args):
         """Post a formatted list of the members in a given role."""
         if len(args) < 1:
@@ -59,7 +54,7 @@ class MemberTools(commands.Cog):
         # Generates a list containing n sized chunks of found_role.members
         chunked_members = chunklist(found_role.members, bot_member_page_size)
 
-        em = discord.Embed(
+        em = Embed(
             title=f":memo: {make_renderable(found_role.name)} Member List",
             color=message_color
         )
@@ -87,5 +82,4 @@ class MemberTools(commands.Cog):
 
 
 def setup(client):
-    """Register class with client object."""
-    client.add_cog(MemberTools(client))
+    client.add_cog(Members(client))

@@ -20,6 +20,7 @@ from utils.generators import generate_footer, generate_clean_guild_mail
 
 
 class GuildMail(commands.Cog):
+    category = "guildmail"
     """
     GuildMail class
 

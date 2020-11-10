@@ -1,46 +1,25 @@
 """
-Fox Utilities > misctools.py
+Fox Utilities > stats > usercount.py
 Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-import time
 from random import sample
 
-import discord
-from discord.ext import commands
+from discord import Embed
+from discord.ext.commands import Cog, command
 
 from config.globals import message_color
 from utils.generators import generate_footer
 
 
-class MiscTools(commands.Cog):
-    """
-    MiscTools class
-
-    Miscellaneous commands that don't need their own cog.
-    """
+class Roll(Cog):
+    category = "fun"
 
     def __init__(self, client):
         self.client = client
 
-    @commands.command(
-        name="time",
-        aliases=["epoch"],
-        brief="Returns current UNIX time",
-        usage=""
-    )
-    async def epoch_time(self, ctx):
-        """Get the system time and post it as Unix time."""
-        em = discord.Embed(
-            title=":clock1130: Current Epoch Time",
-            description=f"{time.time():,.2f}s\n\n[What?](https://en.wikipedia.org/wiki/Unix_time)",
-            color=message_color
-        )
-        em.set_footer(text=generate_footer(ctx))
-        await ctx.send(embed=em)
-
-    @commands.command(
+    @command(
         name="roll",
         aliases=["dice"],
         brief="Rolls the specified dice.",
@@ -65,7 +44,7 @@ class MiscTools(commands.Cog):
 
         rolls = sample(range(1, faces + 1), qty)
 
-        em = discord.Embed(
+        em = Embed(
             title=f":game_die: Rolling {qty}d{'{:,}'.format(faces)}...",
             description=f"{', '.join(['{:,}'.format(i) for i in rolls])}\n\nTotal: {'{:,}'.format(sum(rolls))}",
             color=message_color
@@ -75,5 +54,4 @@ class MiscTools(commands.Cog):
 
 
 def setup(client):
-    """Register class with client object."""
-    client.add_cog(MiscTools(client))
+    client.add_cog(Roll(client))

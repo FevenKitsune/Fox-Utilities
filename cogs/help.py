@@ -17,6 +17,7 @@ class Help(commands.Cog):
 
     Generates and outputs the help menu.
     """
+    category = "info"
 
     def __init__(self, client):
         self.client = client
@@ -56,19 +57,27 @@ class Help(commands.Cog):
                 # If the argument given was not a valid command, throw an error.
                 raise UserWarning(f"Command \"{args[0]}\" was not found.")
         else:
+            categories = {}
             for cog in [self.client.get_cog(cog_name) for cog_name in sorted(self.client.cogs)]:
-                # List of formatted strings containing each command.
+                if not hasattr(cog, "category"):
+                    continue
+
+                if cog.category not in categories:
+                    categories[cog.category] = [cog]
+                else:
+                    categories[cog.category].append(cog)
+
+            for key in list(categories):
                 command_list = []
-                # Get each command and figure out how they should be formatted.
-                for command in sorted(cog.walk_commands(), key=lambda key: key.name):
-                    if command.hidden and not (ctx.author.id == developer_id):
-                        pass
-                    # Add formatted string to the list.
-                    command_list.append(
-                        f"{'#' if command.hidden else ''}"
-                        f"`{' '.join((command.name, command.usage)).strip()}` {command.brief}"
-                    )
-                em.add_field(name=cog.qualified_name, value="\n".join(command_list), inline=False)
+                for cog in categories[key]:
+                    for command in cog.walk_commands():
+                        if command.hidden and not (ctx.author.id == developer_id):
+                            continue
+                        command_list.append(
+                            f"{'#' if command.hidden else ''}"
+                            f"`{' '.join((command.name, command.usage)).strip()}` {command.brief}"
+                        )
+                em.add_field(name=key.capitalize(), value="\n".join(command_list), inline=False)
 
         await ctx.author.send(embed=em)
 

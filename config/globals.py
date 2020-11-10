@@ -9,16 +9,27 @@ import os
 
 # Globally accessible list of extensions.
 extensions = [
-    "cogs.coretools",
-    "cogs.developertools",
+    "cogs.config.changebotstatus",
+    "cogs.fun.roll",
+    "cogs.info.invite",
+    "cogs.info.privacy",
+    "cogs.info.report",
+    "cogs.info.systemuptime",
+    "cogs.info.tags",
+    "cogs.stats.invites",
+    "cogs.stats.members",
+    "cogs.stats.servercount",
+    "cogs.stats.usercount",
+    "cogs.system.pull",
+    "cogs.system.reboot",
+    "cogs.system.reload",
+    "cogs.system.stop",
+    "cogs.utils.dbsize",
+    "cogs.utils.ping",
+    "cogs.utils.snipe",
+    "cogs.utils.testexception",
     "cogs.guildmail",
-    "cogs.help",
-    "cogs.membertools",
-    "cogs.bottools",
-    "cogs.invitetools",
-    "cogs.systemtools",
-    "cogs.snipetools",
-    "cogs.misctools"
+    "cogs.help"
 ]
 
 # Global variables
