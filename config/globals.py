@@ -31,16 +31,7 @@ extensions = [
     "cogs.guildmail",
     "cogs.help"
 ]
-"""
-"cogs.membertools",
-    "cogs.invitetools",
-    "cogs.systemtools",
-    "cogs.snipetools",
-    "cogs.misctools",
-    
-"cogs.developertools",
-"cogs.guildmail",
-"""
+
 # Global variables
 message_color = 0xFFB600  # Color of the message embeds.
 error_color = 0xFF0000  # Color of errors
