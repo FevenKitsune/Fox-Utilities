@@ -12,8 +12,9 @@ from discord import Status
 from discord.ext import commands
 
 from config.globals import message_color
-from utils.checks import is_admin
 from db import session, UserSettings
+from utils.checks import is_admin
+from utils.exceptions import GuildBlocked
 from utils.findbyname import find_by_name
 from utils.generators import generate_footer, generate_clean_guild_mail
 
@@ -65,7 +66,8 @@ class GuildMail(commands.Cog):
                 break
         return flags
 
-    async def extract_mail_target(self, ctx: discord.ext.commands.Context, args, target_type) -> Tuple[List[discord.Member], discord.Role]:
+    async def extract_mail_target(self, ctx: discord.ext.commands.Context, args, target_type) -> Tuple[
+        List[discord.Member], discord.Role]:
         """
         Abstracts finding the desired list of recipients by taking a target type and performing the appropriate search.
 
@@ -106,7 +108,8 @@ class GuildMail(commands.Cog):
                     target.append(member)
         return target, role_data
 
-    async def extract_mail_filter(self, ctx: discord.ext.commands.Context, args, target: List[discord.Member]) -> List[discord.Member]:
+    async def extract_mail_filter(self, ctx: discord.ext.commands.Context, args, target: List[discord.Member]) -> List[
+        discord.Member]:
         """
         Searches through a given list of members and picks ones based on arguments extracted from extract_args(args)
 
@@ -136,7 +139,8 @@ class GuildMail(commands.Cog):
 
         return filtered_targets
 
-    async def extract_mail_intent(self, ctx: discord.ext.commands.Context, args, target_type) -> Tuple[List[discord.Member], discord.Role]:
+    async def extract_mail_intent(self, ctx: discord.ext.commands.Context, args, target_type) -> Tuple[
+        List[discord.Member], discord.Role]:
         """
         The interface for target extraction as well as filter handling.
 
@@ -155,7 +159,8 @@ class GuildMail(commands.Cog):
         # Return tuple containing targets and a targeted role if applicable.
         return filtered_targets, role
 
-    async def mail_targets(self, ctx: discord.ext.commands.Context, targets: List[discord.Member], args, no_role=False) -> List[Tuple[discord.Member, Exception]]:
+    async def mail_targets(self, ctx: discord.ext.commands.Context, targets: List[discord.Member], args,
+                           no_role=False) -> List[Tuple[discord.Member, Exception]]:
         """
         Generalized message sender for guild mail. Sends a guild mail to all targets.
 
@@ -180,7 +185,7 @@ class GuildMail(commands.Cog):
                         # Check if guild id is in block list.
                         if ctx.guild.id in json.loads(block_pref.msgrole_block):
                             # If so, raise exception.
-                            raise UserWarning("This user has blocked guild mail.")
+                            raise GuildBlocked("Blocked")
 
                 # Send embedded guild mail.
                 em_sent = discord.Embed(
@@ -232,7 +237,8 @@ class GuildMail(commands.Cog):
         failed_messages_log = []
 
         for member, error in failed_messages:
-            failed_messages_log.append(f"Failed to send message to {member.name}: `{type(error).__name__}: {error}`")
+            failed_messages_log.append(
+                f":negative_squared_cross_mark: {member.name}: `{type(error).__name__}: {error}`")
 
         em.add_field(
             name="Failed Messages:",
