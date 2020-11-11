@@ -77,7 +77,10 @@ class Help(commands.Cog):
                             f"{'#' if command.hidden else ''}"
                             f"`{' '.join((command.name, command.usage)).strip()}` {command.brief}"
                         )
-                em.add_field(name=key.capitalize(), value="\n".join(command_list), inline=False)
+                if command_list:
+                    em.add_field(name=key.capitalize(), value="\n".join(command_list), inline=False)
+                else:
+                    continue
 
         await ctx.author.send(embed=em)
 
