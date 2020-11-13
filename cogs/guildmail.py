@@ -9,7 +9,7 @@ from typing import List, Tuple
 
 import discord
 from discord import Status
-from discord.ext import commands
+from discord.ext.commands import Cog, command, guild_only, dm_only
 
 from config.globals import message_color
 from db import session, UserSettings
@@ -19,7 +19,7 @@ from utils.findbyname import find_by_name
 from utils.generators import generate_footer, generate_clean_guild_mail
 
 
-class GuildMail(commands.Cog):
+class GuildMail(Cog):
     category = "guildmail"
     """
     GuildMail class
@@ -203,7 +203,7 @@ class GuildMail(commands.Cog):
                 failed_messages.append((target, e))
         return failed_messages
 
-    @commands.command(
+    @command(
         name="mailrole",
         aliases=["msgrole", "mr", "msgr"],
         brief="Mails all members of a given role.",
@@ -219,7 +219,7 @@ class GuildMail(commands.Cog):
              "this point will be removed from the message."
     )
     @is_admin()
-    @commands.guild_only()
+    @guild_only()
     async def mail_role(self, ctx, *args):
         # Determine list of members who should receive the message.
         targets, role = await self.extract_mail_intent(ctx, args, discord.Role)
@@ -247,7 +247,7 @@ class GuildMail(commands.Cog):
         # Send success/fail list back to guild.
         await ctx.send(embed=em)
 
-    @commands.command(
+    @command(
         name="mailnorole",
         aliases=["msgnorole", "mnr", "msgnr", "mail"],
         brief="Mails all members that have no role.",
@@ -260,7 +260,7 @@ class GuildMail(commands.Cog):
              "this point will be removed from the message."
     )
     @is_admin()
-    @commands.guild_only()
+    @guild_only()
     async def mail_no_role(self, ctx, *args):
         # Determine list of members who should receive the message.
         targets, role = await self.extract_mail_intent(ctx, args, "nr")
@@ -286,7 +286,7 @@ class GuildMail(commands.Cog):
         # Send success/fail list back to guild.
         await ctx.send(embed=em)
 
-    @commands.command(
+    @command(
         name="block",
         brief="Blocks guild mail from a given guild.",
         usage="guild_id",
@@ -294,7 +294,7 @@ class GuildMail(commands.Cog):
              "**Usage Information**\n"
              "*guild_id*: The ID of the guild you wish to block. This can be found at the bottom of every guild mail."
     )
-    @commands.dm_only()
+    @dm_only()
     async def block_guild_mail(self, ctx, args):
         """Push block settings to database."""
         query = session.query(UserSettings)
@@ -342,7 +342,7 @@ class GuildMail(commands.Cog):
 
         await ctx.send(embed=em)
 
-    @commands.command(
+    @command(
         name="unblock",
         brief="Unblocks guild mail from a given guild.",
         usage="guild_id",
@@ -350,7 +350,7 @@ class GuildMail(commands.Cog):
              "**Usage Information**\n"
              "*guild_id*: The ID of the guild you wish to unblock. This can be found using f.blocklist."
     )
-    @commands.dm_only()
+    @dm_only()
     async def unblock_guild_mail(self, ctx, args):
         """Push unblock settings to database."""
         query = session.query(UserSettings)
@@ -393,13 +393,13 @@ class GuildMail(commands.Cog):
 
         await ctx.send(embed=em)
 
-    @commands.command(
+    @command(
         name="unblockall",
         brief="Erases all entries in server mail block list.",
         usage="",
         help="The unblockall command can be used to unblock all guilds from sending you guild mail."
     )
-    @commands.dm_only()
+    @dm_only()
     async def unblock_all_guild_mail(self, ctx):
         """Delete all block_list entries from database."""
         query = session.query(UserSettings)
@@ -421,13 +421,13 @@ class GuildMail(commands.Cog):
 
         await ctx.send(embed=em)
 
-    @commands.command(
+    @command(
         name="blocklist",
         brief="Lists your current blocks.",
         usage="",
         help="The blocklist command can be used to see the name and ID of all guild's you've blocked."
     )
-    @commands.dm_only()
+    @dm_only()
     async def block_list_guild_mail(self, ctx):
         """List all block_list entries in database."""
         query = session.query(UserSettings)
