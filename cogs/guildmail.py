@@ -202,6 +202,7 @@ class GuildMail(Cog):
                                        icon_url=ctx.guild.icon_url)
                     await target.send(embed=em_sent)
                 else:
+                    # This is a test. Do not actually send messages.
                     if target.id == developer_id:
                         # Send a message only to the developer.
                         em_sent = discord.Embed(
@@ -216,8 +217,6 @@ class GuildMail(Cog):
                         em_sent.set_author(name=ctx.guild.name,
                                            icon_url=ctx.guild.icon_url)
                         await target.send(embed=em_sent)
-                    # This is a test. Do not actually send messages.
-                    pass
             except Exception as e:
                 failed_messages.append((target, e))
         return failed_messages
@@ -249,6 +248,14 @@ class GuildMail(Cog):
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
+        # Add wait field
+        em.add_field(
+            name=":timer: Please wait...",
+            value="Please wait while I send the requested messages..."
+        )
+        awaiting_message = await ctx.send(embed=em)
+        # Once the message is sent, clear the fields and begin processing...
+        em.clear_fields()
 
         # Send mail to determined targets and return a list of tuples containing any errors.
         if self.client.user.id != testing_client_id:
@@ -270,8 +277,8 @@ class GuildMail(Cog):
             name="Failed Messages:",
             value=str_failed_messages
         )
-        # Send success/fail list back to guild.
-        await ctx.send(embed=em)
+        # Edit existing message with success/fail list back to guild.
+        await awaiting_message.edit(embed=em)
 
     @command(
         name="mailnorole",
@@ -290,15 +297,27 @@ class GuildMail(Cog):
     async def mail_no_role(self, ctx, *args):
         # Determine list of members who should receive the message.
         targets, role = await self.extract_mail_intent(ctx, args, "nr")
+
         em = discord.Embed(
             title=":mega: Sending messages...",
             description=f"Sending {len(targets)} requested messages.",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
+        # Add wait field
+        em.add_field(
+            name=":timer: Please wait...",
+            value="Please wait while I send the requested messages..."
+        )
+        awaiting_message = await ctx.send(embed=em)
+        # Once the message is sent, clear the fields and begin processing...
+        em.clear_fields()
 
         # Send mail to determined targets and return a list of tuples containing any errors.
-        failed_messages = await self.mail_targets(ctx, targets, args, no_role=True)
+        if self.client.user.id != testing_client_id:
+            failed_messages = await self.mail_targets(ctx, targets, args, no_role=True)
+        else:
+            failed_messages = await self.mail_targets(ctx, targets, args, no_role=True, test_message=True)
         # List of str for creating a formatted log of failed messages.
         failed_messages_log = []
 
@@ -315,7 +334,7 @@ class GuildMail(Cog):
             value=str_failed_messages
         )
         # Send success/fail list back to guild.
-        await ctx.send(embed=em)
+        await awaiting_message.edit(embed=em)
 
     @command(
         name="block",
