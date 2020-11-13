@@ -53,7 +53,8 @@ class Help(Cog):
                 # Search client for given command. Assign found_command with found value.
                 # found_command will be None if no command is found.
                 em.add_field(
-                    name=f"{'#' if found_command.hidden else ''}`{found_command.cog_name}`\n{found_command.name} {found_command.usage}",
+                    name=f"{'#' if found_command.hidden else ''}`{found_command.cog_name}`"
+                         f"\n{found_command.name} {found_command.usage}",
                     value=f"{found_command.help}\n\n**Aliases**\n{found_command.aliases}"
                 )
             else:

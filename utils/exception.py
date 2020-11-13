@@ -42,5 +42,6 @@ async def on_command_error(ctx, error):
         # Was unable to send message due to HTTP error.
         logger.warn(
             f"{type(http_exception)} when sending an exception message. "
-            f"{http_exception.status}: {http_exception.text}")
+            f"{http_exception.status}: {http_exception.text}"
+        )
         pass

@@ -59,8 +59,7 @@ class Members(Cog):
             color=message_color
         )
         em.set_footer(
-            text=f"Page {page_count}/{str(len(chunked_members))} "
-                 f"| {generate_footer(ctx)}"
+            text=f"Page {page_count}/{str(len(chunked_members))} | {generate_footer(ctx)}"
         )
 
         try:

@@ -41,7 +41,8 @@ class Reload(Cog):
         if len(extensions) == 0:
             em.add_field(
                 name="Oh well.",
-                value="Doesn't look like there are any extensions defined.")
+                value="Doesn't look like there are any extensions defined."
+            )
             await ctx.send(embed=em)
             return
         for extension in extensions:

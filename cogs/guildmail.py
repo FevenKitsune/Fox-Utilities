@@ -66,8 +66,12 @@ class GuildMail(Cog):
                 break
         return flags
 
-    async def extract_mail_target(self, ctx: discord.ext.commands.Context, args, target_type) -> Tuple[
-        List[discord.Member], discord.Role]:
+    async def extract_mail_target(
+            self,
+            ctx: discord.ext.commands.Context,
+            args,
+            target_type
+    ) -> Tuple[List[discord.Member], discord.Role]:
         """
         Abstracts finding the desired list of recipients by taking a target type and performing the appropriate search.
 
@@ -108,8 +112,12 @@ class GuildMail(Cog):
                     target.append(member)
         return target, role_data
 
-    async def extract_mail_filter(self, ctx: discord.ext.commands.Context, args, target: List[discord.Member]) -> List[
-        discord.Member]:
+    async def extract_mail_filter(
+            self,
+            ctx: discord.ext.commands.Context,
+            args,
+            target: List[discord.Member]
+    ) -> List[discord.Member]:
         """
         Searches through a given list of members and picks ones based on arguments extracted from extract_args(args)
 
@@ -139,8 +147,12 @@ class GuildMail(Cog):
 
         return filtered_targets
 
-    async def extract_mail_intent(self, ctx: discord.ext.commands.Context, args, target_type) -> Tuple[
-        List[discord.Member], discord.Role]:
+    async def extract_mail_intent(
+            self,
+            ctx: discord.ext.commands.Context,
+            args,
+            target_type
+    ) -> Tuple[List[discord.Member], discord.Role]:
         """
         The interface for target extraction as well as filter handling.
 
@@ -159,8 +171,14 @@ class GuildMail(Cog):
         # Return tuple containing targets and a targeted role if applicable.
         return filtered_targets, role
 
-    async def mail_targets(self, ctx: discord.ext.commands.Context, targets: List[discord.Member], args,
-                           no_role=False, test_message=False) -> List[Tuple[discord.Member, Exception]]:
+    async def mail_targets(
+            self,
+            ctx: discord.ext.commands.Context,
+            targets: List[discord.Member],
+            args,
+            no_role=False,
+            test_message=False
+    ) -> List[Tuple[discord.Member, Exception]]:
         """
         Generalized message sender for guild mail. Sends a guild mail to all targets.
 
@@ -192,14 +210,20 @@ class GuildMail(Cog):
                     # This is not a test. Send embedded guild mail.
                     em_sent = discord.Embed(
                         title=f"Guild mail from {ctx.message.author.name}",
-                        description=generate_clean_guild_mail(ctx, self.sieve_out_args(args) if not no_role else ''),
+                        description=generate_clean_guild_mail(
+                            ctx,
+                            self.sieve_out_args(args) if not no_role else ''
+                        ),
                         color=message_color
                     )
                     em_sent.set_footer(
                         text=f"Sent from: {ctx.guild.name}\n"
-                             f"Use f.block {ctx.guild.id} if you no longer wish to receive messages from this guild.")
-                    em_sent.set_author(name=ctx.guild.name,
-                                       icon_url=ctx.guild.icon_url)
+                             f"Use f.block {ctx.guild.id} if you no longer wish to receive messages from this guild."
+                    )
+                    em_sent.set_author(
+                        name=ctx.guild.name,
+                        icon_url=ctx.guild.icon_url
+                    )
                     await target.send(embed=em_sent)
                 else:
                     # This is a test. Do not actually send messages.
@@ -207,8 +231,10 @@ class GuildMail(Cog):
                         # Send a message only to the developer.
                         em_sent = discord.Embed(
                             title=f"Guild mail from {ctx.message.author.name}",
-                            description=generate_clean_guild_mail(ctx,
-                                                                  self.sieve_out_args(args) if not no_role else ''),
+                            description=generate_clean_guild_mail(
+                                ctx,
+                                self.sieve_out_args(args) if not no_role else ''
+                            ),
                             color=message_color
                         )
                         em_sent.set_footer(
@@ -323,7 +349,8 @@ class GuildMail(Cog):
 
         for member, error in failed_messages:
             failed_messages_log.append(
-                f":negative_squared_cross_mark: {member.name}: `{type(error).__name__}: {error}`")
+                f":negative_squared_cross_mark: {member.name}: `{type(error).__name__}: {error}`"
+            )
 
         str_failed_messages = '\n'.join(failed_messages_log) if failed_messages_log else "No failed messages detected."
         if len(str_failed_messages) > 1024:
@@ -361,7 +388,10 @@ class GuildMail(Cog):
 
         # If user is not in database, create new entry.
         if to_set is None:
-            to_set = UserSettings(discord_id=ctx.message.author.id, msgrole_block=json.dumps([int(args)]))
+            to_set = UserSettings(
+                discord_id=ctx.message.author.id,
+                msgrole_block=json.dumps([int(args)])
+            )
             session.add(to_set)
             # Load block_list for posting in msg
             block_list = json.loads(to_set.msgrole_block)

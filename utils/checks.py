@@ -15,11 +15,12 @@ def is_admin():
 
     async def predicate(ctx):
         return (
-                ctx.message.channel.permissions_for(
-                    ctx.message.author).administrator
-                # Permissions for dev.
-                or (ctx.author.id == developer_id)
-                or (discord.utils.get(ctx.author.roles, name=str(f"fox:{ctx.command.name}")))
+            # User is a server administrator.
+            ctx.message.channel.permissions_for(ctx.message.author).administrator
+            # User is a developer.
+            or (ctx.author.id == developer_id)
+            # User has a permission tag.
+            or (discord.utils.get(ctx.author.roles, name=str(f"fox:{ctx.command.name}")))
         )
 
     return commands.check(predicate)
