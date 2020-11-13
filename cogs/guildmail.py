@@ -11,7 +11,7 @@ import discord
 from discord import Status
 from discord.ext.commands import Cog, command, guild_only, dm_only
 
-from config.globals import message_color
+from config.globals import message_color, testing_client_id, developer_id
 from db import session, UserSettings
 from utils.checks import is_admin
 from utils.exceptions import GuildBlocked
@@ -160,7 +160,7 @@ class GuildMail(Cog):
         return filtered_targets, role
 
     async def mail_targets(self, ctx: discord.ext.commands.Context, targets: List[discord.Member], args,
-                           no_role=False) -> List[Tuple[discord.Member, Exception]]:
+                           no_role=False, test_message=False) -> List[Tuple[discord.Member, Exception]]:
         """
         Generalized message sender for guild mail. Sends a guild mail to all targets.
 
@@ -169,6 +169,7 @@ class GuildMail(Cog):
         :param args: A list of strings provided by discord.ext.commands.command.
         :param no_role: Bypasses the removal of the role indicator. Otherwise will cause generate_clean_guildmail() to
         begin removing message text.
+        :param test_message: Bypasses sending the final message. Good for testing.
         :return: A list of tuples containing who and why a message failed to send. Returns [] if there were no errors.
         """
         failed_messages = []
@@ -187,18 +188,36 @@ class GuildMail(Cog):
                             # If so, raise exception.
                             raise GuildBlocked("Blocked")
 
-                # Send embedded guild mail.
-                em_sent = discord.Embed(
-                    title=f"Guild mail from {ctx.message.author.name}",
-                    description=generate_clean_guild_mail(ctx, self.sieve_out_args(args) if not no_role else ''),
-                    color=message_color
-                )
-                em_sent.set_footer(
-                    text=f"Sent from: {ctx.guild.name}\n"
-                         f"Use f.block {ctx.guild.id} if you no longer wish to receive messages from this guild.")
-                em_sent.set_author(name=ctx.guild.name,
-                                   icon_url=ctx.guild.icon_url)
-                await target.send(embed=em_sent)
+                if not test_message:
+                    # This is not a test. Send embedded guild mail.
+                    em_sent = discord.Embed(
+                        title=f"Guild mail from {ctx.message.author.name}",
+                        description=generate_clean_guild_mail(ctx, self.sieve_out_args(args) if not no_role else ''),
+                        color=message_color
+                    )
+                    em_sent.set_footer(
+                        text=f"Sent from: {ctx.guild.name}\n"
+                             f"Use f.block {ctx.guild.id} if you no longer wish to receive messages from this guild.")
+                    em_sent.set_author(name=ctx.guild.name,
+                                       icon_url=ctx.guild.icon_url)
+                    await target.send(embed=em_sent)
+                else:
+                    if target.id == developer_id:
+                        # Send a message only to the developer.
+                        em_sent = discord.Embed(
+                            title=f"Guild mail from {ctx.message.author.name}",
+                            description=generate_clean_guild_mail(ctx,
+                                                                  self.sieve_out_args(args) if not no_role else ''),
+                            color=message_color
+                        )
+                        em_sent.set_footer(
+                            text=f"Sent from: {ctx.guild.name}\n"
+                                 f"Use f.block {ctx.guild.id} if you no longer wish to receive messages from this guild.")
+                        em_sent.set_author(name=ctx.guild.name,
+                                           icon_url=ctx.guild.icon_url)
+                        await target.send(embed=em_sent)
+                    # This is a test. Do not actually send messages.
+                    pass
             except Exception as e:
                 failed_messages.append((target, e))
         return failed_messages
@@ -232,7 +251,10 @@ class GuildMail(Cog):
         em.set_footer(text=generate_footer(ctx))
 
         # Send mail to determined targets and return a list of tuples containing any errors.
-        failed_messages = await self.mail_targets(ctx, targets, args)
+        if self.client.user.id != testing_client_id:
+            failed_messages = await self.mail_targets(ctx, targets, args)
+        else:
+            failed_messages = await self.mail_targets(ctx, targets, args, test_message=True)
         # List of str for creating a formatted log of failed messages.
         failed_messages_log = []
 
