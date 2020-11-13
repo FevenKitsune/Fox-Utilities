@@ -5,13 +5,13 @@ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 Intern
 """
 
 import discord
-from discord.ext import commands
+from discord.ext.commands import Cog, command
 
 from config.globals import bot_description, message_color, developer_id
 from utils.generators import generate_footer
 
 
-class Help(commands.Cog):
+class Help(Cog):
     """
     Help class
 
@@ -22,7 +22,7 @@ class Help(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(
+    @command(
         name="help",
         brief="Display this message.",
         usage="[command]",
@@ -48,12 +48,12 @@ class Help(commands.Cog):
         if args and (search := args[0]):
             # If there is an args list, assign variable search with the first value.
             # User is requesting information about a specific command.
-            if command := self.client.get_command(search):
-                # Search client for given command. Assign variable command with found value.
-                # Command will be None if no command is found.
+            if found_command := self.client.get_command(search):
+                # Search client for given command. Assign found_command with found value.
+                # found_command will be None if no command is found.
                 em.add_field(
-                    name=f"{'#' if command.hidden else ''}`{command.cog_name}`\n{command.name} {command.usage}",
-                    value=f"{command.help}\n\n**Aliases**\n{command.aliases}"
+                    name=f"{'#' if found_command.hidden else ''}`{found_command.cog_name}`\n{found_command.name} {found_command.usage}",
+                    value=f"{found_command.help}\n\n**Aliases**\n{found_command.aliases}"
                 )
             else:
                 # Variable command is None. Throw UserWarning.
@@ -82,13 +82,13 @@ class Help(commands.Cog):
                 command_list = []
                 for cog in categories[key]:
                     # With each key, iterate through the cogs in that category and generate the appropriate embed field.
-                    for command in cog.walk_commands():
-                        if command.hidden and not (ctx.author.id == developer_id):
+                    for cog_commands in cog.walk_commands():
+                        if cog_commands.hidden and not (ctx.author.id == developer_id):
                             # Hide Developer commands.
                             continue
                         command_list.append(
-                            f"{'#' if command.hidden else ''}"
-                            f"`{' '.join((command.name, command.usage)).strip()}` {command.brief}"
+                            f"{'#' if cog_commands.hidden else ''}"
+                            f"`{' '.join((cog_commands.name, cog_commands.usage)).strip()}` {cog_commands.brief}"
                         )
                 if command_list:
                     # There are commands in this category the user can access. Show this category.
