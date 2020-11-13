@@ -45,41 +45,56 @@ class Help(commands.Cog):
         )
         em.set_footer(text=generate_footer(ctx))
 
-        # If asking about a specific command, search for that command or its aliases.
-        # Double := because I enjoy making Python programmers angry.
         if args and (search := args[0]):
+            # If there is an args list, assign variable search with the first value.
+            # User is requesting information about a specific command.
             if command := self.client.get_command(search):
+                # Search client for given command. Assign variable command with found value.
+                # Command will be None if no command is found.
                 em.add_field(
                     name=f"{'#' if command.hidden else ''}`{command.cog_name}`\n{command.name} {command.usage}",
                     value=f"{command.help}\n\n**Aliases**\n{command.aliases}"
                 )
             else:
-                # If the argument given was not a valid command, throw an error.
+                # Variable command is None. Throw UserWarning.
                 raise UserWarning(f"Command \"{args[0]}\" was not found.")
         else:
+            # User did not provide a specific command to read about. Generate an overview of available commands.
+            # Dictionary structure that will contain cogs sorted by their class attribute "category"
+            # categories["category_name"] = [list of cogs that belong to that category]
             categories = {}
             for cog in [self.client.get_cog(cog_name) for cog_name in sorted(self.client.cogs)]:
+                # Get discord.ext.commands.Cog object in alphabetical order.
                 if not hasattr(cog, "category"):
+                    # If the Cog object doesn't have a category class attribute, ignore it.
+                    # This is useful for cogs containing only helper functions.
                     continue
 
                 if cog.category not in categories:
+                    # Cog category hasn't been seen before, create new key in categories dictionary.
                     categories[cog.category] = [cog]
                 else:
+                    # Cog category has been seen before, append to existing list in categories dictionary.
                     categories[cog.category].append(cog)
 
             for key in list(categories):
+                # Get each key in the categories dictionary.
                 command_list = []
                 for cog in categories[key]:
+                    # With each key, iterate through the cogs in that category and generate the appropriate embed field.
                     for command in cog.walk_commands():
                         if command.hidden and not (ctx.author.id == developer_id):
+                            # Hide Developer commands.
                             continue
                         command_list.append(
                             f"{'#' if command.hidden else ''}"
                             f"`{' '.join((command.name, command.usage)).strip()}` {command.brief}"
                         )
                 if command_list:
+                    # There are commands in this category the user can access. Show this category.
                     em.add_field(name=key.capitalize(), value="\n".join(command_list), inline=False)
                 else:
+                    # The user has access to none of the commands in this category. Don't add an empty embed.
                     continue
 
         await ctx.author.send(embed=em)
