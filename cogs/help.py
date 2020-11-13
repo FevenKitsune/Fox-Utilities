@@ -4,7 +4,7 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-import discord
+from discord import Embed
 from discord.ext.commands import Cog, command
 
 from config.globals import bot_description, message_color, developer_id
@@ -34,11 +34,12 @@ class Help(Cog):
              "operate it.\n\n"
              "*[argument]*: Arguments marked with [] are optional, and are not required.\n"
              "*argument*: Arguments without [] are required to use the command.\n"
-             "*argument/\"argument\"*: Arguments separated with a slash delineate two ways of stating the same argument."
+             "*argument/\"argument\"*: Arguments separated with a slash delineate two ways of stating the same "
+             "argument."
     )
     async def help(self, ctx, *args):
         """Help menu. Processes the list of available commands into a readable menu."""
-        em = discord.Embed(
+        em = Embed(
             title="Fox Utilities Help Guide",
             description=bot_description,
             color=message_color
