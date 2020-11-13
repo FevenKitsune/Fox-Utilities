@@ -240,9 +240,13 @@ class GuildMail(Cog):
             failed_messages_log.append(
                 f":negative_squared_cross_mark: {member.name}: `{type(error).__name__}: {error}`")
 
+        str_failed_messages = '\n'.join(failed_messages_log) if failed_messages_log else "No failed messages detected."
+        if len(str_failed_messages) > 1024:
+            str_failed_messages = f":negative_squared_cross_mark: Failed to send messages to " \
+                                  f"{len(failed_messages_log)} members."
         em.add_field(
             name="Failed Messages:",
-            value='\n'.join(failed_messages_log) if failed_messages_log else "No failed messages detected."
+            value=str_failed_messages
         )
         # Send success/fail list back to guild.
         await ctx.send(embed=em)
@@ -277,11 +281,16 @@ class GuildMail(Cog):
         failed_messages_log = []
 
         for member, error in failed_messages:
-            failed_messages_log.append(f"Failed to send message to {member.name}: `{type(error).__name__}: {error}`")
+            failed_messages_log.append(
+                f":negative_squared_cross_mark: {member.name}: `{type(error).__name__}: {error}`")
 
+        str_failed_messages = '\n'.join(failed_messages_log) if failed_messages_log else "No failed messages detected."
+        if len(str_failed_messages) > 1024:
+            str_failed_messages = f":negative_squared_cross_mark: Failed to send messages to " \
+                                  f"{len(failed_messages_log)} members."
         em.add_field(
             name="Failed Messages:",
-            value='\n'.join(failed_messages_log) if failed_messages_log else "No failed messages detected."
+            value=str_failed_messages
         )
         # Send success/fail list back to guild.
         await ctx.send(embed=em)
