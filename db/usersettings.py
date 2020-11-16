@@ -4,7 +4,7 @@ Author: Feven Kitsune <fevenkitsune@gmail.com>
 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 """
 
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, JSON
 
 from .base import Base
 
@@ -15,5 +15,4 @@ class UserSettings(Base):
 
     id = Column(Integer, primary_key=True)
     discord_id = Column(Integer, index=True)
-    msgrole_block = Column(String)  # TODO: Migrate this to JSON type
-    settings_json = Column(String)
+    data = Column(JSON)
