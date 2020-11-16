@@ -218,7 +218,8 @@ class GuildMail(Cog):
                     )
                     em_sent.set_footer(
                         text=f"Sent from: {ctx.guild.name}\n"
-                             f"Use f.block {ctx.guild.id} if you no longer wish to receive messages from this guild."
+                             f"Use f.block {ctx.guild.id} if you no longer wish to receive messages from this guild.\n"
+                             f"Guild Mail will be removed from Fox Utilities 11/17 @ 12:00PM EST"
                     )
                     em_sent.set_author(
                         name=ctx.guild.name,
@@ -239,7 +240,8 @@ class GuildMail(Cog):
                         )
                         em_sent.set_footer(
                             text=f"Sent from: {ctx.guild.name}\n"
-                                 f"Use f.block {ctx.guild.id} if you no longer wish to receive messages from this guild."
+                                 f"Use f.block {ctx.guild.id} if you no longer wish to receive messages from this guild.\n"
+                                 f"Guild Mail will be removed from Fox Utilities 11/17 @ 12:00PM EST"
                         )
                         em_sent.set_author(
                             name=ctx.guild.name,
@@ -276,7 +278,7 @@ class GuildMail(Cog):
             description=f"Sending {len(targets)} requested messages to {role.mention}",
             color=message_color
         )
-        em.set_footer(text=generate_footer(ctx))
+        em.set_footer(text=generate_footer(ctx) + "\nGuild Mail will be removed from Fox Utilities 11/17 @ 12:00PM EST")
         # Add wait field
         em.add_field(
             name=":timer: Please wait...",
@@ -332,7 +334,7 @@ class GuildMail(Cog):
             description=f"Sending {len(targets)} requested messages.",
             color=message_color
         )
-        em.set_footer(text=generate_footer(ctx))
+        em.set_footer(text=generate_footer(ctx) + "\nGuild Mail will be removed from Fox Utilities 11/17 @ 12:00PM EST")
         # Add wait field
         em.add_field(
             name=":timer: Please wait...",
