@@ -28,7 +28,6 @@ extensions = [
     "cogs.utils.ping",
     "cogs.utils.snipe",
     "cogs.utils.testexception",
-    "cogs.guildmail",
     "cogs.help"
 ]
 
