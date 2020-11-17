@@ -29,7 +29,9 @@ def build_conflicting_scores_string(conflicting_scores):
     return string_builder
 
 
-async def find_by_name(name, search_in):
+async def find_by_name(name: str, search_in):
+    # TODO: Generalize with a data pre-processor for different data types.
+    #  Add a preprocessor for List[discord.Role], List[discord.Member], or simply List[str]
     """Performs a fuzzy search with unicode-font conversions."""
     found_name = extract(normalize("NFKC", name), [normalize("NFKC", item.name) for item in search_in])
     found_items = [[find(lambda m: normalize("NFKC", m.name) == found[0], search_in), found[1]] for found in found_name]

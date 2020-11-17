@@ -11,6 +11,7 @@ import os
 extensions = [
     "cogs.config.changebotstatus",
     "cogs.fun.roll",
+    "cogs.info.guildmailremoved",
     "cogs.info.invite",
     "cogs.info.privacy",
     "cogs.info.report",
