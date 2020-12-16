@@ -36,7 +36,7 @@ class Invites(Cog):
             user = ctx.message.author
 
         em = Embed(
-            title="**{}\'s Invites**".format(user.name),
+            title=f"{user.name}'s Invites",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
@@ -46,8 +46,9 @@ class Invites(Cog):
             if inv.inviter == user:
                 time_formatter = "%b %-d, %Y at %-l:%M%p"
                 em.add_field(
-                    name="Invite code: ####{}".format(str(inv.code)[4:]),
-                    value=f"Uses: {inv.uses}\nCreated at: {inv.created_at.strftime(time_formatter)}"
+                    name=f"Invite code: ####{str(inv.code)[4:]}",
+                    value=f"`Uses` {inv.uses}\n"
+                          f"`Created at` {inv.created_at.strftime(time_formatter)}"
                 )
 
         await ctx.send(embed=em)

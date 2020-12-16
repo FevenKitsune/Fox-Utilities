@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 RUN mkdir db
 
 # Set database location for Docker
-ENV FU_DB=/usr/src/app/db/db.db
+ENV FOXDB=/usr/src/app/db/db.db
 
 # Download latest version of Fox-Utilities
 RUN git clone https://github.com/FevenKitsune/Fox-Utilities.git

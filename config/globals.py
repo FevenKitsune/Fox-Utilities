@@ -10,23 +10,18 @@ import os
 # Globally accessible list of extensions.
 extensions = [
     "cogs.config.changebotstatus",
-    "cogs.fun.roll",
     "cogs.info.guildmailremoved",
     "cogs.info.invite",
     "cogs.info.privacy",
     "cogs.info.report",
-    "cogs.info.systemuptime",
     "cogs.info.tags",
     "cogs.stats.invites",
     "cogs.stats.members",
-    "cogs.stats.servercount",
-    "cogs.stats.usercount",
+    "cogs.stats.stats",
     "cogs.system.pull",
     "cogs.system.reboot",
     "cogs.system.reload",
     "cogs.system.stop",
-    "cogs.utils.dbsize",
-    "cogs.utils.ping",
     "cogs.utils.snipe",
     "cogs.utils.testexception",
     "cogs.help"
@@ -59,5 +54,5 @@ There are multiple options here, if you don't want to mess around with environme
 Environment Variable option and uncomment the key option. Make sure you keep your key safe! The developer will never
 ask for your key.
 """
-bot_key = os.environ['FU_KEY']  # Environment Variable option
+bot_key = os.environ['FOXKEY']  # Environment Variable option
 # bot_key = "KEY_HERE"

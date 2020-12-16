@@ -66,8 +66,8 @@ class Members(Cog):
             for member in chunked_members[page_count - 1]:
                 em.add_field(
                     name=f":high_brightness: {make_renderable(member.top_role.name)}",
-                    value=f"`User`: {member.mention}\n"
-                          f"`Tag`: {member.name}#{member.discriminator}"
+                    value=f"`User` {member.mention}\n"
+                          f"`Tag` {member.name}#{member.discriminator}"
                 )
         except IndexError:
             # Find cause of IndexError
