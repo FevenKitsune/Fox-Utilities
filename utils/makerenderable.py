@@ -1,10 +1,3 @@
-"""
-foxlib > makerenderable.py
-Author: Feven Kitsune <fevenkitsune@gmail.com>
-This work is licensed under a This work is licensed under a Creative Commons Attribution 4.0 International License.
-"""
-
-
 def make_renderable(data: str) -> str:
     """
     Modify a given string to allow it to display in Discord.

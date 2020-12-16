@@ -1,16 +1,3 @@
-"""
-Fox Utilities > listeners > setdefaultstatus.py
-Author: Feven Kitsune <fevenkitsune@gmail.com>
-This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-"""
-
-from discord import Game
-from discord.ext.commands import Cog
-
-from config.globals import bot_default_status
-from utils.log import logger
-
-
 class DefaultStatus(Cog):
     def __init__(self, client):
         self.client = client
