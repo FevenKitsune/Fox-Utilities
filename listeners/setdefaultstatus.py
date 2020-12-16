@@ -15,7 +15,7 @@ class DefaultStatus(Cog):
     def __init__(self, client):
         self.client = client
 
-    @Cog.listener("on_ready")
+    @Cog.listener("on_connect")
     async def set_default_status(self):
         """Executes once the bot has finished starting up."""
         logger.info(f"Setting client presence to: {bot_default_status}")
