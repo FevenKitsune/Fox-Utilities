@@ -25,7 +25,7 @@ class ChangeBotStatus(Cog):
     @is_developer()
     async def change_status(self, ctx, args):
         """Change the game status of the bot."""
-        await ctx.bot.change_presence(activity=Game(args))
+        await self.client.change_presence(activity=Game(args))
         await ctx.send(args)
 
 

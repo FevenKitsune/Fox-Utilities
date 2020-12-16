@@ -24,7 +24,9 @@ extensions = [
     "cogs.system.stop",
     "cogs.utils.snipe",
     "cogs.utils.testexception",
-    "cogs.help"
+    "cogs.help",
+    "listeners.capturesnipe",
+    "listeners.setdefaultstatus"
 ]
 
 # Global variables
