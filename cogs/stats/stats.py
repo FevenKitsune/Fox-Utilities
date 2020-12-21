@@ -18,8 +18,8 @@ class Stats(Cog):
 
     @command(
         name="stats",
-        # aliases=["bot_stats", "servercount", "scount", "servers", "usercount", "ucount", "membercount", "mcount",
-        #         "users", "memcount", "ping", "pong", "system_uptime", "suptime", "uptime"],
+        aliases=["bot_stats", "servercount", "scount", "servers", "usercount", "ucount", "membercount", "mcount",
+                 "users", "memcount", "ping", "pong", "system_uptime", "suptime", "uptime"],
         brief="Display full application statistics and diagnostics.",
         usage=""
     )
