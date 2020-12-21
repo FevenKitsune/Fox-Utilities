@@ -1,3 +1,10 @@
+from discord import Game
+from discord.ext.commands import Cog
+
+from config.globals import bot_default_status
+from utils.log import logger
+
+
 class DefaultStatus(Cog):
     def __init__(self, client):
         self.client = client
