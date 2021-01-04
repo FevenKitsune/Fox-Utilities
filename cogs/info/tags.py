@@ -13,16 +13,18 @@ class Tags(Cog):
 
     @command(
         name="tags",
-        brief="Information about bot-permission tags.",
+        brief="Information about permission tags.",
         usage="",
-        help="The tags command can be used to get information on role-assigned permissions."
+        help="Returns information on how to use the Fox Utilities permission tags to give any user access to "
+             "commands that require administrator permissions."
     )
     async def tags(self, ctx):
         """Gives the user information on permission tags, which allow non-admins to access admin commands."""
         em = Embed(
             title="Fox Utilities Permission Tags",
-            description="Create a role with the syntax `fox:name_of_command` to give them "
-                        "permission to access that command! Will work with any admin command!",
+            description="Create a server role with the syntax `fox:name_of_command`. Assign any user to this role to "
+                        "give them access to the named command. This will work with any command that requires "
+                        "administrator permissions to access.",
             color=message_color)
         em.set_footer(text=generate_footer(ctx))
 

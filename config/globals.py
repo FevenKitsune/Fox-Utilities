@@ -6,6 +6,7 @@ extensions = [
     "cogs.config.changebotstatus",
     "cogs.info.guildmailremoved",
     "cogs.info.invite",
+    "cogs.info.prefix",
     "cogs.info.privacy",
     "cogs.info.report",
     "cogs.info.tags",
