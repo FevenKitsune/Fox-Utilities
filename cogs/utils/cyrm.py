@@ -16,7 +16,15 @@ class CYRM(Cog):
         name="cyrm",
         brief="A debugging command that verifies the bot has permission to send and receive in a given channel.",
         usage="",
-        help=""
+        help="Can You Read Me?\n"
+             "A debugging command that runs through a series of tests to check if the bot can send and receive in the "
+             "invoked command.\n\n"
+             "Possible responses:\n"
+             "No response: Cannot see the command, or failed to perform the other responses.\n"
+             "Response in invoked channel: Everything is working well!\n"
+             "Response via Direct Message: Unable to send messages in invoked channel but able to DM message author.\n"
+             "Reaction :fox: :sos:: Unable to send messages in invoked channel, and unable to DM message author. Able "
+             "to see and react to messages."
     )
     @guild_only()
     async def cyrm(self, ctx):
