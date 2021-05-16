@@ -17,6 +17,7 @@ extensions = [
     "cogs.system.reboot",
     "cogs.system.reload",
     "cogs.system.stop",
+    "cogs.utils.cyrm",
     "cogs.utils.snipe",
     "cogs.utils.testexception",
     "cogs.help",
