@@ -34,7 +34,7 @@ async def on_command_error(ctx, error):
         pass
     except discord.HTTPException as http_exception:
         # Was unable to send message due to HTTP error.
-        logging.warn(
+        logging.warning(
             f"{type(http_exception)} when sending an exception message. "
             f"{http_exception.status}: {http_exception.text}"
         )
