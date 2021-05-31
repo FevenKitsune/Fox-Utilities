@@ -3,7 +3,7 @@ from discord.ext.commands import Cog, command, guild_only
 
 from config.globals import message_color, error_color
 from utils.generators import generate_footer
-from utils.log import logger
+import logging
 
 
 class CYRM(Cog):

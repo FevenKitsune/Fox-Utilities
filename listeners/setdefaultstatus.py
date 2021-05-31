@@ -2,7 +2,7 @@ from discord import Game
 from discord.ext.commands import Cog
 
 from config.globals import bot_default_status
-from utils.log import logger
+import logging
 
 
 class DefaultStatus(Cog):
@@ -12,10 +12,10 @@ class DefaultStatus(Cog):
     @Cog.listener("on_connect")
     async def set_default_status(self):
         """Executes once the bot has finished starting up."""
-        logger.info(f"Setting client presence to: {bot_default_status}")
+        logging.info(f"Setting client presence to: {bot_default_status}")
         # Set the bot status
         await self.client.change_presence(activity=Game(bot_default_status))
-        logger.info("Default status has been set.")
+        logging.info("Default status has been set.")
 
 
 def setup(client):

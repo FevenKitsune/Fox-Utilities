@@ -6,9 +6,9 @@ from discord.ext.commands import Cog, command
 from psutil import boot_time, virtual_memory, cpu_count, getloadavg
 
 from config.globals import message_color
-from db import session, UserSettings
 from utils.generators import generate_footer
 
+import logging
 
 class Stats(Cog):
     category = "stats"
@@ -24,7 +24,9 @@ class Stats(Cog):
         usage=""
     )
     async def stats(self, ctx):
+        logging.info("Hello!")
         """Posts a full application statistics page"""
+
         em = Embed(
             title="Application Statistics",
             color=message_color
@@ -35,9 +37,6 @@ class Stats(Cog):
 
         # Collect memory statistics
         memory = virtual_memory()
-
-        # Count the number of entries in the database.
-        query = session.query(UserSettings).all()
 
         em.add_field(
             name=":desktop: System Information",
@@ -55,12 +54,6 @@ class Stats(Cog):
                   f"`Shards` {len(self.client.shards)}\n"
                   f"`Users` {len(self.client.users):,}\n"
                   f"`Guilds` {len(self.client.guilds):,}",
-            inline=False
-        )
-
-        em.add_field(
-            name=":books: SQLAlchemy Information",
-            value=f"`Database Size` {len(query)}",
             inline=False
         )
 

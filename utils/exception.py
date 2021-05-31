@@ -1,5 +1,5 @@
 import discord
-from utils.log import logger
+import logging
 
 from config.globals import error_color
 from utils.generators import generate_footer
@@ -34,7 +34,7 @@ async def on_command_error(ctx, error):
         pass
     except discord.HTTPException as http_exception:
         # Was unable to send message due to HTTP error.
-        logger.warn(
+        logging.warn(
             f"{type(http_exception)} when sending an exception message. "
             f"{http_exception.status}: {http_exception.text}"
         )
