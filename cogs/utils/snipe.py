@@ -2,8 +2,8 @@ from discord import Embed
 from discord.ext.commands import Cog, command
 
 from config.globals import message_color
-from db.dict import snipe_dict
 from utils.generators import generate_footer
+from db.dictionaries import snipe_dictionary
 
 
 class Snipe(Cog):
@@ -25,7 +25,7 @@ class Snipe(Cog):
         em.set_footer(text=generate_footer(ctx))
 
         try:
-            grabbed_message = snipe_dict[f"{ctx.author.id}"][f"{ctx.channel.id}"]
+            grabbed_message = snipe_dictionary[f"{ctx.author.id}"][f"{ctx.channel.id}"]
         except KeyError:
             em.add_field(
                 name=f"I don't see the last mention...",

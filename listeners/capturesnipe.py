@@ -1,6 +1,5 @@
 from discord.ext.commands import Cog
-
-from db.dict import snipe_dict
+from db.dictionaries import snipe_dictionary
 
 
 class CaptureSnipe(Cog):
@@ -10,7 +9,7 @@ class CaptureSnipe(Cog):
     @Cog.listener("on_message")
     async def capture_snipe(self, message):
         for member in message.mentions:
-            snipe_dict.update({
+            snipe_dictionary.update({
                 f"{member.id}": {
                     f"{message.channel.id}": {
                         "author_id": str(message.author.id),
