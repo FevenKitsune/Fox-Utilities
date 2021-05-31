@@ -57,6 +57,7 @@ class Members(Cog):
         )
 
         try:
+            # Grabs the list of members in the given index and generates embed fields.
             for member in chunked_members[page_count - 1]:
                 em.add_field(
                     name=f":high_brightness: {make_renderable(member.top_role.name)}",
