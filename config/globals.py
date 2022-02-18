@@ -4,7 +4,7 @@ import os
 # Globally accessible list of extensions.
 extensions = [
     "cogs.config.changebotstatus",
-    "cogs.info.invite",
+    "cogs.info.about",
     "cogs.info.privacy",
     "cogs.info.report",
     "cogs.info.tags",
@@ -29,7 +29,6 @@ stable_client_id = 476166340328161280
 testing_client_id = 728052111593570304
 
 # Bot Links
-bot_invite = "https://discordapp.com/api/oauth2/authorize?client_id=476166340328161280&permissions=8&scope=bot"
 bot_development_server = "https://discord.gg/ZVJasmz"
 bot_source = "https://github.com/FevenKitsune/Fox-Utilities"
 bot_wiki = "https://github.com/FevenKitsune/Fox-Utilities/wiki"
