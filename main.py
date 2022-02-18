@@ -7,7 +7,7 @@ from config.globals import bot_description, extensions, bot_key
 from utils.prefix import get_prefix
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 # Declare system intents.
 intents = discord.Intents.default()
