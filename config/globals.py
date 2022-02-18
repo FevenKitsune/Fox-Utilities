@@ -16,10 +16,8 @@ extensions = [
     "cogs.system.reload",
     "cogs.system.stop",
     "cogs.utils.cyrm",
-    "cogs.utils.snipe",
     "cogs.utils.testexception",
     "cogs.help",
-    "listeners.capturesnipe",
     "listeners.setdefaultstatus"
 ]
 
