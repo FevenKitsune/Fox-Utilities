@@ -18,7 +18,11 @@ class Invites(Cog):
         guild_ids=[developer_guild_id]
     )
     @guild_only()
-    async def invites(self, ctx, user: Option(discord.User, description="Optional user to look up.", required=False)):
+    async def invites(
+            self,
+            ctx: discord.ApplicationContext,
+            user: Option(discord.User, description="Optional user to look up.", required=False)
+    ):
         """Get a list of invite codes and the number of uses for a given user."""
         # If no one was mentioned, assume author is target.
         if not user:

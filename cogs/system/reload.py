@@ -1,3 +1,4 @@
+import discord
 from discord import Embed
 from discord.ext.commands import Cog, slash_command
 
@@ -18,7 +19,10 @@ class Reload(Cog):
         guild_ids=[developer_guild_id]
     )
     @is_developer()
-    async def reload(self, ctx):
+    async def reload(
+            self,
+            ctx: discord.ApplicationContext
+    ):
         """Unload all discord.py cogs and load them back. Easier than a full reboot."""
         em = Embed(
             title="System Reload",
