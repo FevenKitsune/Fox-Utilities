@@ -28,6 +28,7 @@ extensions = [
 message_color = 0xFFB600  # Color of the message embeds.
 error_color = 0xFF0000  # Color of errors
 developer_id = 276531286443556865  # ID of the developer (FevenKitsune)
+developer_guild_id = 385059238231408651
 stable_client_id = 476166340328161280
 testing_client_id = 728052111593570304
 
