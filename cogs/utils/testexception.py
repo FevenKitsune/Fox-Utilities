@@ -1,4 +1,4 @@
-from discord.ext.commands import Cog, command
+from discord.ext.commands import Cog, slash_command
 
 
 class TestException(Cog):
@@ -7,10 +7,9 @@ class TestException(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="except",
-        brief="Throw a test error. Used to test the exception handler.",
-        usage=""
+        description="Throw a test error. Used to test the exception handler."
     )
     async def test_exception(self, ctx):
         """Throw an exception to test the exception functions"""
