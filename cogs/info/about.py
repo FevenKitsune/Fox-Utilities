@@ -2,7 +2,7 @@ import discord
 from discord import Embed
 from discord.ext.commands import Cog, slash_command
 
-from config.globals import message_color, bot_development_server, bot_source, bot_wiki
+from config.globals import message_color, bot_development_server, bot_source, bot_wiki, developer_guild_id
 from utils.generators import generate_footer
 
 
@@ -15,6 +15,7 @@ class About(Cog):
     @slash_command(
         name="about",
         description="Information about this bot.",
+        guild_ids=[developer_guild_id]
     )
     async def about_bot(
             self,
