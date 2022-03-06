@@ -37,7 +37,7 @@ bot_wiki = "https://github.com/FevenKitsune/Fox-Utilities/wiki"
 bot_default_status = "with code."  # Default status
 bot_description = "Fox Utilities is a utils bot covering a selection of niche functions to assist in server administration."  # Discord.Bot description input
 bot_footer_prefix = "Invoked by: "
-bot_member_page_size = 25
+bot_member_page_size = 21
 
 """ 
 Bot Key
