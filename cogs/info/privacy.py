@@ -1,7 +1,7 @@
 from discord import Embed
-from discord.ext.commands import Cog, command
+from discord.ext.commands import Cog, slash_command
 
-from config.globals import message_color
+from config.globals import message_color, developer_guild_id, bot_development_server
 from utils.generators import generate_footer
 
 
@@ -11,11 +11,10 @@ class Privacy(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="privacy",
-        brief="Information about our bots privacy.",
-        usage="",
-        help="The privacy command can be used to get information on how we store and process user data."
+        description="Information about our bots privacy.",
+        guild_ids=[developer_guild_id]
     )
     async def privacy_information(self, ctx):
         """Sends information on what data this bot collects and how we use it."""
@@ -50,7 +49,7 @@ class Privacy(Cog):
             value="Feel free to ask questions in the Development Server!"
         )
 
-        await ctx.author.send(embed=em)
+        await ctx.respond(embed=em)
 
 
 def setup(client):
