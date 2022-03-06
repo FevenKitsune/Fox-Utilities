@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     # Register exception.py as the exception handler.
     logging.info("Registering error handler.")
-    client.add_listener(exception.on_command_error)
+    client.add_listener(exception.on_application_command_error)
 
     # External cogs
     for extension in extensions:
