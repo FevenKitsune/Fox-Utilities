@@ -11,6 +11,22 @@ from utils.generators import generate_footer
 from utils.makerenderable import make_renderable
 
 
+def match_emoji(status: discord.Status) -> str:
+    match status:
+        case discord.Status.online:
+            return ":green_circle:"
+        case discord.Status.offline:
+            return ":black_circle:"
+        case discord.Status.idle:
+            return ":yellow_circle:"
+        case discord.Status.dnd:
+            return ":red_circle:"
+        case discord.Status.streaming:
+            return ":purple_circle:"
+        case _:
+            return ":question:"
+
+
 class Members(Cog):
     category = "stats"
 
