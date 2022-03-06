@@ -5,7 +5,7 @@ from config.globals import error_color
 from utils.generators import generate_footer
 
 
-async def on_command_error(ctx, error):
+async def on_application_command_error(ctx, error):
     """Error handler, parses how message author should be notified about an error."""
     # If CommandNotFound, fail silently
     if isinstance(error, discord.ext.commands.CommandNotFound):
@@ -28,7 +28,8 @@ async def on_command_error(ctx, error):
     )
     em.set_footer(text=generate_footer(ctx))
     try:
-        await ctx.send(embed=em)
+        logging.info(f"The following error was posted to a guild:\n{exc}")
+        await ctx.respond(embed=em)
     except discord.Forbidden:
         # Was unable to send exception message, ignore.
         pass
