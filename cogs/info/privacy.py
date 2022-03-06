@@ -34,9 +34,7 @@ class Privacy(Cog):
 
         em.add_field(
             name="Data Persistence",
-            value="Snipe tool data: the contents of your last mention is stored in "
-                  "memory, meaning it is wiped as soon as the bot stops running.\n"
-                  "User preferences: the user ID and guild ID (where applicable) is stored in a local database."
+            value="This bot currently does not contain any persistent data storage (databases, log files, etc)."
         )
 
         em.add_field(
@@ -46,7 +44,7 @@ class Privacy(Cog):
 
         em.add_field(
             name="Questions?",
-            value="Feel free to ask questions in the Development Server!"
+            value=f"Feel free to ask questions in the [development server]({bot_development_server})!"
         )
 
         await ctx.respond(embed=em)
