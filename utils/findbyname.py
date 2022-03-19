@@ -2,6 +2,7 @@ from unicodedata import normalize
 
 from discord.utils import find
 from fuzzywuzzy.process import extract
+from collections.abc import Iterable
 
 
 def extract_conflicting_scores(extract_list):
@@ -18,17 +19,15 @@ def build_conflicting_scores_string(conflicting_scores):
     """Builds a printable string from a conflicting scores list"""
     string_builder = ""
     for i in conflicting_scores:
-        string_builder += f"\n\"{i[0].name}\" match score: {i[1]}"
+        string_builder += f"\n\"{i[0]}\" match score: {i[1]}"
 
     return string_builder
 
 
-async def find_by_name(name: str, search_in):
-    # TODO: Generalize with a data pre-processor for different data types.
-    #  Add a preprocessor for List[discord.Role], List[discord.Member], or simply List[str]
+def find_by_name(term: str, search_in: Iterable[str]):
     """Performs a fuzzy search with unicode-font conversions."""
-    found_name = extract(normalize("NFKC", name), [normalize("NFKC", item.name) for item in search_in])
-    found_items = [[find(lambda m: normalize("NFKC", m.name) == found[0], search_in), found[1]] for found in found_name]
+    found_name = extract(normalize("NFKC", term), [normalize("NFKC", item) for item in search_in])
+    found_items = [[find(lambda m: normalize("NFKC", m) == found[0], search_in), found[1]] for found in found_name]
 
     # Check for match conflicts
     if (
