@@ -42,7 +42,7 @@ class Members(Cog):
     async def member_list(
             self,
             ctx: discord.ApplicationContext,
-            role: Option(discord.Role, description="Role to grab members from.")
+            role: Option(discord.Role, description="Role to grab members from.", required=True)
     ):
         """Post a formatted list of the members in a given role."""
         # Generates a list containing n sized chunks of found_role.members

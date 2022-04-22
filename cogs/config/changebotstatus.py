@@ -1,7 +1,10 @@
+import discord
 from discord import Game
-from discord.ext.commands import Cog, command
+from discord.commands import Option
+from discord.ext.commands import Cog, slash_command
 
 from utils.checks import is_developer
+from config.globals import developer_guild_id
 
 
 class ChangeBotStatus(Cog):
@@ -10,17 +13,20 @@ class ChangeBotStatus(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="cbs",
-        brief="Change the bot status. Developer only command!",
-        usage="string",
-        hidden=True
+        description="Change the bot status. Developer only command!",
+        guild_ids=[developer_guild_id]
     )
     @is_developer()
-    async def change_status(self, ctx, args):
+    async def change_status(
+            self,
+            ctx: discord.ApplicationContext,
+            new_status: Option(str, description="New status for the bot.", required=True)
+    ):
         """Change the game status of the bot."""
-        await self.client.change_presence(activity=Game(args))
-        await ctx.send(args)
+        await self.client.change_presence(activity=Game(new_status))
+        await ctx.respond(new_status)
 
 
 def setup(client):
