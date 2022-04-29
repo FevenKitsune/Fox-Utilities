@@ -1,5 +1,6 @@
-from discord.ext.commands import Cog, command
+from discord.ext.commands import Cog, slash_command
 
+from config.globals import bot_development_server
 from utils.checks import is_developer
 
 
@@ -9,11 +10,11 @@ class Stop(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="stop",
-        brief="Force stop the bot.",
+        description="Force stop the bot.",
         hidden=True,
-        usage=""
+        guild_ids=[developer_guild_id]
     )
     @is_developer()
     async def stop_bot(self, ctx):
