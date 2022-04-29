@@ -1,10 +1,10 @@
 from os import getcwd
 
 from discord import Embed
-from discord.ext.commands import Cog, command
+from discord.ext.commands import Cog, slash_command
 from git import Repo
 
-from config.globals import message_color
+from config.globals import message_color, developer_guild_id
 from utils.checks import is_developer
 from utils.generators import generate_footer
 
@@ -15,11 +15,11 @@ class Pull(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="pull",
-        brief="Git pull from GitHub repo.",
+        description="Git pull from GitHub repo.",
         hidden=True,
-        usage=""
+        guild_ids=[developer_guild_id]
     )
     @is_developer()
     async def pull(self, ctx):
@@ -34,7 +34,7 @@ class Pull(Cog):
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
-        await ctx.send(embed=em)
+        await ctx.respond(embed=em)
 
 
 def setup(client):
