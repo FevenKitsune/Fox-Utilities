@@ -1,11 +1,10 @@
 from discord import Embed, Status, ApplicationContext, Role
-from discord.ext.commands import Cog, slash_command, guild_only
-from discord.ext import pages
 from discord.commands import Option
+from discord.ext import pages
+from discord.ext.commands import Cog, slash_command, guild_only
 
 from config.globals import message_color, bot_member_page_size, developer_guild_id
 from utils.chunklist import chunklist
-from utils.findbyname import find_by_name
 from utils.generators import generate_footer
 from utils.makerenderable import make_renderable
 

@@ -1,8 +1,9 @@
+import logging
+
 import discord
 from discord.ext import commands
 
 import utils.exception as exception
-import logging
 from config.globals import bot_description, extensions, bot_key
 
 # Configure logging

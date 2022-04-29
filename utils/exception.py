@@ -1,5 +1,6 @@
-import discord
 import logging
+
+import discord
 
 from config.globals import error_color
 from utils.generators import generate_footer

@@ -1,8 +1,8 @@
-from unicodedata import normalize
+from collections.abc import Iterable
 
 from discord.utils import find
 from fuzzywuzzy.process import extract
-from collections.abc import Iterable
+from unicodedata import normalize
 
 
 def extract_conflicting_scores(extract_list):
