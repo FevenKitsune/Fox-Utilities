@@ -1,7 +1,7 @@
 from discord import Embed
-from discord.ext.commands import Cog, command
+from discord.ext.commands import Cog, slash_command
 
-from config.globals import message_color
+from config.globals import message_color, developer_guild_id
 from utils.generators import generate_footer
 
 
@@ -11,13 +11,10 @@ class Report(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="report",
-        aliases=["bug", "error", "contact"],
-        brief="Need to report a bug? Get information on how to do so here.",
-        usage="",
-        help="The report command can be used to get information and resources on where to report a bug. Bug reports "
-             "are vital in ensuring Fox Utilities is the best it can be."
+        description="Need to report a bug? Get information on how to do so here.",
+        guild_ids=[developer_guild_id]
     )
     async def report_bug(self, ctx):
         """Gives the user information on how to report bugs they find."""
@@ -29,7 +26,7 @@ class Report(Cog):
         )
         em.set_footer(text=generate_footer(ctx))
 
-        await ctx.send(embed=em)
+        await ctx.respond(embed=em)
 
 
 def setup(client):
