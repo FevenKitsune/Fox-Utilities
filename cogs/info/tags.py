@@ -1,7 +1,7 @@
 from discord import Embed
-from discord.ext.commands import Cog, command
+from discord.ext.commands import Cog, slash_command
 
-from config.globals import message_color
+from config.globals import message_color, developer_guild_id
 from utils.generators import generate_footer
 
 
@@ -11,12 +11,10 @@ class Tags(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="tags",
-        brief="Information about permission tags.",
-        usage="",
-        help="Returns information on how to use the Fox Utilities permission tags to give any user access to "
-             "commands that require administrator permissions."
+        description="Information about permission tags.",
+        guild_ids=[developer_guild_id]
     )
     async def tags(self, ctx):
         """Gives the user information on permission tags, which allow non-admins to access admin commands."""
@@ -28,7 +26,7 @@ class Tags(Cog):
             color=message_color)
         em.set_footer(text=generate_footer(ctx))
 
-        await ctx.send(embed=em)
+        await ctx.respond(embed=em)
 
 
 def setup(client):
