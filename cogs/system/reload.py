@@ -1,5 +1,4 @@
-import discord
-from discord import Embed
+from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command
 
 from config.globals import message_color, extensions, developer_guild_id
@@ -21,7 +20,7 @@ class Reload(Cog):
     @is_developer()
     async def reload(
             self,
-            ctx: discord.ApplicationContext
+            ctx: ApplicationContext
     ):
         """Unload all discord.py cogs and load them back. Easier than a full reboot."""
         em = Embed(

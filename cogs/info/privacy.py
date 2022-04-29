@@ -1,4 +1,4 @@
-from discord import Embed
+from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command
 
 from config.globals import message_color, developer_guild_id, bot_development_server
@@ -16,7 +16,10 @@ class Privacy(Cog):
         description="Information about our bots privacy.",
         guild_ids=[developer_guild_id]
     )
-    async def privacy_information(self, ctx):
+    async def privacy_information(
+            self,
+            ctx: ApplicationContext
+    ):
         """Sends information on what data this bot collects and how we use it."""
         em = Embed(
             title="Privacy Information",

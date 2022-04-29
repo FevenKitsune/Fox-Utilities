@@ -1,9 +1,8 @@
 from datetime import timedelta
 from time import time
 
-import discord
-from discord import Embed, Option
-from discord.ext.commands import Cog, command, slash_command
+from discord import Embed, ApplicationContext
+from discord.ext.commands import Cog, slash_command
 from psutil import boot_time, virtual_memory, cpu_count, getloadavg
 
 from config.globals import message_color
@@ -22,7 +21,7 @@ class Stats(Cog):
     )
     async def stats(
             self,
-            ctx: discord.ApplicationContext
+            ctx: ApplicationContext
     ):
         """Posts a full application statistics page"""
 

@@ -1,4 +1,4 @@
-from discord import Embed
+from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command
 
 from config.globals import message_color, developer_guild_id
@@ -16,7 +16,10 @@ class Report(Cog):
         description="Need to report a bug? Get information on how to do so here.",
         guild_ids=[developer_guild_id]
     )
-    async def report_bug(self, ctx):
+    async def report_bug(
+            self,
+            ctx: ApplicationContext
+    ):
         """Gives the user information on how to report bugs they find."""
         em = Embed(
             title="Found a bug? :bee:",

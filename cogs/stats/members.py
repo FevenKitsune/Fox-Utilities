@@ -1,5 +1,4 @@
-import discord
-from discord import Embed
+from discord import Embed, Status, ApplicationContext, Role
 from discord.ext.commands import Cog, slash_command, guild_only
 from discord.ext import pages
 from discord.commands import Option
@@ -11,17 +10,17 @@ from utils.generators import generate_footer
 from utils.makerenderable import make_renderable
 
 
-def match_emoji(status: discord.Status) -> str:
+def match_emoji(status: Status) -> str:
     match status:
-        case discord.Status.online:
+        case Status.online:
             return ":green_circle:"
-        case discord.Status.offline:
+        case Status.offline:
             return ":black_circle:"
-        case discord.Status.idle:
+        case Status.idle:
             return ":yellow_circle:"
-        case discord.Status.dnd:
+        case Status.dnd:
             return ":red_circle:"
-        case discord.Status.streaming:
+        case Status.streaming:
             return ":purple_circle:"
         case _:
             return ":question:"
@@ -41,8 +40,8 @@ class Members(Cog):
     @guild_only()
     async def member_list(
             self,
-            ctx: discord.ApplicationContext,
-            role: Option(discord.Role, description="Role to grab members from.", required=True)
+            ctx: ApplicationContext,
+            role: Option(Role, description="Role to grab members from.", required=True)
     ):
         """Post a formatted list of the members in a given role."""
         # Generates a list containing n sized chunks of found_role.members
@@ -53,7 +52,7 @@ class Members(Cog):
 
         member_pages = []
         for index, member_chunk in enumerate(chunked_members):
-            page_generator = discord.Embed(
+            page_generator = Embed(
                 title=f":memo: {make_renderable(role.name)} Member List",
                 color=message_color
             )

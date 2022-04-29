@@ -1,5 +1,4 @@
-import discord
-from discord import Game
+from discord import Game, ApplicationContext
 from discord.commands import Option
 from discord.ext.commands import Cog, slash_command
 
@@ -21,7 +20,7 @@ class ChangeBotStatus(Cog):
     @is_developer()
     async def change_status(
             self,
-            ctx: discord.ApplicationContext,
+            ctx: ApplicationContext,
             new_status: Option(str, description="New status for the bot.", required=True)
     ):
         """Change the game status of the bot."""

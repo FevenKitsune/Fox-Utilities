@@ -1,6 +1,6 @@
 from os import getcwd
 
-from discord import Embed
+from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command
 from git import Repo
 
@@ -22,7 +22,10 @@ class Pull(Cog):
         guild_ids=[developer_guild_id]
     )
     @is_developer()
-    async def pull(self, ctx):
+    async def pull(
+            self,
+            ctx: ApplicationContext
+    ):
         """Pulls the latest version of the bot from Git"""
         # Find Git repository the bot is stored in
         repo = Repo(getcwd(), search_parent_directories=True)

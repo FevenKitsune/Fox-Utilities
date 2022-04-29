@@ -1,5 +1,4 @@
-import discord
-from discord import Embed
+from discord import Embed, ApplicationContext, User
 from discord.commands import Option
 from discord.ext.commands import Cog, slash_command, guild_only
 from config.globals import message_color, developer_guild_id
@@ -20,8 +19,8 @@ class Invites(Cog):
     @guild_only()
     async def invites(
             self,
-            ctx: discord.ApplicationContext,
-            user: Option(discord.User, description="Optional user to look up.", required=False)
+            ctx: ApplicationContext,
+            user: Option(User, description="Optional user to look up.", required=False)
     ):
         """Get a list of invite codes and the number of uses for a given user."""
         # If no one was mentioned, assume author is target.

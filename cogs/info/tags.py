@@ -1,4 +1,4 @@
-from discord import Embed
+from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command
 
 from config.globals import message_color, developer_guild_id
@@ -16,7 +16,10 @@ class Tags(Cog):
         description="Information about permission tags.",
         guild_ids=[developer_guild_id]
     )
-    async def tags(self, ctx):
+    async def tags(
+            self,
+            ctx: ApplicationContext
+    ):
         """Gives the user information on permission tags, which allow non-admins to access admin commands."""
         em = Embed(
             title="Fox Utilities Permission Tags",

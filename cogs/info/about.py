@@ -1,5 +1,4 @@
-import discord
-from discord import Embed
+from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command
 
 from config.globals import message_color, bot_development_server, bot_source, bot_wiki, developer_guild_id
@@ -19,7 +18,7 @@ class About(Cog):
     )
     async def about_bot(
             self,
-            ctx: discord.ApplicationContext
+            ctx: ApplicationContext
     ):
         """Sends information on the development server and the GitHub."""
         em = Embed(

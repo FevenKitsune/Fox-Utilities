@@ -1,7 +1,7 @@
 from os import getpid, close, execl
 from sys import executable, argv
 
-from discord import Embed
+from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command
 from psutil import Process
 
@@ -23,7 +23,10 @@ class Reboot(Cog):
         guild_ids=[developer_guild_id]
     )
     @is_developer()
-    async def reboot(self, ctx):
+    async def reboot(
+            self,
+            ctx: ApplicationContext
+    ):
         """Restart the bot on the system level."""
         em = Embed(
             title="Rebooting the bot!",
