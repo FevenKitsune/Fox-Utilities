@@ -1,10 +1,13 @@
-from discord import Embed, Status, ApplicationContext, Role
+import discord
+from discord import Embed, Status, ApplicationContext
 from discord.commands import Option
 from discord.ext import pages
 from discord.ext.commands import Cog, slash_command, guild_only
+from discord.utils import find
 
 from config.globals import message_color, bot_member_page_size, developer_guild_id
 from utils.chunklist import chunklist
+from utils.findbyname import find_and_rank
 from utils.generators import generate_footer
 from utils.makerenderable import make_renderable
 
@@ -31,6 +34,13 @@ class Members(Cog):
     def __init__(self, client):
         self.client = client
 
+    async def get_roles(
+            self,
+            ctx: discord.AutocompleteContext
+    ):
+        return [ranking_tuple[0] for ranking_tuple in
+                find_and_rank(ctx.value, [role.name for role in ctx.interaction.guild.roles])]
+
     @slash_command(
         name="members",
         description="Lists all members in a mentioned role.",
@@ -40,9 +50,13 @@ class Members(Cog):
     async def member_list(
             self,
             ctx: ApplicationContext,
-            role: Option(Role, description="Role to grab members from.", required=True)
+            role_str: Option(str, name="role", description="Role to grab members from.", required=True,
+                             autocomplete=get_roles)
     ):
         """Post a formatted list of the members in a given role."""
+        # Find role from fuzzy-searched AutoComplete string
+        role = find(lambda r: r.name == role_str, ctx.interaction.guild.roles)
+
         # Generates a list containing n sized chunks of found_role.members
         chunked_members = chunklist(role.members, bot_member_page_size)
 
