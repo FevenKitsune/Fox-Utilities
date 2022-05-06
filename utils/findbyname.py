@@ -42,3 +42,9 @@ def find_by_name(term: str, search_in: Iterable[str]):
 
     # If there is no conflict, return the highest ranked item
     return found_items[0][0]
+
+
+def find_and_rank(term: str, search_in: Iterable[str]):
+    found_name = extract(normalize("NFKC", term), [normalize("NFKC", item) for item in search_in])
+    found_items = [[find(lambda m: normalize("NFKC", m) == found[0], search_in), found[1]] for found in found_name]
+    return found_items
