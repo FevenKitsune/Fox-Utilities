@@ -13,8 +13,7 @@ class Privacy(Cog):
 
     @slash_command(
         name="privacy",
-        description="Information about our bots privacy.",
-        guild_ids=[developer_guild_id]
+        description="Information about our bots privacy."
     )
     async def privacy_information(
             self,

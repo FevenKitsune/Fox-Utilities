@@ -17,9 +17,7 @@ class Pull(Cog):
 
     @slash_command(
         name="pull",
-        description="Git pull from GitHub repo.",
-        hidden=True,
-        guild_ids=[developer_guild_id]
+        description="Git pull from GitHub repo."
     )
     @is_developer()
     async def pull(

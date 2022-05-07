@@ -13,8 +13,7 @@ class Tags(Cog):
 
     @slash_command(
         name="tags",
-        description="Information about permission tags.",
-        guild_ids=[developer_guild_id]
+        description="Information about permission tags."
     )
     async def tags(
             self,

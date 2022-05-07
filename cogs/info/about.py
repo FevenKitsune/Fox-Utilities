@@ -13,8 +13,7 @@ class About(Cog):
 
     @slash_command(
         name="about",
-        description="Information about this bot.",
-        guild_ids=[developer_guild_id]
+        description="Information about this bot."
     )
     async def about_bot(
             self,

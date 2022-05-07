@@ -13,8 +13,7 @@ class Report(Cog):
 
     @slash_command(
         name="report",
-        description="Need to report a bug? Get information on how to do so here.",
-        guild_ids=[developer_guild_id]
+        description="Need to report a bug? Get information on how to do so here."
     )
     async def report_bug(
             self,

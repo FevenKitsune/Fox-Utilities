@@ -43,8 +43,7 @@ class Members(Cog):
 
     @slash_command(
         name="members",
-        description="Lists all members in a mentioned role.",
-        guild_ids=[developer_guild_id]
+        description="Lists all members in a mentioned role."
     )
     @guild_only()
     async def member_list(

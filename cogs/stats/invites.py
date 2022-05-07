@@ -14,8 +14,7 @@ class Invites(Cog):
 
     @slash_command(
         name="invites",
-        description="Display your own or a mentioned user's server invites.",
-        guild_ids=[developer_guild_id]
+        description="Display your own or a mentioned user's server invites."
     )
     @guild_only()
     async def invites(

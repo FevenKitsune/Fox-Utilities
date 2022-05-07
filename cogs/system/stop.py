@@ -12,9 +12,7 @@ class Stop(Cog):
 
     @slash_command(
         name="stop",
-        description="Force stop the bot.",
-        hidden=True,
-        guild_ids=[developer_guild_id]
+        description="Force stop the bot."
     )
     @is_developer()
     async def stop_bot(self, ctx):
