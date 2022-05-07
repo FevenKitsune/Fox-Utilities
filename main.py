@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 
 import utils.exception as exception
-from config.globals import bot_description, extensions, bot_key
+from config.globals import bot_description, extensions, bot_key, developer_guild_id
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -15,7 +15,7 @@ intents.members = True
 intents.presences = True
 
 # Create discord.py Bot object.
-client = commands.AutoShardedBot(description=bot_description, intents=intents)
+client = commands.AutoShardedBot(description=bot_description, intents=intents, debug_guilds=[developer_guild_id])
 
 # Bot setup and loading
 if __name__ == "__main__":
