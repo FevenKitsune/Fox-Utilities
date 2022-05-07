@@ -49,8 +49,13 @@ class Members(Cog):
     async def member_list(
             self,
             ctx: ApplicationContext,
-            role_str: Option(str, name="role", description="Role to grab members from.", required=True,
-                             autocomplete=get_roles)
+            role_str: Option(
+                str,
+                name="role",
+                description="Role to grab members from.",
+                required=True,
+                autocomplete=get_roles
+            )
     ):
         """Post a formatted list of the members in a given role."""
         # Find role from fuzzy-searched AutoComplete string
