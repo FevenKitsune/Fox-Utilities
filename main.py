@@ -15,7 +15,8 @@ intents.members = True
 intents.presences = True
 
 # Create discord.py Bot object.
-client = commands.AutoShardedBot(description=bot_description, intents=intents, debug_guilds=[developer_guild_id])
+# client = commands.AutoShardedBot(description=bot_description, intents=intents, debug_guilds=[developer_guild_id])
+client = commands.AutoShardedBot(description=bot_description, intents=intents)
 
 # Bot setup and loading
 if __name__ == "__main__":
