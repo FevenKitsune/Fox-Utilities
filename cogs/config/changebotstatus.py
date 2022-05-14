@@ -13,7 +13,8 @@ class ChangeBotStatus(Cog):
 
     @slash_command(
         name="cbs",
-        description="Change the bot status. Developer only command!"
+        description="Change the bot status. Developer only command!",
+        guild_ids=[developer_guild_id]
     )
     @is_developer()
     async def change_status(

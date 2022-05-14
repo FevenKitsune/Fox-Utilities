@@ -10,7 +10,8 @@ class TestException(Cog):
 
     @slash_command(
         name="except",
-        description="Throw a test error. Used to test the exception handler."
+        description="Throw a test error. Used to test the exception handler.",
+        guild_ids=[developer_guild_id]
     )
     async def test_exception(
             self,

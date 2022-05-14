@@ -13,7 +13,8 @@ class Reload(Cog):
 
     @slash_command(
         name="reload",
-        description="Reload bot extensions. Developer command."
+        description="Reload bot extensions. Developer command.",
+        guild_ids=[developer_guild_id]
     )
     @is_developer()
     async def reload(

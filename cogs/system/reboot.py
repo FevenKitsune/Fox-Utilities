@@ -17,7 +17,8 @@ class Reboot(Cog):
 
     @slash_command(
         name="reboot",
-        description="Reboot core bot. Developer command."
+        description="Reboot core bot. Developer command.",
+        guild_ids=[developer_guild_id]
     )
     @is_developer()
     async def reboot(
