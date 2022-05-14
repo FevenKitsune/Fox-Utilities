@@ -13,6 +13,8 @@ class TestException(Cog):
         description="Throw a test error. Used to test the exception handler.",
         guild_ids=[developer_guild_id]
     )
+    @default_permissions(administrator=True)
+    @is_owner()
     async def test_exception(
             self,
             ctx: ApplicationContext

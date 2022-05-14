@@ -14,7 +14,8 @@ class Stop(Cog):
         description="Force stop the bot.",
         guild_ids=[developer_guild_id]
     )
-    @is_developer()
+    @default_permissions(administrator=True)
+    @is_owner()
     async def stop_bot(self, ctx):
         """Force stops the bot."""
         exit()

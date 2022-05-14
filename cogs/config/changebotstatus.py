@@ -16,7 +16,8 @@ class ChangeBotStatus(Cog):
         description="Change the bot status. Developer only command!",
         guild_ids=[developer_guild_id]
     )
-    @is_developer()
+    @default_permissions(administrator=True)
+    @is_owner()
     async def change_status(
             self,
             ctx: ApplicationContext,

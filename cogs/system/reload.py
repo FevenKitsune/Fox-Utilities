@@ -16,7 +16,8 @@ class Reload(Cog):
         description="Reload bot extensions. Developer command.",
         guild_ids=[developer_guild_id]
     )
-    @is_developer()
+    @default_permissions(administrator=True)
+    @is_owner()
     async def reload(
             self,
             ctx: ApplicationContext

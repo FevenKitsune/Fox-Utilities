@@ -20,7 +20,8 @@ class Reboot(Cog):
         description="Reboot core bot. Developer command.",
         guild_ids=[developer_guild_id]
     )
-    @is_developer()
+    @default_permissions(administrator=True)
+    @is_owner()
     async def reboot(
             self,
             ctx: ApplicationContext
