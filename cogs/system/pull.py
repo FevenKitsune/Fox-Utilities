@@ -1,7 +1,8 @@
 from os import getcwd
 
 from discord import Embed, ApplicationContext
-from discord.ext.commands import Cog, slash_command
+from discord.ext.commands import Cog, slash_command, is_owner
+from discord.commands import default_permissions
 from git import Repo
 
 from config.globals import message_color, developer_guild_id

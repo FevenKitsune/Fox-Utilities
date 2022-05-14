@@ -2,7 +2,8 @@ from os import getpid, close, execl
 from sys import executable, argv
 
 from discord import Embed, ApplicationContext
-from discord.ext.commands import Cog, slash_command
+from discord.ext.commands import Cog, slash_command, is_owner
+from discord.commands import default_permissions
 from psutil import Process
 
 from config.globals import message_color, developer_guild_id
