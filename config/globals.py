@@ -7,6 +7,7 @@ extensions = [
     "cogs.info.about",
     "cogs.info.privacy",
     "cogs.info.report",
+    "cogs.stats.count_characters    ",
     "cogs.stats.invites",
     "cogs.stats.members",
     "cogs.stats.stats",
