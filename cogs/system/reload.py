@@ -2,7 +2,6 @@ from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command
 
 from config.globals import message_color, extensions, developer_guild_id
-from utils.checks import is_developer
 from utils.generators import generate_footer
 
 

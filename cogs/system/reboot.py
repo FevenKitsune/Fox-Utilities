@@ -6,7 +6,6 @@ from discord.ext.commands import Cog, slash_command
 from psutil import Process
 
 from config.globals import message_color, developer_guild_id
-from utils.checks import is_developer
 from utils.generators import generate_footer
 
 

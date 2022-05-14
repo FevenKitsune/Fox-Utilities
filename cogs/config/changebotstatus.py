@@ -3,7 +3,6 @@ from discord.commands import Option
 from discord.ext.commands import Cog, slash_command
 
 from config.globals import developer_guild_id
-from utils.checks import is_developer
 
 
 class ChangeBotStatus(Cog):
