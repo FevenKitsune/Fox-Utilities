@@ -7,6 +7,15 @@ from config.globals import bot_description, message_color
 from utils.generators import generate_footer
 
 
+async def get_command(
+        ctx: discord.AutocompleteContext
+):
+    filtered_commands = filter(
+        lambda command: command.guild_ids is None or ctx.interaction.guild_id in command.guild_ids,
+        ctx.bot.walk_application_commands())
+    return [command.name for command in filtered_commands]
+
+
 class Help(Cog):
     """
     Help class
@@ -17,15 +26,6 @@ class Help(Cog):
 
     def __init__(self, client):
         self.client = client
-
-    async def get_command(
-            self,
-            ctx: discord.AutocompleteContext
-    ):
-        filtered_commands = filter(
-            lambda command: command.guild_ids is None or ctx.interaction.guild_id in command.guild_ids,
-            ctx.bot.walk_application_commands())
-        return [command.name for command in filtered_commands]
 
     @slash_command(
         name="help",
