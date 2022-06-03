@@ -19,11 +19,14 @@ class CountCharacters(Cog):
             ctx: ApplicationContext,
             message: discord.Message
     ):
-        """
+        """A message command that can be accessed via an in-application menu. Counts the number of unique characters
+        and their occurrences.
 
         Args:
             ctx: ApplicationContext represents a Discord application command interaction context.
-            message:
+            message: The discord.Message the message_command() was invoked upon.
+
+        TODO: Do not ship this in the public release. Produces quite a bit of spam.
         """
         character_breakdown = {}
         for character in message.content:

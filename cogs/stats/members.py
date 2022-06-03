@@ -13,6 +13,14 @@ from utils.makerenderable import make_renderable
 
 
 def match_emoji(status: Status) -> str:
+    """Matches a discord.Status object to an emoji that represents that status.
+
+    Args:
+        status: A discord.Status object to match.
+
+    Returns:
+        String containing a client tag for an emoji.
+    """
     match status:
         case Status.online:
             return ":green_circle:"
@@ -31,6 +39,14 @@ def match_emoji(status: Status) -> str:
 async def get_roles(
         ctx: discord.AutocompleteContext
 ):
+    """An AutocompleteContext to fuzzy match to a context's guild roles.
+
+    Args:
+        ctx: AutocompleteContext represents context for a slash command's option autocomplete.
+
+    Returns:
+        Returns a list of the top matched roles based on fuzzy matching.
+    """
     return [ranking_tuple[0] for ranking_tuple in
             find_and_rank(ctx.value, [role.name for role in ctx.interaction.guild.roles])]
 
@@ -61,7 +77,7 @@ class Members(Cog):
 
         Args:
             ctx: ApplicationContext represents a Discord application command interaction context.
-            role_str:
+            role_str: Discord slash command option. Matches a string to the roles of the guild using fuzzy matching.
         """
         # Find role from fuzzy-searched AutoComplete string
         role = find(lambda r: r.name == role_str, ctx.interaction.guild.roles)

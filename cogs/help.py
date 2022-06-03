@@ -1,5 +1,5 @@
 import discord
-from discord import Embed, ApplicationContext
+from discord import Embed, ApplicationContext, AutocompleteContext
 from discord.commands import Option
 from discord.ext.commands import Cog, slash_command
 
@@ -8,8 +8,16 @@ from utils.generators import generate_footer
 
 
 async def get_command(
-        ctx: discord.AutocompleteContext
+        ctx: AutocompleteContext
 ):
+    """An AutocompleteContext for matching to the bots' available commands.
+
+    Args:
+        ctx: AutocompleteContext represents context for a slash command's option autocomplete.
+
+    Returns:
+        Returns a list of commands that the user may want based on what has already been typed.
+    """
     filtered_commands = filter(
         lambda command: command.guild_ids is None or ctx.interaction.guild_id in command.guild_ids,
         ctx.bot.walk_application_commands())
@@ -17,13 +25,9 @@ async def get_command(
 
 
 class Help(Cog):
-    """
-    Help class
-
+    """Help class
     Generates and outputs the help menu.
-
     TODO: Hide commands that the author does not have access to.
-
     """
     category = "info"
 
@@ -45,7 +49,12 @@ class Help(Cog):
                 autocomplete=get_command
             )
     ):
-        """Help menu. Processes the list of available commands into a readable menu."""
+        """Aggregates a list of commands registered with the bot and compiles it into a human-readable list.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+            command_help: Discord slash command option. Autocompletes to the closest match.
+        """
         em = Embed(
             title="Fox Utilities Help Guide",
             description=bot_description,
