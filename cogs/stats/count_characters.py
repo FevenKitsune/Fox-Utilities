@@ -19,6 +19,12 @@ class CountCharacters(Cog):
             ctx: ApplicationContext,
             message: discord.Message
     ):
+        """
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+            message:
+        """
         character_breakdown = {}
         for character in message.content:
             if str(character) not in character_breakdown:

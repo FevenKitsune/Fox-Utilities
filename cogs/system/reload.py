@@ -23,7 +23,11 @@ class Reload(Cog):
             self,
             ctx: ApplicationContext
     ):
-        """Unload all discord.py cogs and load them back. Easier than a full reboot."""
+        """Unload all cogs and load them back. Easier than a full reboot.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         em = Embed(
             title="System Reload",
             color=message_color

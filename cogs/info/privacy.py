@@ -1,7 +1,7 @@
 from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command
 
-from config.globals import message_color, developer_guild_id, bot_development_server
+from config.globals import message_color, bot_development_server
 from utils.generators import generate_footer
 
 
@@ -19,7 +19,11 @@ class Privacy(Cog):
             self,
             ctx: ApplicationContext
     ):
-        """Sends information on what data this bot collects and how we use it."""
+        """Sends information on what data this bot collects and how we use it.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         em = Embed(
             title="Privacy Information",
             description="Privacy is important to everyone, so this is a quick overview of the data we have stored.",
@@ -27,7 +31,6 @@ class Privacy(Cog):
         )
         em.set_footer(text=generate_footer(ctx))
 
-        # Command
         em.add_field(
             name="Error Logging",
             value="If a command returns an error, the contents of the command will be logged for debugging purposes. "

@@ -22,7 +22,11 @@ class TestException(Cog):
             self,
             ctx: ApplicationContext
     ):
-        """Throw an exception to test the exception functions"""
+        """Raise a UserWarning exception to test the bots' ability to handle an error.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         raise UserWarning("Testing exception!")
 
 

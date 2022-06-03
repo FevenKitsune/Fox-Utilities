@@ -2,7 +2,7 @@ from discord import Embed, ApplicationContext, User
 from discord.commands import Option
 from discord.ext.commands import Cog, slash_command, guild_only
 
-from config.globals import message_color, developer_guild_id
+from config.globals import message_color
 from utils.generators import generate_footer
 
 
@@ -22,7 +22,12 @@ class Invites(Cog):
             ctx: ApplicationContext,
             user: Option(User, description="Optional user to look up.", required=False)
     ):
-        """Get a list of invite codes and the number of uses for a given user."""
+        """Get a list of invite codes and the number of uses for a given user.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+            user:
+        """
         # If no one was mentioned, assume author is target.
         if not user:
             user = ctx.interaction.user

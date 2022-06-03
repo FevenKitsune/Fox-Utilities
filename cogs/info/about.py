@@ -1,7 +1,7 @@
 from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command
 
-from config.globals import message_color, bot_development_server, bot_source, bot_wiki, developer_guild_id
+from config.globals import message_color, bot_development_server, bot_source, bot_wiki
 from utils.generators import generate_footer
 
 
@@ -19,7 +19,11 @@ class About(Cog):
             self,
             ctx: ApplicationContext
     ):
-        """Sends information on the development server and the GitHub."""
+        """Sends information on the development server and the GitHub.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         em = Embed(
             title="About Fox Utilities!",
             description=f"[Development server!]({bot_development_server})\n"

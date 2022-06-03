@@ -5,7 +5,7 @@ from discord.ext import pages
 from discord.ext.commands import Cog, slash_command, guild_only
 from discord.utils import find
 
-from config.globals import message_color, bot_member_page_size, developer_guild_id
+from config.globals import message_color, bot_member_page_size
 from utils.chunklist import chunklist
 from utils.findbyname import find_and_rank
 from utils.generators import generate_footer
@@ -57,7 +57,12 @@ class Members(Cog):
                 autocomplete=get_roles
             )
     ):
-        """Post a formatted list of the members in a given role."""
+        """Post a formatted list of the members in a given role.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+            role_str:
+        """
         # Find role from fuzzy-searched AutoComplete string
         role = find(lambda r: r.name == role_str, ctx.interaction.guild.roles)
 

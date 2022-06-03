@@ -1,7 +1,7 @@
 from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command
 
-from config.globals import message_color, developer_guild_id
+from config.globals import message_color
 from utils.generators import generate_footer
 
 
@@ -19,7 +19,11 @@ class Report(Cog):
             self,
             ctx: ApplicationContext
     ):
-        """Gives the user information on how to report bugs they find."""
+        """Gives the user information on how to report bugs they find.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         em = Embed(
             title="Found a bug? :bee:",
             description="You can report bugs on the "

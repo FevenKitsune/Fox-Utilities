@@ -22,7 +22,11 @@ class Stop(Cog):
             self,
             ctx: ApplicationContext
     ):
-        """Force stops the bot."""
+        """Force stops the bot.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         exit()
 
 

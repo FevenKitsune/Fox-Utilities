@@ -27,7 +27,11 @@ class Reboot(Cog):
             self,
             ctx: ApplicationContext
     ):
-        """Restart the bot on the system level."""
+        """Restart the bot on the system level.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         em = Embed(
             title="Rebooting the bot!",
             description="Please wait while the bot reboots...",

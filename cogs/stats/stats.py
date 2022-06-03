@@ -23,8 +23,11 @@ class Stats(Cog):
             self,
             ctx: ApplicationContext
     ):
-        """Posts a full application statistics page"""
+        """Posts a full application statistics page.
 
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         em = Embed(
             title="Application Statistics",
             color=message_color

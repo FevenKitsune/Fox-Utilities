@@ -23,7 +23,12 @@ class ChangeBotStatus(Cog):
             ctx: ApplicationContext,
             new_status: Option(str, description="New status for the bot.", required=True)
     ):
-        """Change the game status of the bot."""
+        """Change the game status of the bot.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+            new_status: Discord application command option to request string input from the user.
+        """
         await self.client.change_presence(activity=Game(new_status))
         await ctx.respond(new_status)
 

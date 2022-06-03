@@ -26,7 +26,11 @@ class Pull(Cog):
             self,
             ctx: ApplicationContext
     ):
-        """Pulls the latest version of the bot from Git"""
+        """Pulls the latest version of the bot from Git.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         # Find Git repository the bot is stored in
         repo = Repo(getcwd(), search_parent_directories=True)
 
