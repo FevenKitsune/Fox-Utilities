@@ -1,5 +1,5 @@
 import discord
-from discord import Embed
+from discord import Embed, ApplicationContext
 from discord.commands import Option
 from discord.ext.commands import Cog, slash_command
 
@@ -36,7 +36,7 @@ class Help(Cog):
     )
     async def help(
             self,
-            ctx,
+            ctx: ApplicationContext,
             command_help: Option(
                 str,
                 name="command",
