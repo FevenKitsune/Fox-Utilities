@@ -28,18 +28,18 @@ def match_emoji(status: Status) -> str:
             return ":question:"
 
 
+async def get_roles(
+        ctx: discord.AutocompleteContext
+):
+    return [ranking_tuple[0] for ranking_tuple in
+            find_and_rank(ctx.value, [role.name for role in ctx.interaction.guild.roles])]
+
+
 class Members(Cog):
     category = "stats"
 
     def __init__(self, client):
         self.client = client
-
-    async def get_roles(
-            self,
-            ctx: discord.AutocompleteContext
-    ):
-        return [ranking_tuple[0] for ranking_tuple in
-                find_and_rank(ctx.value, [role.name for role in ctx.interaction.guild.roles])]
 
     @slash_command(
         name="members",
