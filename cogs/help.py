@@ -21,6 +21,9 @@ class Help(Cog):
     Help class
 
     Generates and outputs the help menu.
+
+    TODO: Hide commands that the author does not have access to.
+
     """
     category = "info"
 
