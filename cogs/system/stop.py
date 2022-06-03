@@ -1,3 +1,4 @@
+from discord import ApplicationContext
 from discord.ext.commands import Cog, slash_command, is_owner
 from discord.commands import default_permissions
 
@@ -17,7 +18,10 @@ class Stop(Cog):
     )
     @default_permissions(administrator=True)
     @is_owner()
-    async def stop_bot(self, ctx):
+    async def stop_bot(
+            self,
+            ctx: ApplicationContext
+    ):
         """Force stops the bot."""
         exit()
 
