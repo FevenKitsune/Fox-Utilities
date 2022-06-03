@@ -1,9 +1,11 @@
 def make_renderable(data: str) -> str:
-    """
-    Modify a given string to allow it to display in Discord.
+    """Modify a given string to allow it to display in Discord.
 
-    :param data: String with formatting characters.
-    :return: String with the appropriate escape characters to render string correctly.
+    Args:
+        data: The string with markdown characters.
+
+    Returns:
+        The string with the appropriate escape characters to render string correctly.
     """
     markup_characters = {
         "_": "\\_",

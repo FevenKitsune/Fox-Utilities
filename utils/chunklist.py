@@ -1,11 +1,13 @@
 def chunklist(inlist: list, chunksize: int) -> list:
-    """Split a list into chucks of determined size.
+    """Splits a list into equal chunks determined by chunksize.
 
-    Keyword arguments:
-    inList -- list to chunk
-    chunkSize -- number of elements in each chunk
+    Args:
+        inlist: The list to chunk.
+        chunksize: The number of elements in each chunk.
+
+    Returns:
+        Returns a list of lists, with each list containing chunksize number of elements each.
     """
-
     if not isinstance(inlist, list):
         raise TypeError
 

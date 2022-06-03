@@ -26,7 +26,7 @@ class Invites(Cog):
 
         Args:
             ctx: ApplicationContext represents a Discord application command interaction context.
-            user:
+            user: Discord slash command option. Will autocomplete as a discord.User object.
         """
         # If no one was mentioned, assume author is target.
         if not user:
