@@ -1,7 +1,7 @@
-from discord import Embed
-from discord.ext.commands import Cog, command
+from discord import Embed, ApplicationContext
+from discord.ext.commands import Cog, slash_command
 
-from config.globals import message_color
+from config.globals import message_color, bot_development_server
 from utils.generators import generate_footer
 
 
@@ -11,14 +11,19 @@ class Privacy(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="privacy",
-        brief="Information about our bots privacy.",
-        usage="",
-        help="The privacy command can be used to get information on how we store and process user data."
+        description="Information about our bots privacy."
     )
-    async def privacy_information(self, ctx):
-        """Sends information on what data this bot collects and how we use it."""
+    async def privacy_information(
+            self,
+            ctx: ApplicationContext
+    ):
+        """Sends information on what data this bot collects and how we use it.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         em = Embed(
             title="Privacy Information",
             description="Privacy is important to everyone, so this is a quick overview of the data we have stored.",
@@ -26,7 +31,6 @@ class Privacy(Cog):
         )
         em.set_footer(text=generate_footer(ctx))
 
-        # Command
         em.add_field(
             name="Error Logging",
             value="If a command returns an error, the contents of the command will be logged for debugging purposes. "
@@ -35,9 +39,7 @@ class Privacy(Cog):
 
         em.add_field(
             name="Data Persistence",
-            value="Snipe tool data: the contents of your last mention is stored in "
-                  "memory, meaning it is wiped as soon as the bot stops running.\n"
-                  "User preferences: the user ID and guild ID (where applicable) is stored in a local database."
+            value="This bot currently does not contain any persistent data storage (databases, log files, etc)."
         )
 
         em.add_field(
@@ -47,10 +49,10 @@ class Privacy(Cog):
 
         em.add_field(
             name="Questions?",
-            value="Feel free to ask questions in the Development Server!"
+            value=f"Feel free to ask questions in the [development server]({bot_development_server})!"
         )
 
-        await ctx.author.send(embed=em)
+        await ctx.respond(embed=em)
 
 
 def setup(client):

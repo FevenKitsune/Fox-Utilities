@@ -1,5 +1,6 @@
-from discord import Embed
-from discord.ext.commands import Cog, command, guild_only
+from discord import Embed, ApplicationContext, User
+from discord.commands import Option
+from discord.ext.commands import Cog, slash_command, guild_only
 
 from config.globals import message_color
 from utils.generators import generate_footer
@@ -11,23 +12,25 @@ class Invites(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="invites",
-        aliases=["myinvites"],
-        brief="Display your own or a mentioned user's server invites.",
-        usage="[@user]",
-        help="The invites command can be used to see how many invites a user has generated.\n\n"
-             "**Usage Information**\n"
-             "*@user*: A user can be targeted by tagging them. If no user is given, the sender will be used."
+        description="Display your own or a mentioned user's server invites."
     )
     @guild_only()
-    async def invites(self, ctx):
-        """Get a list of invite codes and the number of uses for a given user."""
+    async def invites(
+            self,
+            ctx: ApplicationContext,
+            user: Option(User, description="Optional user to look up.", required=False)
+    ):
+        """Get a list of invite codes and the number of uses for a given user.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+            user: Discord slash command option. Will autocomplete as a discord.User object.
+        """
         # If no one was mentioned, assume author is target.
-        if ctx.message.mentions:
-            user = ctx.message.mentions[0]
-        else:
-            user = ctx.message.author
+        if not user:
+            user = ctx.interaction.user
 
         em = Embed(
             title=f"{user.name}'s Invites",
@@ -36,16 +39,16 @@ class Invites(Cog):
         em.set_footer(text=generate_footer(ctx))
 
         # Iterate through the guild invites and parse invites by the targeted user.
-        for inv in await ctx.message.guild.invites():
+        for inv in await ctx.interaction.guild.invites():
             if inv.inviter == user:
-                time_formatter = "%b %-d, %Y at %-l:%M%p"
+                time_formatter = "%b %d, %Y at %I:%M%p"
                 em.add_field(
                     name=f"Invite code: ####{str(inv.code)[4:]}",
                     value=f"`Uses` {inv.uses}\n"
                           f"`Created at` {inv.created_at.strftime(time_formatter)}"
                 )
 
-        await ctx.send(embed=em)
+        await ctx.respond(embed=em)
 
 
 def setup(client):

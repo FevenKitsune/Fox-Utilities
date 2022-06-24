@@ -1,8 +1,8 @@
-from discord import Embed
-from discord.ext.commands import Cog, command
+from discord import Embed, ApplicationContext
+from discord.ext.commands import Cog, slash_command, is_owner
+from discord.commands import default_permissions
 
-from config.globals import message_color, extensions
-from utils.checks import is_developer
+from config.globals import message_color, extensions, developer_guild_id
 from utils.generators import generate_footer
 
 
@@ -12,15 +12,22 @@ class Reload(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="reload",
-        brief="Reload bot extensions. Developer command.",
-        hidden=True,
-        usage=""
+        description="Reload bot extensions. Developer command.",
+        guild_ids=[developer_guild_id]
     )
-    @is_developer()
-    async def reload(self, ctx, *args):
-        """Unload all discord.py cogs and load them back. Easier than a full reboot."""
+    @default_permissions(administrator=True)
+    @is_owner()
+    async def reload(
+            self,
+            ctx: ApplicationContext
+    ):
+        """Unload all cogs and load them back. Easier than a full reboot.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         em = Embed(
             title="System Reload",
             color=message_color
@@ -37,7 +44,7 @@ class Reload(Cog):
                 name="Oh well.",
                 value="Doesn't look like there are any extensions defined."
             )
-            await ctx.send(embed=em)
+            await ctx.respond(embed=em)
             return
         for extension in extensions:
             try:
@@ -71,7 +78,7 @@ class Reload(Cog):
                 f"`{i[0]}` {i[1]}" for i in failed
             ]) if failed else "`None`"
         )
-        await ctx.send(embed=em)
+        await ctx.respond(embed=em)
 
 
 def setup(client):

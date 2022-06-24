@@ -1,20 +1,22 @@
+import logging
+
 import discord
 from discord.ext import commands
 
 import utils.exception as exception
-import logging
-from config.globals import bot_description, extensions, bot_key
-from utils.prefix import get_prefix
+from config.globals import bot_description, extensions, bot_key, developer_guild_id
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 # Declare system intents.
 intents = discord.Intents.default()
 intents.members = True
+intents.presences = True
 
 # Create discord.py Bot object.
-client = commands.AutoShardedBot(description=bot_description, command_prefix=get_prefix, intents=intents)
+# client = commands.AutoShardedBot(description=bot_description, intents=intents, debug_guilds=[developer_guild_id])
+client = commands.AutoShardedBot(description=bot_description, intents=intents)
 
 # Bot setup and loading
 if __name__ == "__main__":
@@ -24,7 +26,7 @@ if __name__ == "__main__":
 
     # Register exception.py as the exception handler.
     logging.info("Registering error handler.")
-    client.add_listener(exception.on_command_error)
+    client.add_listener(exception.on_application_command_error)
 
     # External cogs
     for extension in extensions:

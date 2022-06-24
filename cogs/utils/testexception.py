@@ -1,4 +1,8 @@
-from discord.ext.commands import Cog, command
+from discord import ApplicationContext
+from discord.ext.commands import Cog, slash_command, is_owner
+from discord.commands import default_permissions
+
+from config.globals import developer_guild_id
 
 
 class TestException(Cog):
@@ -7,13 +11,22 @@ class TestException(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="except",
-        brief="Throw a test error. Used to test the exception handler.",
-        usage=""
+        description="Throw a test error. Used to test the exception handler.",
+        guild_ids=[developer_guild_id]
     )
-    async def test_exception(self, ctx):
-        """Throw an exception to test the exception functions"""
+    @default_permissions(administrator=True)
+    @is_owner()
+    async def test_exception(
+            self,
+            ctx: ApplicationContext
+    ):
+        """Raise a UserWarning exception to test the bots' ability to handle an error.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         raise UserWarning("Testing exception!")
 
 

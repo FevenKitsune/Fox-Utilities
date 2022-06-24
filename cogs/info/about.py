@@ -1,33 +1,34 @@
 from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command
 
-from config.globals import message_color
+from config.globals import message_color, bot_development_server, bot_source, bot_wiki
 from utils.generators import generate_footer
 
 
-class Report(Cog):
+class About(Cog):
     category = "info"
 
     def __init__(self, client):
         self.client = client
 
     @slash_command(
-        name="report",
-        description="Need to report a bug? Get information on how to do so here."
+        name="about",
+        description="Information about this bot."
     )
-    async def report_bug(
+    async def about_bot(
             self,
             ctx: ApplicationContext
     ):
-        """Gives the user information on how to report bugs they find.
+        """Sends information on the development server and the GitHub.
 
         Args:
             ctx: ApplicationContext represents a Discord application command interaction context.
         """
         em = Embed(
-            title="Found a bug? :bee:",
-            description="You can report bugs on the "
-                        "[Fox Utilities issues](https://github.com/FevenKitsune/Fox-Utilities/issues) page on GitHub!",
+            title="About Fox Utilities!",
+            description=f"[Development server!]({bot_development_server})\n"
+                        f"[GitHub!]({bot_source})\n"
+                        f"[Wiki!]({bot_wiki})",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
@@ -36,4 +37,4 @@ class Report(Cog):
 
 
 def setup(client):
-    client.add_cog(Report(client))
+    client.add_cog(About(client))

@@ -1,14 +1,13 @@
 from datetime import timedelta
 from time import time
 
-from discord import Embed
-from discord.ext.commands import Cog, command
+from discord import Embed, ApplicationContext
+from discord.ext.commands import Cog, slash_command
 from psutil import boot_time, virtual_memory, cpu_count, getloadavg
 
 from config.globals import message_color
 from utils.generators import generate_footer
 
-import logging
 
 class Stats(Cog):
     category = "stats"
@@ -16,17 +15,19 @@ class Stats(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="stats",
-        aliases=["bot_stats", "servercount", "scount", "servers", "usercount", "ucount", "membercount", "mcount",
-                 "users", "memcount", "ping", "pong", "system_uptime", "suptime", "uptime"],
-        brief="Display full application statistics and diagnostics.",
-        usage=""
+        description="Display full application statistics and diagnostics."
     )
-    async def stats(self, ctx):
-        logging.info("Hello!")
-        """Posts a full application statistics page"""
+    async def stats(
+            self,
+            ctx: ApplicationContext
+    ):
+        """Posts a full application statistics page.
 
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         em = Embed(
             title="Application Statistics",
             color=message_color
@@ -59,7 +60,7 @@ class Stats(Cog):
 
         em.set_footer(text=generate_footer(ctx))
 
-        await ctx.send(embed=em)
+        await ctx.respond(embed=em)
 
 
 def setup(client):

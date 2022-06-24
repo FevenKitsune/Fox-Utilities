@@ -1,12 +1,12 @@
 from os import getpid, close, execl
 from sys import executable, argv
 
-from discord import Embed
-from discord.ext.commands import Cog, command
+from discord import Embed, ApplicationContext
+from discord.ext.commands import Cog, slash_command, is_owner
+from discord.commands import default_permissions
 from psutil import Process
 
-from config.globals import message_color
-from utils.checks import is_developer
+from config.globals import message_color, developer_guild_id
 from utils.generators import generate_footer
 
 
@@ -16,22 +16,29 @@ class Reboot(Cog):
     def __init__(self, client):
         self.client = client
 
-    @command(
+    @slash_command(
         name="reboot",
-        brief="Reboot core bot. Developer command.",
-        hidden=True,
-        usage=""
+        description="Reboot core bot. Developer command.",
+        guild_ids=[developer_guild_id]
     )
-    @is_developer()
-    async def reboot(self, ctx):
-        """Restart the bot on the system level."""
+    @default_permissions(administrator=True)
+    @is_owner()
+    async def reboot(
+            self,
+            ctx: ApplicationContext
+    ):
+        """Restart the bot on the system level.
+
+        Args:
+            ctx: ApplicationContext represents a Discord application command interaction context.
+        """
         em = Embed(
             title="Rebooting the bot!",
             description="Please wait while the bot reboots...",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
-        await ctx.send(embed=em)
+        await ctx.respond(embed=em)
 
         # Get bot process
         p = Process(getpid())
