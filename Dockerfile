@@ -4,7 +4,7 @@ FROM python:3
 WORKDIR /usr/src/app
 
 # Download latest version of Fox-Utilities
-RUN git clone https://github.com/FevenKitsune/Fox-Utilities.git
+RUN git clone -b legacy --single-branch https://github.com/FevenKitsune/Fox-Utilities.git
 
 # Set working directory to newly downloaded repository  
 WORKDIR /usr/src/app/Fox-Utilities
