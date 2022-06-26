@@ -18,7 +18,7 @@ class Reboot(Cog):
 
     @slash_command(
         name="reboot",
-        description="Reboot core bot. Developer command.",
+        description="Developer command. Reboot core bot.",
         guild_ids=[developer_guild_id]
     )
     @default_permissions(administrator=True)

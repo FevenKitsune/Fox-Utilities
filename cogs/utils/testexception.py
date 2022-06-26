@@ -13,7 +13,7 @@ class TestException(Cog):
 
     @slash_command(
         name="except",
-        description="Throw a test error. Used to test the exception handler.",
+        description="Developer command. Throw a test error. Used to test the exception handler.",
         guild_ids=[developer_guild_id]
     )
     @default_permissions(administrator=True)

@@ -17,7 +17,7 @@ class Pull(Cog):
 
     @slash_command(
         name="pull",
-        description="Git pull from GitHub repo.",
+        description="Developer command. Git pull from GitHub repo.",
         guild_ids=[developer_guild_id]
     )
     @default_permissions(administrator=True)

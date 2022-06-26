@@ -14,7 +14,7 @@ class Reload(Cog):
 
     @slash_command(
         name="reload",
-        description="Reload bot extensions. Developer command.",
+        description="Developer command. Reload bot extensions.",
         guild_ids=[developer_guild_id]
     )
     @default_permissions(administrator=True)

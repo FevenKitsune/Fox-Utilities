@@ -13,7 +13,7 @@ class Stop(Cog):
 
     @slash_command(
         name="stop",
-        description="Force stop the bot.",
+        description="Developer command. Force stop the bot.",
         guild_ids=[developer_guild_id]
     )
     @default_permissions(administrator=True)

@@ -16,7 +16,7 @@ extensions = [
     "cogs.system.reload",
     "cogs.system.stop",
     "cogs.utils.testexception",
-    "cogs.help",
+    "cogs.docs",
     "listeners.setdefaultstatus"
 ]
 
