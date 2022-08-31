@@ -82,8 +82,14 @@ class Members(Cog):
         # Find role from fuzzy-searched AutoComplete string
         role = find(lambda r: r.name == role_str, ctx.interaction.guild.roles)
 
+        # Assume the autocomplete failed, complete entry using traditional fuzzy method.
         if not role:
-            raise UserWarning(f"Could not find role \"{role_str}\"!")
+            role_match_rankings = find_and_rank(role_str, [role_iteration.name for role_iteration in ctx.interaction.guild.roles])
+            role = find(lambda r: r.name == role_match_rankings[0][0], ctx.interaction.guild.roles)
+
+        # If STILL no role, throw error.
+        if not role:
+            raise UserWarning(f"Was unable to find the role \"{role_str}\".")
 
         # Generates a list containing n sized chunks of found_role.members
         chunked_members = chunklist(role.members, bot_member_page_size)
