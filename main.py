@@ -7,7 +7,7 @@ import utils.exception as exception
 from config.globals import bot_description, extensions, bot_key, developer_guild_id
 
 # Configure logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 # Declare system intents.
 intents = discord.Intents.default()
