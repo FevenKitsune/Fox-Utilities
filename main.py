@@ -12,7 +12,6 @@ logging.basicConfig(level=logging.DEBUG)
 # Declare system intents.
 intents = discord.Intents.default()
 intents.members = True
-intents.presences = True
 
 # Create discord.py Bot object.
 # client = commands.AutoShardedBot(description=bot_description, intents=intents, debug_guilds=[developer_guild_id])
