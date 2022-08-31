@@ -82,6 +82,9 @@ class Members(Cog):
         # Find role from fuzzy-searched AutoComplete string
         role = find(lambda r: r.name == role_str, ctx.interaction.guild.roles)
 
+        if not role:
+            raise UserWarning(f"Could not find role \"{role_str}\"!")
+
         # Generates a list containing n sized chunks of found_role.members
         chunked_members = chunklist(role.members, bot_member_page_size)
 
