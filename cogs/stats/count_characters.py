@@ -26,7 +26,7 @@ class CountCharacters(Cog):
             ctx: ApplicationContext represents a Discord application command interaction context.
             message: The discord.Message the message_command() was invoked upon.
 
-        TODO: Do not ship this in the public release. Produces quite a bit of spam.
+        Disabled by default, produces spam.
         """
         character_breakdown = {}
         for character in message.content:
