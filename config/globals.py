@@ -33,7 +33,7 @@ bot_source = "https://github.com/FevenKitsune/Fox-Utilities"
 bot_wiki = "https://github.com/FevenKitsune/Fox-Utilities/wiki"
 
 # Config Variables
-bot_default_status = "with code."  # Default status
+bot_default_status = "with Slash Commands!"  # Default status
 bot_description = "Fox Utilities is a utils bot covering a selection of niche functions to assist in server administration."  # Discord.Bot description input
 bot_footer_prefix = "Invoked by: "
 bot_member_page_size = 21
