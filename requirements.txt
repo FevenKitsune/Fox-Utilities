@@ -14,4 +14,4 @@ py-cord==2.4.1
 smmap==5.0.1
 typing-extensions==4.8.0
 yarl==1.9.3
-python-Levenshtein==0.23.0
+Levenshtein==0.23.0
