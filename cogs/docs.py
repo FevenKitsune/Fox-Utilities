@@ -68,7 +68,7 @@ class Docs(Cog):
                 value=f"{found_command.description}"
             )
         else:
-            raise UserWarning(f"Command \"{found_command}\" was not found.")
+            raise UserWarning(f"Command \"{command_search}\" was not found.")
         await ctx.respond(embed=em)
 
 
