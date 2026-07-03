@@ -44,7 +44,11 @@ class Reboot(Cog):
         p = Process(getpid())
         for handler in p.open_files() + p.connections():
             # Close all active connections and processes
-            close(handler.fd)
+            try:
+                close(handler.fd)
+            except OSError:
+                # fd already closed, invalid (-1), or otherwise unclosable; skip it.
+                pass
 
         # Get python exec
         python = executable
