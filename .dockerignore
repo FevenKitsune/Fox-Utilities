@@ -1,7 +1,9 @@
+.git
 .vscode
 .idea
 venv
 __pycache__
 env
 .vs
+tests
 .env
