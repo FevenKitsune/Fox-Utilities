@@ -1,3 +1,5 @@
+import logging
+
 from discord import Embed, ApplicationContext
 from discord.ext.commands import Cog, slash_command, is_owner
 from discord.commands import default_permissions
@@ -52,7 +54,7 @@ class Reload(Cog):
                 self.client.unload_extension(extension)
             # Continue if unload failed.
             except Exception as e:
-                pass
+                logging.warning(f"Failed to unload extension {extension} during reload\n{type(e).__name__}: {e}")
         for extension in extensions:
             try:
                 # Load extension
