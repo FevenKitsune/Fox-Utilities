@@ -6,7 +6,7 @@ from unicodedata import normalize
 
 
 def extract_conflicting_scores(extract_list):
-    """Isolates objects in an array with matching fuzzywuzzy scores"""
+    """Isolates objects in an array with matching fuzzy-match scores"""
     list_builder = []
     for i in extract_list:
         if i[1] == extract_list[0][1]:
