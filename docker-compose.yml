@@ -1,7 +1,6 @@
 services:
   fox-utilities:
     build: .
-    container_name: fox-utilities
     restart: unless-stopped
     env_file:
       - .env
