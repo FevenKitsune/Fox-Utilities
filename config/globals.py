@@ -1,6 +1,11 @@
 # TODO: This should probably be a JSON file...
 import os
 
+from dotenv import load_dotenv
+
+# Load variables from a local .env file (if present) into the environment.
+load_dotenv()
+
 # Globally accessible list of extensions.
 extensions = [
     "cogs.config.changebotstatus",
@@ -38,11 +43,14 @@ bot_description = "Fox Utilities is a utils bot covering a selection of niche fu
 bot_footer_prefix = "Invoked by: "
 bot_member_page_size = 21
 
-""" 
+"""
 Bot Key
-There are multiple options here, if you don't want to mess around with environment variables, then comment out the 
+There are multiple options here, if you don't want to mess around with environment variables, then comment out the
 Environment Variable option and uncomment the key option. Make sure you keep your key safe! The developer will never
 ask for your key.
+
+For local testing, put FOXKEY=your-key-here in a .env file at the project root (see .env.example);
+it's loaded automatically by load_dotenv() above and never committed (.gitignore).
 """
 bot_key = os.environ['FOXKEY']  # Environment Variable option
 # bot_key = "KEY_HERE"
