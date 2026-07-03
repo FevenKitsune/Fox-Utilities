@@ -1,0 +1,11 @@
+services:
+  fox-utilities:
+    build: .
+    container_name: fox-utilities
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      # Bind-mount the checkout so /pull updates the NAS's actual files, not just
+      # the container's throwaway layer. Only requires a rebuild when requirements.txt changes.
+      - .:/usr/src/app
