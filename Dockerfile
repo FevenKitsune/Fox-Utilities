@@ -3,11 +3,8 @@ FROM python:3
 # Set work directory to app
 WORKDIR /usr/src/app
 
-# Download latest version of Fox-Utilities
-RUN git clone https://github.com/FevenKitsune/Fox-Utilities.git
-
-# Set working directory to newly downloaded repository  
-WORKDIR /usr/src/app/Fox-Utilities
+# Copy the repository into the image
+COPY . .
 
 # Install required libraries from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
