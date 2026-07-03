@@ -35,9 +35,15 @@ class Pull(Cog):
         repo = Repo(getcwd(), search_parent_directories=True)
 
         # Run git pull and post results into embed.
+        pull_output = str(repo.git.pull())
+        # Embed descriptions are capped at 4096 characters; truncate to leave room for the code fence.
+        max_output_length = 4096 - len("```smalltalk\n\n```")
+        if len(pull_output) > max_output_length:
+            pull_output = f"{pull_output[:max_output_length]}\n... (truncated)"
+
         em = Embed(
             title="Fox Utilities GitHub",
-            description=f"```smalltalk\n{str(repo.git.pull())}\n```",
+            description=f"```smalltalk\n{pull_output}\n```",
             color=message_color
         )
         em.set_footer(text=generate_footer(ctx))
